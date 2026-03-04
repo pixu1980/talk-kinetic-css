@@ -37,7 +37,7 @@
 		"posthtml-include": "2.0.1",
 		"prettier": "3.7.4",
 		"sharp": "0.33.5",
-		"svgo": "4.0.0"
+		"svgo": "4.0.1"
 	},
 	"browserslist": [
 		"last 1 major version"
