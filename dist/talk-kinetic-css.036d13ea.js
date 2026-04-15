@@ -59917,10 +59917,10 @@ const $2bb243fb75602950$export$8b945488eb7acd70 = ()=>{
 
 /**
  * Initialize all motion JavaScript
- */ document.addEventListener('DOMContentLoaded', ()=>{
+ */ document.addEventListener("DOMContentLoaded", ()=>{
     (0, $55117376bb9301d5$export$5234f2d54e8e125f)();
     (0, $2bb243fb75602950$export$8b945488eb7acd70)();
 });
 
 
-//# sourceMappingURL=kinetic-css.a96730de.js.map
+//# sourceMappingURL=talk-kinetic-css.036d13ea.js.map

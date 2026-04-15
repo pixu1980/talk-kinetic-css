@@ -62640,10 +62640,10 @@ var $ed25e07febd654a5$export$8b945488eb7acd70 = function() {
 
 /**
  * Initialize all motion JavaScript
- */ document.addEventListener('DOMContentLoaded', function() {
+ */ document.addEventListener("DOMContentLoaded", function() {
     (0, $a4766905f54da53d$export$5234f2d54e8e125f)();
     (0, $ed25e07febd654a5$export$8b945488eb7acd70)();
 });
 
 })();
-//# sourceMappingURL=kinetic-css.3ad46e7c.js.map
+//# sourceMappingURL=talk-kinetic-css.e918bb58.js.map

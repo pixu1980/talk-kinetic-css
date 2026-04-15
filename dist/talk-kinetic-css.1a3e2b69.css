@@ -15766,7 +15766,8 @@
         height: var(--logo-size-min);
         top: 50%;
         left: calc((var(--index) / var(--steps)) * 100%);
-        transform: translateX(calc(-50% + var(--index) * var(--logo-gap))) translateY(-50%);
+        transform: translateX(calc(-50% + var(--index) * var(--logo-gap)))
+						translateY(-50%);
         will-change: left, transform;
         animation: 12s ease-in-out infinite sponsor-travel;
         position: absolute;
@@ -15784,14 +15785,40 @@
       @keyframes sponsor-travel {
         0%, 100% {
           left: calc(((var(--index) - 3) / var(--steps)) * 100%);
-          transform: translateX(calc(-50% + var(--index) * var(--logo-gap))) translateY(calc(-50% + var(--wave-amplitude) * sin(calc((var(--index) - 3) / var(--steps) * var(--wave-length)))))
-            scale(calc(var(--scale-min) + (var(--scale-max) - var(--scale-min)) * ((sin(calc((var(--index) - 3) / var(--steps) * var(--wave-length))) + 1) / 2)));
+          transform: translateX(calc(-50% + var(--index) * var(--logo-gap)))
+						translateY(calc(-50% +
+								var(--wave-amplitude) *
+								sin(calc((var(--index) - 3) / var(--steps) * var(--wave-length)))))
+						scale(calc(var(--scale-min) +
+								(var(--scale-max) - var(--scale-min)) *
+								(
+									(
+										sin(calc((var(--index) - 3) /
+												var(--steps) *
+												var(--wave-length))) +
+										1
+									) /
+									2
+								)));
         }
 
         50% {
           left: calc(((var(--index) + 3) / var(--steps)) * 100%);
-          transform: translateX(calc(-50% + var(--index) * var(--logo-gap))) translateY(calc(-50% + var(--wave-amplitude) * sin(calc((var(--index) + 3) / var(--steps) * var(--wave-length)))))
-            scale(calc(var(--scale-min) + (var(--scale-max) - var(--scale-min)) * ((sin(calc((var(--index) + 3) / var(--steps) * var(--wave-length))) + 1) / 2)));
+          transform: translateX(calc(-50% + var(--index) * var(--logo-gap)))
+						translateY(calc(-50% +
+								var(--wave-amplitude) *
+								sin(calc((var(--index) + 3) / var(--steps) * var(--wave-length)))))
+						scale(calc(var(--scale-min) +
+								(var(--scale-max) - var(--scale-min)) *
+								(
+									(
+										sin(calc((var(--index) + 3) /
+												var(--steps) *
+												var(--wave-length))) +
+										1
+									) /
+									2
+								)));
         }
       }
 
@@ -15953,8 +15980,14 @@
       .card-content {
         backface-visibility: hidden;
         filter: drop-shadow(0 0 15px #00f5ff99);
-        perspective: calc(cos(var(--tilt-card--x)) * cos(var(--tilt-card--y)) * var(--tilt-card--perspective));
-        perspective-origin: calc(50% - cos(var(--tilt-card--x)) * sin(var(--tilt-card--y)) * var(--tilt-card--perspective)) calc(50% + sin(var(--tilt-card--x)) * var(--tilt-card--perspective));
+        perspective: calc(cos(var(--tilt-card--x)) *
+					cos(var(--tilt-card--y)) *
+					var(--tilt-card--perspective));
+        perspective-origin: calc(50% -
+						cos(var(--tilt-card--x)) *
+						sin(var(--tilt-card--y)) *
+						var(--tilt-card--perspective))
+					calc(50% + sin(var(--tilt-card--x)) * var(--tilt-card--perspective));
         position: absolute;
         inset: 0;
         overflow: clip;
@@ -16071,4 +16104,4 @@
     animation-iteration-count: 1 !important;
   }
 }
-/*# sourceMappingURL=kinetic-css.99c62155.css.map */
+/*# sourceMappingURL=talk-kinetic-css.1a3e2b69.css.map */
