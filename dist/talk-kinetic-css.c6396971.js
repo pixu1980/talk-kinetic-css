@@ -1,14 +1,923 @@
+// modules are defined as an array
+// [ module function, map of requires ]
+//
+// map of requires is short require name -> numeric require
+//
+// anything defined in a previous bundle is accessed via the
+// orig method which is the require for previous bundles
 
-function $parcel$interopDefault(a) {
-  return a && a.__esModule ? a.default : a;
+(function (
+  modules,
+  entry,
+  mainEntry,
+  parcelRequireName,
+  externals,
+  distDir,
+  publicUrl,
+  devServer
+) {
+  /* eslint-disable no-undef */
+  var globalObject =
+    typeof globalThis !== 'undefined'
+      ? globalThis
+      : typeof self !== 'undefined'
+      ? self
+      : typeof window !== 'undefined'
+      ? window
+      : typeof global !== 'undefined'
+      ? global
+      : {};
+  /* eslint-enable no-undef */
+
+  // Save the require from previous bundle to this closure if any
+  var previousRequire =
+    typeof globalObject[parcelRequireName] === 'function' &&
+    globalObject[parcelRequireName];
+
+  var importMap = previousRequire.i || {};
+  var cache = previousRequire.cache || {};
+  // Do not use `require` to prevent Webpack from trying to bundle this call
+  var nodeRequire =
+    typeof module !== 'undefined' &&
+    typeof module.require === 'function' &&
+    module.require.bind(module);
+
+  function newRequire(name, jumped) {
+    if (!cache[name]) {
+      if (!modules[name]) {
+        if (externals[name]) {
+          return externals[name];
+        }
+        // if we cannot find the module within our internal map or
+        // cache jump to the current global require ie. the last bundle
+        // that was added to the page.
+        var currentRequire =
+          typeof globalObject[parcelRequireName] === 'function' &&
+          globalObject[parcelRequireName];
+        if (!jumped && currentRequire) {
+          return currentRequire(name, true);
+        }
+
+        // If there are other bundles on this page the require from the
+        // previous one is saved to 'previousRequire'. Repeat this as
+        // many times as there are bundles until the module is found or
+        // we exhaust the require chain.
+        if (previousRequire) {
+          return previousRequire(name, true);
+        }
+
+        // Try the node require function if it exists.
+        if (nodeRequire && typeof name === 'string') {
+          return nodeRequire(name);
+        }
+
+        var err = new Error("Cannot find module '" + name + "'");
+        err.code = 'MODULE_NOT_FOUND';
+        throw err;
+      }
+
+      localRequire.resolve = resolve;
+      localRequire.cache = {};
+
+      var module = (cache[name] = new newRequire.Module(name));
+
+      modules[name][0].call(
+        module.exports,
+        localRequire,
+        module,
+        module.exports,
+        globalObject
+      );
+    }
+
+    return cache[name].exports;
+
+    function localRequire(x) {
+      var res = localRequire.resolve(x);
+      if (res === false) {
+        return {};
+      }
+      // Synthesize a module to follow re-exports.
+      if (Array.isArray(res)) {
+        var m = {__esModule: true};
+        res.forEach(function (v) {
+          var key = v[0];
+          var id = v[1];
+          var exp = v[2] || v[0];
+          var x = newRequire(id);
+          if (key === '*') {
+            Object.keys(x).forEach(function (key) {
+              if (
+                key === 'default' ||
+                key === '__esModule' ||
+                Object.prototype.hasOwnProperty.call(m, key)
+              ) {
+                return;
+              }
+
+              Object.defineProperty(m, key, {
+                enumerable: true,
+                get: function () {
+                  return x[key];
+                },
+              });
+            });
+          } else if (exp === '*') {
+            Object.defineProperty(m, key, {
+              enumerable: true,
+              value: x,
+            });
+          } else {
+            Object.defineProperty(m, key, {
+              enumerable: true,
+              get: function () {
+                if (exp === 'default') {
+                  return x.__esModule ? x.default : x;
+                }
+                return x[exp];
+              },
+            });
+          }
+        });
+        return m;
+      }
+      return newRequire(res);
+    }
+
+    function resolve(x) {
+      var id = modules[name][1][x];
+      return id != null ? id : x;
+    }
+  }
+
+  function Module(moduleName) {
+    this.id = moduleName;
+    this.bundle = newRequire;
+    this.require = nodeRequire;
+    this.exports = {};
+  }
+
+  newRequire.isParcelRequire = true;
+  newRequire.Module = Module;
+  newRequire.modules = modules;
+  newRequire.cache = cache;
+  newRequire.parent = previousRequire;
+  newRequire.distDir = distDir;
+  newRequire.publicUrl = publicUrl;
+  newRequire.devServer = devServer;
+  newRequire.i = importMap;
+  newRequire.register = function (id, exports) {
+    modules[id] = [
+      function (require, module) {
+        module.exports = exports;
+      },
+      {},
+    ];
+  };
+
+  // Only insert newRequire.load when it is actually used.
+  // The code in this file is linted against ES5, so dynamic import is not allowed.
+  // INSERT_LOAD_HERE
+
+  Object.defineProperty(newRequire, 'root', {
+    get: function () {
+      return globalObject[parcelRequireName];
+    },
+  });
+
+  globalObject[parcelRequireName] = newRequire;
+
+  for (var i = 0; i < entry.length; i++) {
+    newRequire(entry[i]);
+  }
+
+  if (mainEntry) {
+    // Expose entry point to Node, AMD or browser globals
+    // Based on https://github.com/ForbesLindesay/umd/blob/master/template.js
+    var mainExports = newRequire(mainEntry);
+
+    // CommonJS
+    if (typeof exports === 'object' && typeof module !== 'undefined') {
+      module.exports = mainExports;
+
+      // RequireJS
+    } else if (typeof define === 'function' && define.amd) {
+      define(function () {
+        return mainExports;
+      });
+    }
+  }
+})({"9NM20":[function(require,module,exports,__globalThis) {
+var global = arguments[3];
+var HMR_HOST = null;
+var HMR_PORT = null;
+var HMR_SERVER_PORT = 6003;
+var HMR_SECURE = false;
+var HMR_ENV_HASH = "439701173a9199ea";
+var HMR_USE_SSE = false;
+module.bundle.HMR_BUNDLE_ID = "17677af8c6396971";
+"use strict";
+/* global HMR_HOST, HMR_PORT, HMR_SERVER_PORT, HMR_ENV_HASH, HMR_SECURE, HMR_USE_SSE, chrome, browser, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
+import type {
+  HMRAsset,
+  HMRMessage,
+} from '@parcel/reporter-dev-server/src/HMRServer.js';
+interface ParcelRequire {
+  (string): mixed;
+  cache: {|[string]: ParcelModule|};
+  hotData: {|[string]: mixed|};
+  Module: any;
+  parent: ?ParcelRequire;
+  isParcelRequire: true;
+  modules: {|[string]: [Function, {|[string]: string|}]|};
+  HMR_BUNDLE_ID: string;
+  root: ParcelRequire;
 }
+interface ParcelModule {
+  hot: {|
+    data: mixed,
+    accept(cb: (Function) => void): void,
+    dispose(cb: (mixed) => void): void,
+    // accept(deps: Array<string> | string, cb: (Function) => void): void,
+    // decline(): void,
+    _acceptCallbacks: Array<(Function) => void>,
+    _disposeCallbacks: Array<(mixed) => void>,
+  |};
+}
+interface ExtensionContext {
+  runtime: {|
+    reload(): void,
+    getURL(url: string): string;
+    getManifest(): {manifest_version: number, ...};
+  |};
+}
+declare var module: {bundle: ParcelRequire, ...};
+declare var HMR_HOST: string;
+declare var HMR_PORT: string;
+declare var HMR_SERVER_PORT: string;
+declare var HMR_ENV_HASH: string;
+declare var HMR_SECURE: boolean;
+declare var HMR_USE_SSE: boolean;
+declare var chrome: ExtensionContext;
+declare var browser: ExtensionContext;
+declare var __parcel__import__: (string) => Promise<void>;
+declare var __parcel__importScripts__: (string) => Promise<void>;
+declare var globalThis: typeof self;
+declare var ServiceWorkerGlobalScope: Object;
+*/ var OVERLAY_ID = '__parcel__error__overlay__';
+var OldModule = module.bundle.Module;
+function Module(moduleName) {
+    OldModule.call(this, moduleName);
+    this.hot = {
+        data: module.bundle.hotData[moduleName],
+        _acceptCallbacks: [],
+        _disposeCallbacks: [],
+        accept: function(fn) {
+            this._acceptCallbacks.push(fn || function() {});
+        },
+        dispose: function(fn) {
+            this._disposeCallbacks.push(fn);
+        }
+    };
+    module.bundle.hotData[moduleName] = undefined;
+}
+module.bundle.Module = Module;
+module.bundle.hotData = {};
+var checkedAssets /*: {|[string]: boolean|} */ , disposedAssets /*: {|[string]: boolean|} */ , assetsToDispose /*: Array<[ParcelRequire, string]> */ , assetsToAccept /*: Array<[ParcelRequire, string]> */ , bundleNotFound = false;
+function getHostname() {
+    return HMR_HOST || (typeof location !== 'undefined' && location.protocol.indexOf('http') === 0 ? location.hostname : 'localhost');
+}
+function getPort() {
+    return HMR_PORT || (typeof location !== 'undefined' ? location.port : HMR_SERVER_PORT);
+}
+// eslint-disable-next-line no-redeclare
+let WebSocket = globalThis.WebSocket;
+if (!WebSocket && typeof module.bundle.root === 'function') try {
+    // eslint-disable-next-line no-global-assign
+    WebSocket = module.bundle.root('ws');
+} catch  {
+// ignore.
+}
+var hostname = getHostname();
+var port = getPort();
+var protocol = HMR_SECURE || typeof location !== 'undefined' && location.protocol === 'https:' && ![
+    'localhost',
+    '127.0.0.1',
+    '0.0.0.0'
+].includes(hostname) ? 'wss' : 'ws';
+// eslint-disable-next-line no-redeclare
+var parent = module.bundle.parent;
+if (!parent || !parent.isParcelRequire) {
+    // Web extension context
+    var extCtx = typeof browser === 'undefined' ? typeof chrome === 'undefined' ? null : chrome : browser;
+    // Safari doesn't support sourceURL in error stacks.
+    // eval may also be disabled via CSP, so do a quick check.
+    var supportsSourceURL = false;
+    try {
+        (0, eval)('throw new Error("test"); //# sourceURL=test.js');
+    } catch (err) {
+        supportsSourceURL = err.stack.includes('test.js');
+    }
+    var ws;
+    if (HMR_USE_SSE) ws = new EventSource('/__parcel_hmr');
+    else try {
+        // If we're running in the dev server's node runner, listen for messages on the parent port.
+        let { workerData, parentPort } = module.bundle.root('node:worker_threads') /*: any*/ ;
+        if (workerData !== null && workerData !== void 0 && workerData.__parcel) {
+            parentPort.on('message', async (message)=>{
+                try {
+                    await handleMessage(message);
+                    parentPort.postMessage('updated');
+                } catch  {
+                    parentPort.postMessage('restart');
+                }
+            });
+            // After the bundle has finished running, notify the dev server that the HMR update is complete.
+            queueMicrotask(()=>parentPort.postMessage('ready'));
+        }
+    } catch  {
+        if (typeof WebSocket !== 'undefined') try {
+            ws = new WebSocket(protocol + '://' + hostname + (port ? ':' + port : '') + '/');
+        } catch (err) {
+            // Ignore cloudflare workers error.
+            if (err.message && !err.message.includes('Disallowed operation called within global scope')) console.error(err.message);
+        }
+    }
+    if (ws) {
+        // $FlowFixMe
+        ws.onmessage = async function(event /*: {data: string, ...} */ ) {
+            var data /*: HMRMessage */  = JSON.parse(event.data);
+            await handleMessage(data);
+        };
+        if (ws instanceof WebSocket) {
+            ws.onerror = function(e) {
+                if (e.message) console.error(e.message);
+            };
+            ws.onclose = function() {
+                console.warn("[parcel] \uD83D\uDEA8 Connection to the HMR server was lost");
+            };
+        }
+    }
+}
+async function handleMessage(data /*: HMRMessage */ ) {
+    checkedAssets = {} /*: {|[string]: boolean|} */ ;
+    disposedAssets = {} /*: {|[string]: boolean|} */ ;
+    assetsToAccept = [];
+    assetsToDispose = [];
+    bundleNotFound = false;
+    if (data.type === 'reload') fullReload();
+    else if (data.type === 'update') {
+        // Remove error overlay if there is one
+        if (typeof document !== 'undefined') removeErrorOverlay();
+        let assets = data.assets;
+        // Handle HMR Update
+        let handled = assets.every((asset)=>{
+            return asset.type === 'css' || asset.type === 'js' && hmrAcceptCheck(module.bundle.root, asset.id, asset.depsByBundle);
+        });
+        // Dispatch a custom event in case a bundle was not found. This might mean
+        // an asset on the server changed and we should reload the page. This event
+        // gives the client an opportunity to refresh without losing state
+        // (e.g. via React Server Components). If e.preventDefault() is not called,
+        // we will trigger a full page reload.
+        if (handled && bundleNotFound && assets.some((a)=>a.envHash !== HMR_ENV_HASH) && typeof window !== 'undefined' && typeof CustomEvent !== 'undefined') handled = !window.dispatchEvent(new CustomEvent('parcelhmrreload', {
+            cancelable: true
+        }));
+        if (handled) {
+            console.clear();
+            // Dispatch custom event so other runtimes (e.g React Refresh) are aware.
+            if (typeof window !== 'undefined' && typeof CustomEvent !== 'undefined') window.dispatchEvent(new CustomEvent('parcelhmraccept'));
+            await hmrApplyUpdates(assets);
+            hmrDisposeQueue();
+            // Run accept callbacks. This will also re-execute other disposed assets in topological order.
+            let processedAssets = {};
+            for(let i = 0; i < assetsToAccept.length; i++){
+                let id = assetsToAccept[i][1];
+                if (!processedAssets[id]) {
+                    hmrAccept(assetsToAccept[i][0], id);
+                    processedAssets[id] = true;
+                }
+            }
+        } else fullReload();
+    }
+    if (data.type === 'error') {
+        // Log parcel errors to console
+        for (let ansiDiagnostic of data.diagnostics.ansi){
+            let stack = ansiDiagnostic.codeframe ? ansiDiagnostic.codeframe : ansiDiagnostic.stack;
+            console.error("\uD83D\uDEA8 [parcel]: " + ansiDiagnostic.message + '\n' + stack + '\n\n' + ansiDiagnostic.hints.join('\n'));
+        }
+        if (typeof document !== 'undefined') {
+            // Render the fancy html overlay
+            removeErrorOverlay();
+            var overlay = createErrorOverlay(data.diagnostics.html);
+            // $FlowFixMe
+            document.body.appendChild(overlay);
+        }
+    }
+}
+function removeErrorOverlay() {
+    var overlay = document.getElementById(OVERLAY_ID);
+    if (overlay) {
+        overlay.remove();
+        console.log("[parcel] \u2728 Error resolved");
+    }
+}
+function createErrorOverlay(diagnostics) {
+    var overlay = document.createElement('div');
+    overlay.id = OVERLAY_ID;
+    let errorHTML = '<div style="background: black; opacity: 0.85; font-size: 16px; color: white; position: fixed; height: 100%; width: 100%; top: 0px; left: 0px; padding: 30px; font-family: Menlo, Consolas, monospace; z-index: 9999;">';
+    for (let diagnostic of diagnostics){
+        let stack = diagnostic.frames.length ? diagnostic.frames.reduce((p, frame)=>{
+            return `${p}
+<a href="${protocol === 'wss' ? 'https' : 'http'}://${hostname}:${port}/__parcel_launch_editor?file=${encodeURIComponent(frame.location)}" style="text-decoration: underline; color: #888" onclick="fetch(this.href); return false">${frame.location}</a>
+${frame.code}`;
+        }, '') : diagnostic.stack;
+        errorHTML += `
+      <div>
+        <div style="font-size: 18px; font-weight: bold; margin-top: 20px;">
+          \u{1F6A8} ${diagnostic.message}
+        </div>
+        <pre>${stack}</pre>
+        <div>
+          ${diagnostic.hints.map((hint)=>"<div>\uD83D\uDCA1 " + hint + '</div>').join('')}
+        </div>
+        ${diagnostic.documentation ? `<div>\u{1F4DD} <a style="color: violet" href="${diagnostic.documentation}" target="_blank">Learn more</a></div>` : ''}
+      </div>
+    `;
+    }
+    errorHTML += '</div>';
+    overlay.innerHTML = errorHTML;
+    return overlay;
+}
+function fullReload() {
+    if (typeof location !== 'undefined' && 'reload' in location) location.reload();
+    else if (typeof extCtx !== 'undefined' && extCtx && extCtx.runtime && extCtx.runtime.reload) extCtx.runtime.reload();
+    else try {
+        let { workerData, parentPort } = module.bundle.root('node:worker_threads') /*: any*/ ;
+        if (workerData !== null && workerData !== void 0 && workerData.__parcel) parentPort.postMessage('restart');
+    } catch (err) {
+        console.error("[parcel] \u26A0\uFE0F An HMR update was not accepted. Please restart the process.");
+    }
+}
+function getParents(bundle, id) /*: Array<[ParcelRequire, string]> */ {
+    var modules = bundle.modules;
+    if (!modules) return [];
+    var parents = [];
+    var k, d, dep;
+    for(k in modules)for(d in modules[k][1]){
+        dep = modules[k][1][d];
+        if (dep === id || Array.isArray(dep) && dep[dep.length - 1] === id) parents.push([
+            bundle,
+            k
+        ]);
+    }
+    if (bundle.parent) parents = parents.concat(getParents(bundle.parent, id));
+    return parents;
+}
+function updateLink(link) {
+    var href = link.getAttribute('href');
+    if (!href) return;
+    var newLink = link.cloneNode();
+    newLink.onload = function() {
+        if (link.parentNode !== null) // $FlowFixMe
+        link.parentNode.removeChild(link);
+    };
+    newLink.setAttribute('href', // $FlowFixMe
+    href.split('?')[0] + '?' + Date.now());
+    // $FlowFixMe
+    link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+var cssTimeout = null;
+function reloadCSS() {
+    if (cssTimeout || typeof document === 'undefined') return;
+    cssTimeout = setTimeout(function() {
+        var links = document.querySelectorAll('link[rel="stylesheet"]');
+        for(var i = 0; i < links.length; i++){
+            // $FlowFixMe[incompatible-type]
+            var href /*: string */  = links[i].getAttribute('href');
+            var hostname = getHostname();
+            var servedFromHMRServer = hostname === 'localhost' ? new RegExp('^(https?:\\/\\/(0.0.0.0|127.0.0.1)|localhost):' + getPort()).test(href) : href.indexOf(hostname + ':' + getPort());
+            var absolute = /^https?:\/\//i.test(href) && href.indexOf(location.origin) !== 0 && !servedFromHMRServer;
+            if (!absolute) updateLink(links[i]);
+        }
+        cssTimeout = null;
+    }, 50);
+}
+function hmrDownload(asset) {
+    if (asset.type === 'js') {
+        if (typeof document !== 'undefined') {
+            let script = document.createElement('script');
+            script.src = asset.url + '?t=' + Date.now();
+            if (asset.outputFormat === 'esmodule') script.type = 'module';
+            return new Promise((resolve, reject)=>{
+                var _document$head;
+                script.onload = ()=>resolve(script);
+                script.onerror = reject;
+                (_document$head = document.head) === null || _document$head === void 0 || _document$head.appendChild(script);
+            });
+        } else if (typeof importScripts === 'function') {
+            // Worker scripts
+            if (asset.outputFormat === 'esmodule') return import(asset.url + '?t=' + Date.now());
+            else return new Promise((resolve, reject)=>{
+                try {
+                    importScripts(asset.url + '?t=' + Date.now());
+                    resolve();
+                } catch (err) {
+                    reject(err);
+                }
+            });
+        }
+    }
+}
+async function hmrApplyUpdates(assets) {
+    global.parcelHotUpdate = Object.create(null);
+    let scriptsToRemove;
+    try {
+        // If sourceURL comments aren't supported in eval, we need to load
+        // the update from the dev server over HTTP so that stack traces
+        // are correct in errors/logs. This is much slower than eval, so
+        // we only do it if needed (currently just Safari).
+        // https://bugs.webkit.org/show_bug.cgi?id=137297
+        // This path is also taken if a CSP disallows eval.
+        if (!supportsSourceURL) {
+            let promises = assets.map((asset)=>{
+                var _hmrDownload;
+                return (_hmrDownload = hmrDownload(asset)) === null || _hmrDownload === void 0 ? void 0 : _hmrDownload.catch((err)=>{
+                    // Web extension fix
+                    if (extCtx && extCtx.runtime && extCtx.runtime.getManifest().manifest_version == 3 && typeof ServiceWorkerGlobalScope != 'undefined' && global instanceof ServiceWorkerGlobalScope) {
+                        extCtx.runtime.reload();
+                        return;
+                    }
+                    throw err;
+                });
+            });
+            scriptsToRemove = await Promise.all(promises);
+        }
+        assets.forEach(function(asset) {
+            hmrApply(module.bundle.root, asset);
+        });
+    } finally{
+        delete global.parcelHotUpdate;
+        if (scriptsToRemove) scriptsToRemove.forEach((script)=>{
+            if (script) {
+                var _document$head2;
+                (_document$head2 = document.head) === null || _document$head2 === void 0 || _document$head2.removeChild(script);
+            }
+        });
+    }
+}
+function hmrApply(bundle /*: ParcelRequire */ , asset /*:  HMRAsset */ ) {
+    var modules = bundle.modules;
+    if (!modules) return;
+    if (asset.type === 'css') reloadCSS();
+    else if (asset.type === 'js') {
+        let deps = asset.depsByBundle[bundle.HMR_BUNDLE_ID];
+        if (deps) {
+            if (modules[asset.id]) {
+                // Remove dependencies that are removed and will become orphaned.
+                // This is necessary so that if the asset is added back again, the cache is gone, and we prevent a full page reload.
+                let oldDeps = modules[asset.id][1];
+                for(let dep in oldDeps)if (!deps[dep] || deps[dep] !== oldDeps[dep]) {
+                    let id = oldDeps[dep];
+                    let parents = getParents(module.bundle.root, id);
+                    if (parents.length === 1) hmrDelete(module.bundle.root, id);
+                }
+            }
+            if (supportsSourceURL) // Global eval. We would use `new Function` here but browser
+            // support for source maps is better with eval.
+            (0, eval)(asset.output);
+            // $FlowFixMe
+            let fn = global.parcelHotUpdate[asset.id];
+            modules[asset.id] = [
+                fn,
+                deps
+            ];
+        }
+        // Always traverse to the parent bundle, even if we already replaced the asset in this bundle.
+        // This is required in case modules are duplicated. We need to ensure all instances have the updated code.
+        if (bundle.parent) hmrApply(bundle.parent, asset);
+    }
+}
+function hmrDelete(bundle, id) {
+    let modules = bundle.modules;
+    if (!modules) return;
+    if (modules[id]) {
+        // Collect dependencies that will become orphaned when this module is deleted.
+        let deps = modules[id][1];
+        let orphans = [];
+        for(let dep in deps){
+            let parents = getParents(module.bundle.root, deps[dep]);
+            if (parents.length === 1) orphans.push(deps[dep]);
+        }
+        // Delete the module. This must be done before deleting dependencies in case of circular dependencies.
+        delete modules[id];
+        delete bundle.cache[id];
+        // Now delete the orphans.
+        orphans.forEach((id)=>{
+            hmrDelete(module.bundle.root, id);
+        });
+    } else if (bundle.parent) hmrDelete(bundle.parent, id);
+}
+function hmrAcceptCheck(bundle /*: ParcelRequire */ , id /*: string */ , depsByBundle /*: ?{ [string]: { [string]: string } }*/ ) {
+    checkedAssets = {};
+    if (hmrAcceptCheckOne(bundle, id, depsByBundle)) return true;
+    // Traverse parents breadth first. All possible ancestries must accept the HMR update, or we'll reload.
+    let parents = getParents(module.bundle.root, id);
+    let accepted = false;
+    while(parents.length > 0){
+        let v = parents.shift();
+        let a = hmrAcceptCheckOne(v[0], v[1], null);
+        if (a) // If this parent accepts, stop traversing upward, but still consider siblings.
+        accepted = true;
+        else if (a !== null) {
+            // Otherwise, queue the parents in the next level upward.
+            let p = getParents(module.bundle.root, v[1]);
+            if (p.length === 0) {
+                // If there are no parents, then we've reached an entry without accepting. Reload.
+                accepted = false;
+                break;
+            }
+            parents.push(...p);
+        }
+    }
+    return accepted;
+}
+function hmrAcceptCheckOne(bundle /*: ParcelRequire */ , id /*: string */ , depsByBundle /*: ?{ [string]: { [string]: string } }*/ ) {
+    var modules = bundle.modules;
+    if (!modules) return;
+    if (depsByBundle && !depsByBundle[bundle.HMR_BUNDLE_ID]) {
+        // If we reached the root bundle without finding where the asset should go,
+        // there's nothing to do. Mark as "accepted" so we don't reload the page.
+        if (!bundle.parent) {
+            bundleNotFound = true;
+            return true;
+        }
+        return hmrAcceptCheckOne(bundle.parent, id, depsByBundle);
+    }
+    if (checkedAssets[id]) return null;
+    checkedAssets[id] = true;
+    var cached = bundle.cache[id];
+    if (!cached) return true;
+    assetsToDispose.push([
+        bundle,
+        id
+    ]);
+    if (cached && cached.hot && cached.hot._acceptCallbacks.length) {
+        assetsToAccept.push([
+            bundle,
+            id
+        ]);
+        return true;
+    }
+    return false;
+}
+function hmrDisposeQueue() {
+    // Dispose all old assets.
+    for(let i = 0; i < assetsToDispose.length; i++){
+        let id = assetsToDispose[i][1];
+        if (!disposedAssets[id]) {
+            hmrDispose(assetsToDispose[i][0], id);
+            disposedAssets[id] = true;
+        }
+    }
+    assetsToDispose = [];
+}
+function hmrDispose(bundle /*: ParcelRequire */ , id /*: string */ ) {
+    var cached = bundle.cache[id];
+    bundle.hotData[id] = {};
+    if (cached && cached.hot) cached.hot.data = bundle.hotData[id];
+    if (cached && cached.hot && cached.hot._disposeCallbacks.length) cached.hot._disposeCallbacks.forEach(function(cb) {
+        cb(bundle.hotData[id]);
+    });
+    delete bundle.cache[id];
+}
+function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
+    // Execute the module.
+    bundle(id);
+    // Run the accept callbacks in the new version of the module.
+    var cached = bundle.cache[id];
+    if (cached && cached.hot && cached.hot._acceptCallbacks.length) {
+        let assetsToAlsoAccept = [];
+        cached.hot._acceptCallbacks.forEach(function(cb) {
+            let additionalAssets = cb(function() {
+                return getParents(module.bundle.root, id);
+            });
+            if (Array.isArray(additionalAssets) && additionalAssets.length) assetsToAlsoAccept.push(...additionalAssets);
+        });
+        if (assetsToAlsoAccept.length) {
+            let handled = assetsToAlsoAccept.every(function(a) {
+                return hmrAcceptCheck(a[0], a[1]);
+            });
+            if (!handled) return fullReload();
+            hmrDisposeQueue();
+        }
+    }
+}
+
+},{}],"8JWvp":[function(require,module,exports,__globalThis) {
+var _core = require("@pixu-talks/core");
+var _baselineStatusJs = require("./baseline-status/baseline-status.js");
+var _doodleJs = require("./_doodle.js");
+var _slideHooksJs = require("./_slide-hooks.js");
+var _07TiltLayeredCardJs = require("./_07-tilt-layered-card.js");
+/**
+ * Initialize all motion JavaScript
+ */ document.addEventListener("DOMContentLoaded", ()=>{
+    (0, _slideHooksJs.initSlideHooks)();
+    (0, _07TiltLayeredCardJs.initTiltLayeredCard)();
+});
+
+},{"@pixu-talks/core":"bgD3A","./baseline-status/baseline-status.js":"1sNcI","./_doodle.js":"8IfSn","./_slide-hooks.js":"292LN","./_07-tilt-layered-card.js":"iJGvL"}],"bgD3A":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+var _indexJs = require("./polyfills/index.js");
+var _revealJs = require("reveal.js");
+var _revealJsDefault = parcelHelpers.interopDefault(_revealJs);
+var _highlightJs = require("reveal.js/dist/plugin/highlight.js");
+var _highlightJsDefault = parcelHelpers.interopDefault(_highlightJs);
+var _markdownJs = require("reveal.js/dist/plugin/markdown.js");
+var _markdownJsDefault = parcelHelpers.interopDefault(_markdownJs);
+var _zoomJs = require("reveal.js/dist/plugin/zoom.js");
+var _zoomJsDefault = parcelHelpers.interopDefault(_zoomJs);
+var _notesJs = require("reveal.js/dist/plugin/notes.js");
+var _notesJsDefault = parcelHelpers.interopDefault(_notesJs);
+// import { Header, Menu , Toolbar } from './plugins';
+var _plugins = require("./plugins");
+var _components = require("./components");
+var _utils = require("./utils");
+addEventListener("DOMContentLoaded", ()=>{
+    let deck = new (0, _revealJsDefault.default)(document.querySelector(".reveal"), {
+        ...window.location.href.includes("?print-pdf") && {
+            pdfSeparateFragments: false
+        },
+        hash: true,
+        // plugins: [Markdown, Highlight, Zoom, Notes, Menu, Toolbar, Header],
+        // plugins: [Markdown, Highlight, Zoom, Notes, Toolbar, Menu],
+        plugins: [
+            (0, _markdownJsDefault.default),
+            (0, _highlightJsDefault.default),
+            (0, _zoomJsDefault.default),
+            (0, _notesJsDefault.default),
+            (0, _plugins.Toolbar)
+        ],
+        navigationMode: "linear",
+        menu: {
+            // Specifies which side of the presentation the menu will
+            // be shown. Use 'left' or 'right'.
+            side: "left",
+            // Specifies the width of the menu.
+            // Can be one of the following:
+            // 'normal', 'wide', 'third', 'half', 'full', or
+            // any valid css length value
+            width: "normal",
+            // Add slide numbers to the titles in the slide list.
+            // Use 'true' or format string (same as reveal.js slide numbers)
+            numbers: true,
+            // Specifies which slide elements will be used for generating
+            // the slide titles in the menu. The default selects the first
+            // heading element found in the slide, but you can specify any
+            // valid css selector and the text from the first matching
+            // element will be used.
+            // Note: that a section data-menu-title attribute or an element
+            // with a menu-title class will take precedence over this option
+            titleSelector: "h1, h2, h3, h4, h5, h6",
+            // If slides do not have a matching title, attempt to use the
+            // start of the text content as the title instead
+            useTextContentForMissingTitles: false,
+            // Hide slides from the menu that do not have a title.
+            // Set to 'true' to only list slides with titles.
+            hideMissingTitles: true,
+            // Adds markers to the slide titles to indicate the
+            // progress through the presentation. Set to 'false'
+            // to hide the markers.
+            markers: true,
+            // Specify custom panels to be included in the menu, by
+            // providing an array of objects with 'title', 'icon'
+            // properties, and either a 'src' or 'content' property.
+            custom: false,
+            // // Specifies the themes that will be available in the themes
+            // // menu panel. Set to 'true' to show the themes menu panel
+            // // with the default themes list. Alternatively, provide an
+            // // array to specify the themes to make available in the
+            // // themes menu panel, for example...
+            // //
+            // // [
+            // //     { name: 'Black', theme: 'dist/theme/black.css' },
+            // //     { name: 'White', theme: 'dist/theme/white.css' },
+            // //     { name: 'League', theme: 'dist/theme/league.css' },
+            // //     {
+            // //       name: 'Dark',
+            // //       theme: 'lib/reveal.js/dist/theme/black.css',
+            // //       highlightTheme: 'lib/reveal.js/plugin/highlight/monokai.css'
+            // //     },
+            // //     {
+            // //       name: 'Code: Zenburn',
+            // //       highlightTheme: 'lib/reveal.js/plugin/highlight/zenburn.css'
+            // //     }
+            // // ]
+            // //
+            // // Note: specifying highlightTheme without a theme will
+            // // change the code highlight theme while leaving the
+            // // presentation theme unchanged.
+            // themes: false,
+            // // Specifies the path to the default theme files. If your
+            // // presentation uses a different path to the standard reveal
+            // // layout then you need to provide this option, but only
+            // // when 'themes' is set to 'true'. If you provide your own
+            // // list of themes or 'themes' is set to 'false' the
+            // // 'themesPath' option is ignored.
+            // themesPath: 'dist/theme/',
+            // Specifies if the transitions menu panel will be shown.
+            // Set to 'true' to show the transitions menu panel with
+            // the default transitions list. Alternatively, provide an
+            // array to specify the transitions to make available in
+            // the transitions panel, for example...
+            // ['None', 'Fade', 'Slide']
+            transitions: false,
+            // Adds a menu button to the slides to open the menu panel.
+            // Set to 'false' to hide the button.
+            openButton: false,
+            // If 'true' allows the slide number in the presentation to
+            // open the menu panel. The reveal.js slideNumber option must
+            // be displayed for this to take effect
+            openSlideNumber: false,
+            // If true allows the user to open and navigate the menu using
+            // the keyboard. Standard keyboard interaction with reveal
+            // will be disabled while the menu is open.
+            keyboard: true,
+            // Normally the menu will close on user actions such as
+            // selecting a menu item, or clicking the presentation area.
+            // If 'true', the sticky option will leave the menu open
+            // until it is explicitly closed, that is, using the close
+            // button or pressing the ESC or m key (when the keyboard
+            // interaction option is enabled).
+            sticky: false,
+            // If 'true' standard menu items will be automatically opened
+            // when navigating using the keyboard. Note: this only takes
+            // effect when both the 'keyboard' and 'sticky' options are enabled.
+            autoOpen: true,
+            // If 'true' the menu will not be created until it is explicitly
+            // requested by calling RevealMenu.init(). Note this will delay
+            // the creation of all menu panels, including custom panels, and
+            // the menu button.
+            delayInit: false,
+            // If 'true' the menu will be shown when the menu is initialised.
+            openOnInit: false
+        },
+        toolbar: {
+            // Specifies where the toolbar will be shown: 'top' or 'bottom'
+            position: "top",
+            // // If true, the reveal.js-menu will be moved into the toolbar.
+            // // Set to false to leave the menu on its own.
+            // menu: {
+            //   content: '<icon class="draft-ui-icon-hamburger"></icon>',
+            // },
+            menu: false,
+            // Add button to show the help overlay
+            help: {
+                content: '<icon class="draft-ui-icon-circle-info"></icon>'
+            },
+            // Add button to toggle the overview mode on and off
+            colorScheme: {
+                content: '<icon class="draft-ui-icon-computer"></icon>'
+            },
+            // Add button to toggle the overview mode on and off
+            overview: {
+                content: '<icon class="draft-ui-icon-apps"></icon>'
+            },
+            // Add button to toggle fullscreen mode for the presentation
+            fullscreen: {
+                content: '<icon class="draft-ui-icon-zoom-in"></icon>'
+            },
+            // Add button to pause (hide) the presentation display
+            pause: false,
+            // Add button to show the speaker notes
+            notes: false
+        }
+    });
+    // keyboard nav configuration
+    deck.configure({
+        keyboard: {
+            8: "prev",
+            // 27: null,
+            78: null
+        }
+    });
+    deck.initialize();
+    // Make the Reveal object globally available on the /demo page
+    window.Reveal = deck;
+});
+
+},{"./polyfills/index.js":"jsOC3","reveal.js":"y6NkT","reveal.js/dist/plugin/highlight.js":"6e8rN","reveal.js/dist/plugin/markdown.js":"5NbHA","reveal.js/dist/plugin/zoom.js":"8UXxo","reveal.js/dist/plugin/notes.js":"kSqKj","./plugins":"2J4bG","./components":"bUnuW","./utils":"4Bc7d","@parcel/transformer-js/src/esmodule-helpers.js":"1egVF"}],"jsOC3":[function(require,module,exports,__globalThis) {
+var _customElementsJs = require("./_customElements.js");
+var _stringsJs = require("./_strings.js");
+
+},{"./_customElements.js":"1S4IX","./_strings.js":"pBLBz"}],"1S4IX":[function(require,module,exports,__globalThis) {
 (function() {
     "use strict";
     var attributesObserver = (whenDefined, MutationObserver1)=>{
         const attributeChanged = (records)=>{
-            for(let i = 0, { length: length } = records; i < length; i++)dispatch(records[i]);
+            for(let i = 0, { length } = records; i < length; i++)dispatch(records[i]);
         };
-        const dispatch = ({ target: target, attributeName: attributeName, oldValue: oldValue })=>{
+        const dispatch = ({ target, attributeName, oldValue })=>{
             target.attributeChangedCallback(attributeName, oldValue, target.getAttribute(attributeName));
         };
         return (target, is)=>{
@@ -17,10 +926,10 @@ function $parcel$interopDefault(a) {
                 new MutationObserver1(attributeChanged).observe(target, {
                     attributes: true,
                     attributeOldValue: true,
-                    attributeFilter: attributeFilter
+                    attributeFilter
                 });
-                for(let i = 0, { length: length } = attributeFilter; i < length; i++)if (target.hasAttribute(attributeFilter[i])) dispatch({
-                    target: target,
+                for(let i = 0, { length } = attributeFilter; i < length; i++)if (target.hasAttribute(attributeFilter[i])) dispatch({
+                    target,
                     attributeName: attributeFilter[i],
                     oldValue: null
                 });
@@ -28,12 +937,12 @@ function $parcel$interopDefault(a) {
             return target;
         };
     };
-    const { keys: keys } = Object;
+    const { keys } = Object;
     const expando = (element)=>{
         const key = keys(element);
         const value = [];
         const ignore = new Set();
-        const { length: length } = key;
+        const { length } = key;
         for(let i = 0; i < length; i++){
             value[i] = element[key[i]];
             try {
@@ -77,13 +986,13 @@ function $parcel$interopDefault(a) {
             if (query.length) {
                 const selectors = query.join(",");
                 const added = new Set(), removed = new Set();
-                for (const { addedNodes: addedNodes, removedNodes: removedNodes } of records){
+                for (const { addedNodes, removedNodes } of records){
                     loop(removedNodes, selectors, added, removed, FALSE, FALSE);
                     loop(addedNodes, selectors, added, removed, TRUE, FALSE);
                 }
             }
         });
-        const { observe: observe } = mo;
+        const { observe } = mo;
         (mo.observe = (node)=>observe.call(mo, node, {
                 subtree: TRUE,
                 childList: TRUE
@@ -93,15 +1002,15 @@ function $parcel$interopDefault(a) {
     const QSA = "querySelectorAll";
     const { document: document$2, Element: Element$1, MutationObserver: MutationObserver$2, Set: Set$2, WeakMap: WeakMap$1 } = self;
     const elements = (element)=>QSA in element;
-    const { filter: filter } = [];
+    const { filter } = [];
     var qsaObserver = (options)=>{
         const live = new WeakMap$1();
         const drop = (elements)=>{
-            for(let i = 0, { length: length } = elements; i < length; i++)live.delete(elements[i]);
+            for(let i = 0, { length } = elements; i < length; i++)live.delete(elements[i]);
         };
         const flush = ()=>{
             const records = observer.takeRecords();
-            for(let i = 0, { length: length } = records; i < length; i++){
+            for(let i = 0, { length } = records; i < length; i++){
                 parse(filter.call(records[i].removedNodes, elements), false);
                 parse(filter.call(records[i].addedNodes, elements), true);
             }
@@ -110,7 +1019,7 @@ function $parcel$interopDefault(a) {
         const notifier = (element, connected)=>{
             let selectors;
             if (connected) {
-                for(let q, m = matches(element), i = 0, { length: length } = query; i < length; i++)if (m.call(element, q = query[i])) {
+                for(let q, m = matches(element), i = 0, { length } = query; i < length; i++)if (m.call(element, q = query[i])) {
                     if (!live.has(element)) live.set(element, new Set$2());
                     selectors = live.get(element);
                     if (!selectors.has(q)) {
@@ -127,12 +1036,12 @@ function $parcel$interopDefault(a) {
             }
         };
         const parse = (elements, connected = true)=>{
-            for(let i = 0, { length: length } = elements; i < length; i++)notifier(elements[i], connected);
+            for(let i = 0, { length } = elements; i < length; i++)notifier(elements[i], connected);
         };
-        const { query: query } = options;
+        const { query } = options;
         const root = options.root || document$2;
         const observer = notify(notifier, root, MutationObserver$2, query);
-        const { attachShadow: attachShadow } = Element$1.prototype;
+        const { attachShadow } = Element$1.prototype;
         if (attachShadow) Element$1.prototype.attachShadow = function(init) {
             const shadowRoot = attachShadow.call(this, init);
             observer.observe(shadowRoot);
@@ -140,21 +1049,21 @@ function $parcel$interopDefault(a) {
         };
         if (query.length) parse(root[QSA](query));
         return {
-            drop: drop,
-            flush: flush,
-            observer: observer,
-            parse: parse
+            drop,
+            flush,
+            observer,
+            parse
         };
     };
-    const { customElements: customElements, document: document$1, Element: Element, MutationObserver: MutationObserver$1, Object: Object$1, Promise: Promise$1, Map: Map, Set: Set$1, WeakMap: WeakMap, Reflect: Reflect } = self;
-    const { createElement: createElement } = document$1;
-    const { define: define, get: get, upgrade: upgrade } = customElements;
-    const { construct: construct } = Reflect || {
+    const { customElements, document: document$1, Element, MutationObserver: MutationObserver$1, Object: Object$1, Promise: Promise$1, Map, Set: Set$1, WeakMap, Reflect } = self;
+    const { createElement } = document$1;
+    const { define, get, upgrade } = customElements;
+    const { construct } = Reflect || {
         construct (HTMLElement) {
             return HTMLElement.call(this);
         }
     };
-    const { defineProperty: defineProperty, getOwnPropertyNames: getOwnPropertyNames, setPrototypeOf: setPrototypeOf } = Object$1;
+    const { defineProperty, getOwnPropertyNames, setPrototypeOf } = Object$1;
     const shadowRoots = new WeakMap();
     const shadows = new Set$1();
     const classes = new Map();
@@ -179,9 +1088,9 @@ function $parcel$interopDefault(a) {
         const method = `${connected ? "" : "dis"}connectedCallback`;
         if (method in proto) element[method]();
     };
-    const { parse: parse } = qsaObserver({
-        query: query,
-        handle: handle
+    const { parse } = qsaObserver({
+        query,
+        handle
     });
     const { parse: parseShadowed } = qsaObserver({
         query: shadowed,
@@ -195,7 +1104,7 @@ function $parcel$interopDefault(a) {
     });
     // qsaObserver also patches attachShadow
     // be sure this runs *after* that
-    const { attachShadow: attachShadow } = Element.prototype;
+    const { attachShadow } = Element.prototype;
     if (attachShadow) Element.prototype.attachShadow = function(init) {
         const root = attachShadow.call(this, init);
         shadowRoots.set(this, root);
@@ -207,8 +1116,8 @@ function $parcel$interopDefault(a) {
                 _ = $;
             });
             defined.set(name, {
-                $: $,
-                _: _
+                $,
+                _
             });
         }
         return defined.get(name).$;
@@ -218,9 +1127,9 @@ function $parcel$interopDefault(a) {
     getOwnPropertyNames(self).filter((k)=>/^HTML.*Element$/.test(k)).forEach((k)=>{
         const HTMLElement = self[k];
         function HTMLBuiltIn() {
-            const { constructor: constructor } = this;
+            const { constructor } = this;
             if (!classes.has(constructor)) throw new TypeError("Illegal constructor");
-            const { is: is, tag: tag } = classes.get(constructor);
+            const { is, tag } = classes.get(constructor);
             if (is) {
                 if (override) return augment(override, is);
                 const element = createElement.call(document$1, tag);
@@ -267,8 +1176,8 @@ function $parcel$interopDefault(a) {
         let selector;
         const tag = options && options.extends;
         classes.set(Class, tag ? {
-            is: is,
-            tag: tag
+            is,
+            tag
         } : {
             is: "",
             tag: is
@@ -298,7 +1207,7 @@ function $parcel$interopDefault(a) {
     }
 })();
 
-
+},{}],"pBLBz":[function(require,module,exports,__globalThis) {
 /**
  * String prototype polyfills: startsWith and endsWith
  *
@@ -335,25 +1244,26 @@ function $parcel$interopDefault(a) {
     return this.substring(length - searchString.length, length) === searchString;
 });
 
-
-
-
-var $14d69c2d74c674dd$var$pi = Object.defineProperty, $14d69c2d74c674dd$var$vi = Object.defineProperties;
-var $14d69c2d74c674dd$var$mi = Object.getOwnPropertyDescriptors;
-var $14d69c2d74c674dd$var$xt = Object.getOwnPropertySymbols;
-var $14d69c2d74c674dd$var$yi = Object.prototype.hasOwnProperty, $14d69c2d74c674dd$var$bi = Object.prototype.propertyIsEnumerable;
-var $14d69c2d74c674dd$var$qe = (c, e, i)=>e in c ? $14d69c2d74c674dd$var$pi(c, e, {
+},{}],"y6NkT":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>ce);
+var pi = Object.defineProperty, vi = Object.defineProperties;
+var mi = Object.getOwnPropertyDescriptors;
+var xt = Object.getOwnPropertySymbols;
+var yi = Object.prototype.hasOwnProperty, bi = Object.prototype.propertyIsEnumerable;
+var qe = (c, e, i)=>e in c ? pi(c, e, {
         enumerable: !0,
         configurable: !0,
         writable: !0,
         value: i
-    }) : c[e] = i, $14d69c2d74c674dd$var$Q = (c, e)=>{
-    for(var i in e || (e = {}))$14d69c2d74c674dd$var$yi.call(e, i) && $14d69c2d74c674dd$var$qe(c, i, e[i]);
-    if ($14d69c2d74c674dd$var$xt) for (var i of $14d69c2d74c674dd$var$xt(e))$14d69c2d74c674dd$var$bi.call(e, i) && $14d69c2d74c674dd$var$qe(c, i, e[i]);
+    }) : c[e] = i, Q = (c, e)=>{
+    for(var i in e || (e = {}))yi.call(e, i) && qe(c, i, e[i]);
+    if (xt) for (var i of xt(e))bi.call(e, i) && qe(c, i, e[i]);
     return c;
-}, $14d69c2d74c674dd$var$We = (c, e)=>$14d69c2d74c674dd$var$vi(c, $14d69c2d74c674dd$var$mi(e));
-var $14d69c2d74c674dd$var$je = (c, e, i)=>$14d69c2d74c674dd$var$qe(c, typeof e != "symbol" ? e + "" : e, i);
-var $14d69c2d74c674dd$var$It = (c, e, i)=>new Promise((t, s)=>{
+}, We = (c, e)=>vi(c, mi(e));
+var je = (c, e, i)=>qe(c, typeof e != "symbol" ? e + "" : e, i);
+var It = (c, e, i)=>new Promise((t, s)=>{
         var a = (h)=>{
             try {
                 o(i.next(h));
@@ -369,12 +1279,12 @@ var $14d69c2d74c674dd$var$It = (c, e, i)=>new Promise((t, s)=>{
         }, o = (h)=>h.done ? t(h.value) : Promise.resolve(h.value).then(a, r);
         o((i = i.apply(c, e)).next());
     });
-const $14d69c2d74c674dd$var$ge = (c, e)=>{
+const ge = (c, e)=>{
     for(let i in e)c[i] = e[i];
     return c;
-}, $14d69c2d74c674dd$var$E = (c, e)=>Array.from(c.querySelectorAll(e)), $14d69c2d74c674dd$var$Ke = (c, e, i)=>{
+}, E = (c, e)=>Array.from(c.querySelectorAll(e)), Ke = (c, e, i)=>{
     i ? c.classList.add(e) : c.classList.remove(e);
-}, $14d69c2d74c674dd$var$fe = (c)=>{
+}, fe = (c)=>{
     if (typeof c == "string") {
         if (c === "null") return null;
         if (c === "true") return !0;
@@ -382,23 +1292,23 @@ const $14d69c2d74c674dd$var$ge = (c, e)=>{
         if (c.match(/^-?[\d\.]+$/)) return parseFloat(c);
     }
     return c;
-}, $14d69c2d74c674dd$var$ae = (c, e)=>{
+}, ae = (c, e)=>{
     c.style.transform = e;
-}, $14d69c2d74c674dd$var$xe = (c, e)=>{
+}, xe = (c, e)=>{
     let i = c.matches || c.matchesSelector || c.msMatchesSelector;
     return !!(i && i.call(c, e));
-}, $14d69c2d74c674dd$var$V = (c, e)=>{
+}, V = (c, e)=>{
     if (c && typeof c.closest == "function") return c.closest(e);
     for(; c;){
-        if ($14d69c2d74c674dd$var$xe(c, e)) return c;
+        if (xe(c, e)) return c;
         c = c.parentElement;
     }
     return null;
-}, $14d69c2d74c674dd$var$Dt = (c)=>{
+}, Dt = (c)=>{
     c = c || document.documentElement;
     let e = c.requestFullscreen || c.webkitRequestFullscreen || c.webkitRequestFullScreen || c.mozRequestFullScreen || c.msRequestFullscreen;
     e && e.apply(c);
-}, $14d69c2d74c674dd$var$wi = (c, e, i, t = "")=>{
+}, wi = (c, e, i, t = "")=>{
     let s = c.querySelectorAll("." + i);
     for(let r = 0; r < s.length; r++){
         let o = s[r];
@@ -406,10 +1316,10 @@ const $14d69c2d74c674dd$var$ge = (c, e)=>{
     }
     let a = document.createElement(e);
     return a.className = i, a.innerHTML = t, c.appendChild(a), a;
-}, $14d69c2d74c674dd$var$Xe = (c)=>{
+}, Xe = (c)=>{
     let e = document.createElement("style");
     return c && c.length > 0 && e.appendChild(document.createTextNode(c)), document.head.appendChild(e), e;
-}, $14d69c2d74c674dd$var$Mt = ()=>{
+}, Mt = ()=>{
     let c = {};
     location.search.replace(/[A-Z0-9]+?=([\w\.%-]*)/gi, (e)=>{
         const i = e.split("=").shift(), t = e.split("=").pop();
@@ -417,27 +1327,27 @@ const $14d69c2d74c674dd$var$ge = (c, e)=>{
     });
     for(let e in c){
         let i = c[e];
-        c[e] = $14d69c2d74c674dd$var$fe(unescape(i));
+        c[e] = fe(unescape(i));
     }
     return typeof c.dependencies != "undefined" && delete c.dependencies, c;
-}, $14d69c2d74c674dd$var$Ei = (c, e = 0)=>{
+}, Ei = (c, e = 0)=>{
     var i;
     if (c) {
         let t, s = c.style.height;
         return c.style.height = "0px", c.parentElement && (c.parentElement.style.height = "auto"), t = e - (((i = c.parentElement) == null ? void 0 : i.offsetHeight) || 0), c.style.height = s + "px", c.parentElement && c.parentElement.style.removeProperty("height"), t;
     }
     return e;
-}, $14d69c2d74c674dd$var$Si = {
+}, Si = {
     mp4: "video/mp4",
     m4a: "video/mp4",
     ogv: "video/ogg",
     mpeg: "video/mpeg",
     webm: "video/webm"
-}, $14d69c2d74c674dd$var$Ai = (c = "")=>{
+}, Ai = (c = "")=>{
     const e = c.split(".").pop();
-    return e ? $14d69c2d74c674dd$var$Si[e] : void 0;
-}, $14d69c2d74c674dd$var$Ri = (c = "")=>encodeURI(c).replace(/%5B/g, "[").replace(/%5D/g, "]").replace(/[!'()*]/g, (e)=>`%${e.charCodeAt(0).toString(16).toUpperCase()}`), $14d69c2d74c674dd$var$Vt = navigator.userAgent, $14d69c2d74c674dd$var$le = /(iphone|ipod|ipad|android)/gi.test($14d69c2d74c674dd$var$Vt) || navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1, $14d69c2d74c674dd$var$Ft = /android/gi.test($14d69c2d74c674dd$var$Vt);
-var $14d69c2d74c674dd$var$ki = function(c) {
+    return e ? Si[e] : void 0;
+}, Ri = (c = "")=>encodeURI(c).replace(/%5B/g, "[").replace(/%5D/g, "]").replace(/[!'()*]/g, (e)=>`%${e.charCodeAt(0).toString(16).toUpperCase()}`), Vt = navigator.userAgent, le = /(iphone|ipod|ipad|android)/gi.test(Vt) || navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1, Ft = /android/gi.test(Vt);
+var ki = function(c) {
     if (c) {
         var e = function(f) {
             return [].slice.call(f);
@@ -564,9 +1474,9 @@ var $14d69c2d74c674dd$var$ki = function(c) {
         ], S)[0];
     }
 }(typeof window == "undefined" ? null : window);
-class $14d69c2d74c674dd$var$Ci {
+class Ci {
     constructor(e){
-        $14d69c2d74c674dd$var$je(this, "allowedToPlayAudio", null);
+        je(this, "allowedToPlayAudio", null);
         this.Reveal = e, this.startEmbeddedMedia = this.startEmbeddedMedia.bind(this), this.startEmbeddedIframe = this.startEmbeddedIframe.bind(this), this.preventIframeAutoFocus = this.preventIframeAutoFocus.bind(this), this.ensureMobileMediaPlaying = this.ensureMobileMediaPlaying.bind(this), this.failedAudioPlaybackTargets = /* @__PURE__ */ new Set(), this.failedVideoPlaybackTargets = /* @__PURE__ */ new Set(), this.failedMutedVideoPlaybackTargets = /* @__PURE__ */ new Set(), this.renderMediaPlayButton();
     }
     renderMediaPlayButton() {
@@ -604,14 +1514,14 @@ class $14d69c2d74c674dd$var$Ci {
             const a = t.replace(/\s*!important\s*$/, "").trim();
             e.style.setProperty("display", a, "important");
         } else e.style.display = t;
-        $14d69c2d74c674dd$var$E(e, "img[data-src], video[data-src], audio[data-src], iframe[data-src]").forEach((a)=>{
+        E(e, "img[data-src], video[data-src], audio[data-src], iframe[data-src]").forEach((a)=>{
             const r = a.tagName === "IFRAME";
             (!r || this.shouldPreload(a)) && (a.setAttribute("src", a.getAttribute("data-src")), a.setAttribute("data-lazy-loaded", ""), a.removeAttribute("data-src"), r && a.addEventListener("load", this.preventIframeAutoFocus));
-        }), $14d69c2d74c674dd$var$E(e, "video, audio").forEach((a)=>{
+        }), E(e, "video, audio").forEach((a)=>{
             let r = 0;
-            $14d69c2d74c674dd$var$E(a, "source[data-src]").forEach((o)=>{
+            E(a, "source[data-src]").forEach((o)=>{
                 o.setAttribute("src", o.getAttribute("data-src")), o.removeAttribute("data-src"), o.setAttribute("data-lazy-loaded", ""), r += 1;
-            }), $14d69c2d74c674dd$var$le && a.tagName === "VIDEO" && a.setAttribute("playsinline", ""), r > 0 && a.load();
+            }), le && a.tagName === "VIDEO" && a.setAttribute("playsinline", ""), r > 0 && a.load();
         });
         let s = e.slideBackgroundElement;
         if (s) {
@@ -622,14 +1532,14 @@ class $14d69c2d74c674dd$var$Ci {
                 let h = e.getAttribute("data-background-image"), u = e.getAttribute("data-background-video"), g = e.hasAttribute("data-background-video-loop"), y = e.hasAttribute("data-background-video-muted");
                 if (h) /^data:/.test(h.trim()) ? a.style.backgroundImage = `url(${h.trim()})` : a.style.backgroundImage = h.split(",").map((p)=>{
                     let b = decodeURI(p.trim());
-                    return `url(${$14d69c2d74c674dd$var$Ri(b)})`;
+                    return `url(${Ri(b)})`;
                 }).join(",");
                 else if (u) {
                     let p = document.createElement("video");
-                    g && p.setAttribute("loop", ""), (y || this.Reveal.isSpeakerNotes()) && (p.muted = !0), $14d69c2d74c674dd$var$le && p.setAttribute("playsinline", ""), u.split(",").forEach((b)=>{
+                    g && p.setAttribute("loop", ""), (y || this.Reveal.isSpeakerNotes()) && (p.muted = !0), le && p.setAttribute("playsinline", ""), u.split(",").forEach((b)=>{
                         const l = document.createElement("source");
                         l.setAttribute("src", b);
-                        let A = $14d69c2d74c674dd$var$Ai(b);
+                        let A = Ai(b);
                         A && l.setAttribute("type", A), p.appendChild(l);
                     }), a.appendChild(p);
                 } else if (r && i.excludeIframes !== !0) {
@@ -646,7 +1556,7 @@ class $14d69c2d74c674dd$var$Ci {
    * Applies JS-dependent layout helpers for the scope.
    */ layout(e) {
         Array.from(e.querySelectorAll(".r-fit-text")).forEach((i)=>{
-            $14d69c2d74c674dd$var$ki(i, {
+            ki(i, {
                 minSize: 24,
                 maxSize: this.Reveal.getConfig().height * 0.8,
                 observeMutations: !1,
@@ -662,11 +1572,11 @@ class $14d69c2d74c674dd$var$Ci {
    */ unload(e) {
         e.style.display = "none";
         let i = this.Reveal.getSlideBackground(e);
-        i && (i.style.display = "none", $14d69c2d74c674dd$var$E(i, "iframe[src]").forEach((t)=>{
+        i && (i.style.display = "none", E(i, "iframe[src]").forEach((t)=>{
             t.removeAttribute("src");
-        })), $14d69c2d74c674dd$var$E(e, "video[data-lazy-loaded][src], audio[data-lazy-loaded][src], iframe[data-lazy-loaded][src]").forEach((t)=>{
+        })), E(e, "video[data-lazy-loaded][src], audio[data-lazy-loaded][src], iframe[data-lazy-loaded][src]").forEach((t)=>{
             t.setAttribute("data-src", t.getAttribute("src")), t.removeAttribute("src");
-        }), $14d69c2d74c674dd$var$E(e, "video[data-lazy-loaded] source[src], audio source[src]").forEach((t)=>{
+        }), E(e, "video[data-lazy-loaded] source[src], audio source[src]").forEach((t)=>{
             t.setAttribute("data-src", t.getAttribute("src")), t.removeAttribute("src");
         });
     }
@@ -674,7 +1584,7 @@ class $14d69c2d74c674dd$var$Ci {
    * Enforces origin-specific format rules for embedded media.
    */ formatEmbeddedContent() {
         let e = (i, t, s)=>{
-            $14d69c2d74c674dd$var$E(this.Reveal.getSlidesElement(), "iframe[" + i + '*="' + t + '"]').forEach((a)=>{
+            E(this.Reveal.getSlidesElement(), "iframe[" + i + '*="' + t + '"]').forEach((a)=>{
                 let r = a.getAttribute(i);
                 r && r.indexOf(s) === -1 && a.setAttribute(i, r + (/\?/.test(r) ? "&" : "?") + s);
             });
@@ -689,23 +1599,23 @@ class $14d69c2d74c674dd$var$Ci {
    */ startEmbeddedContent(e) {
         if (e) {
             const i = this.Reveal.isSpeakerNotes();
-            $14d69c2d74c674dd$var$E(e, 'img[src$=".gif"]').forEach((t)=>{
+            E(e, 'img[src$=".gif"]').forEach((t)=>{
                 t.setAttribute("src", t.getAttribute("src"));
-            }), $14d69c2d74c674dd$var$E(e, "video, audio").forEach((t)=>{
-                if ($14d69c2d74c674dd$var$V(t, ".fragment") && !$14d69c2d74c674dd$var$V(t, ".fragment.visible")) return;
+            }), E(e, "video, audio").forEach((t)=>{
+                if (V(t, ".fragment") && !V(t, ".fragment.visible")) return;
                 let s = this.Reveal.getConfig().autoPlayMedia;
-                if (typeof s != "boolean" && (s = t.hasAttribute("data-autoplay") || !!$14d69c2d74c674dd$var$V(t, ".slide-background")), s && typeof t.play == "function") {
+                if (typeof s != "boolean" && (s = t.hasAttribute("data-autoplay") || !!V(t, ".slide-background")), s && typeof t.play == "function") {
                     if (i && !t.muted) return;
                     t.readyState > 1 ? this.startEmbeddedMedia({
                         target: t
-                    }) : $14d69c2d74c674dd$var$le ? (t.addEventListener("canplay", this.ensureMobileMediaPlaying), this.playMediaElement(t)) : (t.removeEventListener("loadeddata", this.startEmbeddedMedia), t.addEventListener("loadeddata", this.startEmbeddedMedia));
+                    }) : le ? (t.addEventListener("canplay", this.ensureMobileMediaPlaying), this.playMediaElement(t)) : (t.removeEventListener("loadeddata", this.startEmbeddedMedia), t.addEventListener("loadeddata", this.startEmbeddedMedia));
                 }
-            }), i || ($14d69c2d74c674dd$var$E(e, "iframe[src]").forEach((t)=>{
-                $14d69c2d74c674dd$var$V(t, ".fragment") && !$14d69c2d74c674dd$var$V(t, ".fragment.visible") || this.startEmbeddedIframe({
+            }), i || (E(e, "iframe[src]").forEach((t)=>{
+                V(t, ".fragment") && !V(t, ".fragment.visible") || this.startEmbeddedIframe({
                     target: t
                 });
-            }), $14d69c2d74c674dd$var$E(e, "iframe[data-src]").forEach((t)=>{
-                $14d69c2d74c674dd$var$V(t, ".fragment") && !$14d69c2d74c674dd$var$V(t, ".fragment.visible") || t.getAttribute("src") !== t.getAttribute("data-src") && (t.removeEventListener("load", this.startEmbeddedIframe), t.addEventListener("load", this.startEmbeddedIframe), t.setAttribute("src", t.getAttribute("data-src")));
+            }), E(e, "iframe[data-src]").forEach((t)=>{
+                V(t, ".fragment") && !V(t, ".fragment.visible") || t.getAttribute("src") !== t.getAttribute("data-src") && (t.removeEventListener("load", this.startEmbeddedIframe), t.addEventListener("load", this.startEmbeddedIframe), t.setAttribute("src", t.getAttribute("data-src")));
             }));
         }
     }
@@ -732,7 +1642,7 @@ class $14d69c2d74c674dd$var$Ci {
    *
    * @param {object} event
    */ startEmbeddedMedia(e) {
-        let i = !!$14d69c2d74c674dd$var$V(e.target, "html"), t = !!$14d69c2d74c674dd$var$V(e.target, ".present");
+        let i = !!V(e.target, "html"), t = !!V(e.target, ".present");
         i && t && (e.target.paused || e.target.ended) && (e.target.currentTime = 0, this.playMediaElement(e.target)), e.target.removeEventListener("loadeddata", this.startEmbeddedMedia);
     }
     /**
@@ -749,7 +1659,7 @@ class $14d69c2d74c674dd$var$Ci {
             if (t.name === "NotAllowedError") {
                 if (this.allowedToPlayAudio = !1, e.tagName === "VIDEO") {
                     this.onVideoPlaybackNotAllowed(e);
-                    let s = !!$14d69c2d74c674dd$var$V(e, "html"), a = !!$14d69c2d74c674dd$var$V(e, ".present"), r = e.muted;
+                    let s = !!V(e, "html"), a = !!V(e, ".present"), r = e.muted;
                     s && a && !r && (e.setAttribute("data-muted-by-reveal", "true"), e.muted = !0, e.play().catch(()=>{
                         this.onMutedVideoPlaybackNotAllowed(e);
                     }));
@@ -765,10 +1675,10 @@ class $14d69c2d74c674dd$var$Ci {
    */ startEmbeddedIframe(e) {
         let i = e.target;
         if (this.preventIframeAutoFocus(e), i && i.contentWindow) {
-            let t = !!$14d69c2d74c674dd$var$V(e.target, "html"), s = !!$14d69c2d74c674dd$var$V(e.target, ".present");
+            let t = !!V(e.target, "html"), s = !!V(e.target, ".present");
             if (t && s) {
                 let a = this.Reveal.getConfig().autoPlayMedia;
-                typeof a != "boolean" && (a = i.hasAttribute("data-autoplay") || !!$14d69c2d74c674dd$var$V(i, ".slide-background")), /youtube\.com\/embed\//.test(i.getAttribute("src")) && a ? i.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', "*") : /player\.vimeo\.com\//.test(i.getAttribute("src")) && a ? i.contentWindow.postMessage('{"method":"play"}', "*") : i.contentWindow.postMessage("slide:start", "*");
+                typeof a != "boolean" && (a = i.hasAttribute("data-autoplay") || !!V(i, ".slide-background")), /youtube\.com\/embed\//.test(i.getAttribute("src")) && a ? i.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', "*") : /player\.vimeo\.com\//.test(i.getAttribute("src")) && a ? i.contentWindow.postMessage('{"method":"play"}', "*") : i.contentWindow.postMessage("slide:start", "*");
             }
         }
     }
@@ -778,18 +1688,18 @@ class $14d69c2d74c674dd$var$Ci {
    *
    * @param {HTMLElement} element
    */ stopEmbeddedContent(e, i = {}) {
-        i = $14d69c2d74c674dd$var$ge({
+        i = ge({
             // Defaults
             unloadIframes: !0
-        }, i), e && e.parentNode && ($14d69c2d74c674dd$var$E(e, "video, audio").forEach((t)=>{
-            !t.hasAttribute("data-ignore") && typeof t.pause == "function" && (t.setAttribute("data-paused-by-reveal", ""), t.pause(), $14d69c2d74c674dd$var$le && t.removeEventListener("canplay", this.ensureMobileMediaPlaying));
-        }), $14d69c2d74c674dd$var$E(e, "iframe").forEach((t)=>{
+        }, i), e && e.parentNode && (E(e, "video, audio").forEach((t)=>{
+            !t.hasAttribute("data-ignore") && typeof t.pause == "function" && (t.setAttribute("data-paused-by-reveal", ""), t.pause(), le && t.removeEventListener("canplay", this.ensureMobileMediaPlaying));
+        }), E(e, "iframe").forEach((t)=>{
             t.contentWindow && t.contentWindow.postMessage("slide:stop", "*"), t.removeEventListener("load", this.preventIframeAutoFocus), t.removeEventListener("load", this.startEmbeddedIframe);
-        }), $14d69c2d74c674dd$var$E(e, 'iframe[src*="youtube.com/embed/"]').forEach((t)=>{
+        }), E(e, 'iframe[src*="youtube.com/embed/"]').forEach((t)=>{
             !t.hasAttribute("data-ignore") && t.contentWindow && typeof t.contentWindow.postMessage == "function" && t.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', "*");
-        }), $14d69c2d74c674dd$var$E(e, 'iframe[src*="player.vimeo.com/"]').forEach((t)=>{
+        }), E(e, 'iframe[src*="player.vimeo.com/"]').forEach((t)=>{
             !t.hasAttribute("data-ignore") && t.contentWindow && typeof t.contentWindow.postMessage == "function" && t.contentWindow.postMessage('{"method":"pause"}', "*");
-        }), i.unloadIframes === !0 && $14d69c2d74c674dd$var$E(e, "iframe[data-src]").forEach((t)=>{
+        }), i.unloadIframes === !0 && E(e, "iframe[data-src]").forEach((t)=>{
             t.setAttribute("src", "about:blank"), t.removeAttribute("src");
         }));
     }
@@ -851,8 +1761,8 @@ class $14d69c2d74c674dd$var$Ci {
         this.clearMediaPlaybackErrors();
     }
 }
-const $14d69c2d74c674dd$var$de = ".slides section", $14d69c2d74c674dd$var$te = ".slides>section", $14d69c2d74c674dd$var$_e = ".slides>section.present>section", $14d69c2d74c674dd$var$Pi = ".backgrounds>.slide-background", $14d69c2d74c674dd$var$Li = /registerPlugin|registerKeyboardShortcut|addKeyBinding|addEventListener|showPreview/, $14d69c2d74c674dd$var$Ti = "h.v", $14d69c2d74c674dd$var$xi = "h/v", $14d69c2d74c674dd$var$Ye = "c", $14d69c2d74c674dd$var$zt = "c/t";
-class $14d69c2d74c674dd$var$Ii {
+const de = ".slides section", te = ".slides>section", _e = ".slides>section.present>section", Pi = ".backgrounds>.slide-background", Li = /registerPlugin|registerKeyboardShortcut|addKeyBinding|addEventListener|showPreview/, Ti = "h.v", xi = "h/v", Ye = "c", zt = "c/t";
+class Ii {
     constructor(e){
         this.Reveal = e;
     }
@@ -874,22 +1784,22 @@ class $14d69c2d74c674dd$var$Ii {
    * Returns the HTML string corresponding to the current slide
    * number, including formatting.
    */ getSlideNumber(e = this.Reveal.getCurrentSlide()) {
-        let i = this.Reveal.getConfig(), t, s = $14d69c2d74c674dd$var$Ti;
+        let i = this.Reveal.getConfig(), t, s = Ti;
         if (typeof i.slideNumber == "function") t = i.slideNumber(e);
         else {
-            typeof i.slideNumber == "string" && (s = i.slideNumber), !/c/.test(s) && this.Reveal.getHorizontalSlides().length === 1 && (s = $14d69c2d74c674dd$var$Ye);
+            typeof i.slideNumber == "string" && (s = i.slideNumber), !/c/.test(s) && this.Reveal.getHorizontalSlides().length === 1 && (s = Ye);
             let r = e && e.dataset.visibility === "uncounted" ? 0 : 1;
             switch(t = [], s){
-                case $14d69c2d74c674dd$var$Ye:
+                case Ye:
                     t.push(this.Reveal.getSlidePastCount(e) + r);
                     break;
-                case $14d69c2d74c674dd$var$zt:
+                case zt:
                     t.push(this.Reveal.getSlidePastCount(e) + r, "/", this.Reveal.getTotalSlides());
                     break;
                 default:
                     let o = this.Reveal.getIndices(e);
                     t.push(o.h + r);
-                    let h = s === $14d69c2d74c674dd$var$xi ? "/" : ".";
+                    let h = s === xi ? "/" : ".";
                     this.Reveal.isVerticalSlide(e) && t.push(h, o.v + 1);
             }
         }
@@ -918,7 +1828,7 @@ class $14d69c2d74c674dd$var$Ii {
         this.element.remove();
     }
 }
-class $14d69c2d74c674dd$var$Mi {
+class Mi {
     constructor(e){
         this.Reveal = e, this.onInput = this.onInput.bind(this), this.onBlur = this.onBlur.bind(this), this.onKeyDown = this.onKeyDown.bind(this);
     }
@@ -941,7 +1851,7 @@ class $14d69c2d74c674dd$var$Mi {
         let e = this.jumpInput.value.trim(""), i;
         if (/^\d+$/.test(e)) {
             const t = this.Reveal.getConfig().slideNumber;
-            if (t === $14d69c2d74c674dd$var$Ye || t === $14d69c2d74c674dd$var$zt) {
+            if (t === Ye || t === zt) {
                 const s = this.Reveal.getSlides()[parseInt(e, 10) - 1];
                 s && (i = this.Reveal.getIndices(s));
             }
@@ -982,7 +1892,7 @@ class $14d69c2d74c674dd$var$Mi {
         setTimeout(()=>this.hide(), 1);
     }
 }
-const $14d69c2d74c674dd$var$Ge = (c)=>{
+const Ge = (c)=>{
     let e = c.match(/^#([0-9a-f]{3})$/i);
     if (e && e[1]) {
         const a = e[1];
@@ -1014,8 +1924,8 @@ const $14d69c2d74c674dd$var$Ge = (c)=>{
         b: parseInt(s[3], 10),
         a: parseFloat(s[4])
     } : null;
-}, $14d69c2d74c674dd$var$Ni = (c)=>(typeof c == "string" && (c = $14d69c2d74c674dd$var$Ge(c)), c ? (c.r * 299 + c.g * 587 + c.b * 114) / 1e3 : null);
-class $14d69c2d74c674dd$var$Bi {
+}, Ni = (c)=>(typeof c == "string" && (c = Ge(c)), c ? (c.r * 299 + c.g * 587 + c.b * 114) / 1e3 : null);
+class Bi {
     constructor(e){
         this.Reveal = e;
     }
@@ -1029,7 +1939,7 @@ class $14d69c2d74c674dd$var$Bi {
    */ create() {
         this.element.innerHTML = "", this.element.classList.add("no-transition"), this.Reveal.getHorizontalSlides().forEach((e)=>{
             let i = this.createBackground(e, this.element);
-            $14d69c2d74c674dd$var$E(e, "section").forEach((t)=>{
+            E(e, "section").forEach((t)=>{
                 this.createBackground(t, i), i.classList.add("stack");
             });
         }), this.Reveal.getConfig().parallaxBackgroundImage ? (this.element.style.backgroundImage = 'url("' + this.Reveal.getConfig().parallaxBackgroundImage + '")', this.element.style.backgroundSize = this.Reveal.getConfig().parallaxBackgroundSize, this.element.style.backgroundRepeat = this.Reveal.getConfig().parallaxBackgroundRepeat, this.element.style.backgroundPosition = this.Reveal.getConfig().parallaxBackgroundPosition, setTimeout(()=>{
@@ -1082,13 +1992,13 @@ class $14d69c2d74c674dd$var$Bi {
    */ getContrastClass(e) {
         const i = e.slideBackgroundElement;
         let t = e.getAttribute("data-background-color");
-        if (!t || !$14d69c2d74c674dd$var$Ge(t)) {
+        if (!t || !Ge(t)) {
             let s = window.getComputedStyle(i);
             s && s.backgroundColor && (t = s.backgroundColor);
         }
         if (t) {
-            const s = $14d69c2d74c674dd$var$Ge(t);
-            if (s && s.a !== 0) return $14d69c2d74c674dd$var$Ni(t) < 128 ? "has-dark-background" : "has-light-background";
+            const s = Ge(t);
+            if (s && s.a !== 0) return Ni(t) < 128 ? "has-dark-background" : "has-light-background";
         }
         return null;
     }
@@ -1111,7 +2021,7 @@ class $14d69c2d74c674dd$var$Bi {
    */ update(e = !1) {
         let i = this.Reveal.getConfig(), t = this.Reveal.getCurrentSlide(), s = this.Reveal.getIndices(), a = null, r = i.rtl ? "future" : "past", o = i.rtl ? "past" : "future";
         if (Array.from(this.element.childNodes).forEach((u, g)=>{
-            u.classList.remove("past", "present", "future"), g < s.h ? u.classList.add(r) : g > s.h ? u.classList.add(o) : (u.classList.add("present"), a = u), (e || g === s.h) && $14d69c2d74c674dd$var$E(u, ".slide-background").forEach((y, p)=>{
+            u.classList.remove("past", "present", "future"), g < s.h ? u.classList.add(r) : g > s.h ? u.classList.add(o) : (u.classList.add("present"), a = u), (e || g === s.h) && E(u, ".slide-background").forEach((y, p)=>{
                 y.classList.remove("past", "present", "future");
                 const b = typeof s.v == "number" ? s.v : 0;
                 p < b ? y.classList.add("past") : p > b ? y.classList.add("future") : (y.classList.add("present"), g === s.h && (a = y));
@@ -1161,8 +2071,8 @@ class $14d69c2d74c674dd$var$Bi {
         this.element.remove();
     }
 }
-let $14d69c2d74c674dd$var$Nt = 0;
-class $14d69c2d74c674dd$var$Hi {
+let Nt = 0;
+class Hi {
     constructor(e){
         this.Reveal = e;
     }
@@ -1175,17 +2085,17 @@ class $14d69c2d74c674dd$var$Hi {
         this.reset();
         let t = this.Reveal.getSlides(), s = t.indexOf(i), a = t.indexOf(e);
         if (e && i && e.hasAttribute("data-auto-animate") && i.hasAttribute("data-auto-animate") && e.getAttribute("data-auto-animate-id") === i.getAttribute("data-auto-animate-id") && !(s > a ? i : e).hasAttribute("data-auto-animate-restart")) {
-            this.autoAnimateStyleSheet = this.autoAnimateStyleSheet || $14d69c2d74c674dd$var$Xe();
+            this.autoAnimateStyleSheet = this.autoAnimateStyleSheet || Xe();
             let r = this.getAutoAnimateOptions(i);
             e.dataset.autoAnimate = "pending", i.dataset.autoAnimate = "pending", r.slideDirection = s > a ? "forward" : "backward";
             let o = e.style.display === "none";
             o && (e.style.display = this.Reveal.getConfig().display);
-            let h = this.getAutoAnimatableElements(e, i).map((u)=>this.autoAnimateElements(u.from, u.to, u.options || {}, r, $14d69c2d74c674dd$var$Nt++));
+            let h = this.getAutoAnimatableElements(e, i).map((u)=>this.autoAnimateElements(u.from, u.to, u.options || {}, r, Nt++));
             if (o && (e.style.display = "none"), i.dataset.autoAnimateUnmatched !== "false" && this.Reveal.getConfig().autoAnimateUnmatched === !0) {
                 let u = r.duration * 0.8, g = r.duration * 0.2;
                 this.getUnmatchedAutoAnimateElements(i).forEach((y)=>{
                     let p = this.getAutoAnimateOptions(y, r), b = "unmatched";
-                    (p.duration !== r.duration || p.delay !== r.delay) && (b = "unmatched-" + $14d69c2d74c674dd$var$Nt++, h.push(`[data-auto-animate="running"] [data-auto-animate-target="${b}"] { transition: opacity ${p.duration}s ease ${p.delay}s; }`)), y.dataset.autoAnimateTarget = b;
+                    (p.duration !== r.duration || p.delay !== r.delay) && (b = "unmatched-" + Nt++, h.push(`[data-auto-animate="running"] [data-auto-animate-target="${b}"] { transition: opacity ${p.duration}s ease ${p.delay}s; }`)), y.dataset.autoAnimateTarget = b;
                 }, this), h.push(`[data-auto-animate="running"] [data-auto-animate-target="unmatched"] { transition: opacity ${u}s ease ${g}s; }`);
             }
             this.autoAnimateStyleSheet.innerHTML = h.join(""), requestAnimationFrame(()=>{
@@ -1204,9 +2114,9 @@ class $14d69c2d74c674dd$var$Hi {
    * Rolls back all changes that we've made to the DOM so
    * that as part of animating.
    */ reset() {
-        $14d69c2d74c674dd$var$E(this.Reveal.getRevealElement(), '[data-auto-animate]:not([data-auto-animate=""])').forEach((e)=>{
+        E(this.Reveal.getRevealElement(), '[data-auto-animate]:not([data-auto-animate=""])').forEach((e)=>{
             e.dataset.autoAnimate = "";
-        }), $14d69c2d74c674dd$var$E(this.Reveal.getRevealElement(), "[data-auto-animate-target]").forEach((e)=>{
+        }), E(this.Reveal.getRevealElement(), "[data-auto-animate-target]").forEach((e)=>{
             delete e.dataset.autoAnimateTarget;
         }), this.autoAnimateStyleSheet && this.autoAnimateStyleSheet.parentNode && (this.autoAnimateStyleSheet.parentNode.removeChild(this.autoAnimateStyleSheet), this.autoAnimateStyleSheet = null);
     }
@@ -1265,8 +2175,8 @@ class $14d69c2d74c674dd$var$Hi {
             duration: this.Reveal.getConfig().autoAnimateDuration,
             delay: 0
         };
-        if (t = $14d69c2d74c674dd$var$ge(t, i), e.parentNode) {
-            let s = $14d69c2d74c674dd$var$V(e.parentNode, "[data-auto-animate-target]");
+        if (t = ge(t, i), e.parentNode) {
+            let s = V(e.parentNode, "[data-auto-animate-target]");
             s && (t = this.getAutoAnimateOptions(s, t));
         }
         return e.dataset.autoAnimateEasing && (t.easing = e.dataset.autoAnimateEasing), e.dataset.autoAnimateDuration && (t.duration = parseFloat(e.dataset.autoAnimateDuration)), e.dataset.autoAnimateDelay && (t.delay = parseFloat(e.dataset.autoAnimateDelay)), t;
@@ -1335,9 +2245,9 @@ class $14d69c2d74c674dd$var$Hi {
         let t = [];
         const a = "h1, h2, h3, h4, h5, h6, p, li", r = "img, video, iframe";
         return this.findAutoAnimateMatches(t, e, i, "[data-id]", (o)=>o.nodeName + ":::" + o.getAttribute("data-id")), this.findAutoAnimateMatches(t, e, i, a, (o)=>o.nodeName + ":::" + o.textContent.trim()), this.findAutoAnimateMatches(t, e, i, r, (o)=>o.nodeName + ":::" + (o.getAttribute("src") || o.getAttribute("data-src"))), this.findAutoAnimateMatches(t, e, i, "pre", (o)=>o.nodeName + ":::" + o.textContent.trim()), t.forEach((o)=>{
-            $14d69c2d74c674dd$var$xe(o.from, a) ? o.options = {
+            xe(o.from, a) ? o.options = {
                 scale: !1
-            } : $14d69c2d74c674dd$var$xe(o.from, "pre") && (o.options = {
+            } : xe(o.from, "pre") && (o.options = {
                 scale: !1,
                 styles: [
                     "width",
@@ -1419,8 +2329,8 @@ class $14d69c2d74c674dd$var$Hi {
         }, []);
     }
 }
-const $14d69c2d74c674dd$var$Di = 500, $14d69c2d74c674dd$var$Vi = 4, $14d69c2d74c674dd$var$Fi = 6, $14d69c2d74c674dd$var$zi = 8;
-class $14d69c2d74c674dd$var$Oi {
+const Di = 500, Vi = 4, Fi = 6, zi = 8;
+class Oi {
     constructor(e){
         this.Reveal = e, this.active = !1, this.activatedCallbacks = [], this.onScroll = this.onScroll.bind(this);
     }
@@ -1431,7 +2341,7 @@ class $14d69c2d74c674dd$var$Oi {
         if (this.active) return;
         const e = this.Reveal.getState();
         this.active = !0, this.slideHTMLBeforeActivation = this.Reveal.getSlidesElement().innerHTML;
-        const i = $14d69c2d74c674dd$var$E(this.Reveal.getRevealElement(), $14d69c2d74c674dd$var$te), t = $14d69c2d74c674dd$var$E(this.Reveal.getRevealElement(), $14d69c2d74c674dd$var$Pi);
+        const i = E(this.Reveal.getRevealElement(), te), t = E(this.Reveal.getRevealElement(), Pi);
         this.viewportElement.classList.add("loading-scroll-mode", "reveal-scroll");
         let s;
         const a = window.getComputedStyle(this.viewportElement);
@@ -1456,7 +2366,7 @@ class $14d69c2d74c674dd$var$Oi {
             this.Reveal.isVerticalStack(g) ? g.querySelectorAll("section").forEach((p, b)=>{
                 u(p, y, b, !0);
             }) : u(g, y, 0);
-        }, this), this.createProgressBar(), $14d69c2d74c674dd$var$E(this.Reveal.getRevealElement(), ".stack").forEach((g)=>g.remove()), r.forEach((g)=>o.appendChild(g)), this.Reveal.slideContent.layout(this.Reveal.getSlidesElement()), this.Reveal.layout(), this.Reveal.setState(e), this.activatedCallbacks.forEach((g)=>g()), this.activatedCallbacks = [], this.restoreScrollPosition(), this.viewportElement.classList.remove("loading-scroll-mode"), this.viewportElement.addEventListener("scroll", this.onScroll, {
+        }, this), this.createProgressBar(), E(this.Reveal.getRevealElement(), ".stack").forEach((g)=>g.remove()), r.forEach((g)=>o.appendChild(g)), this.Reveal.slideContent.layout(this.Reveal.getSlidesElement()), this.Reveal.layout(), this.Reveal.setState(e), this.activatedCallbacks.forEach((g)=>g()), this.activatedCallbacks = [], this.restoreScrollPosition(), this.viewportElement.classList.remove("loading-scroll-mode"), this.viewportElement.addEventListener("scroll", this.onScroll, {
             passive: !0
         });
     }
@@ -1598,9 +2508,9 @@ class $14d69c2d74c674dd$var$Oi {
    */ syncProgressBar() {
         this.progressBarInner.querySelectorAll(".scrollbar-slide").forEach((r)=>r.remove());
         const e = this.viewportElement.scrollHeight, i = this.viewportElement.offsetHeight, t = i / e;
-        this.progressBarHeight = this.progressBarInner.offsetHeight, this.playheadHeight = Math.max(t * this.progressBarHeight, $14d69c2d74c674dd$var$zi), this.progressBarScrollableHeight = this.progressBarHeight - this.playheadHeight;
-        const s = i / e * this.progressBarHeight, a = Math.min(s / 8, $14d69c2d74c674dd$var$Vi);
-        this.progressBarPlayhead.style.height = this.playheadHeight - a + "px", s > $14d69c2d74c674dd$var$Fi ? this.slideTriggers.forEach((r)=>{
+        this.progressBarHeight = this.progressBarInner.offsetHeight, this.playheadHeight = Math.max(t * this.progressBarHeight, zi), this.progressBarScrollableHeight = this.progressBarHeight - this.playheadHeight;
+        const s = i / e * this.progressBarHeight, a = Math.min(s / 8, Vi);
+        this.progressBarPlayhead.style.height = this.playheadHeight - a + "px", s > Fi ? this.slideTriggers.forEach((r)=>{
             const { page: o } = r;
             o.progressBarSlide = document.createElement("div"), o.progressBarSlide.className = "scrollbar-slide", o.progressBarSlide.style.top = r.range[0] * this.progressBarHeight + "px", o.progressBarSlide.style.height = (r.range[1] - r.range[0]) * this.progressBarHeight - a + "px", o.progressBarSlide.classList.toggle("has-triggers", o.scrollTriggers.length > 0), this.progressBarInner.appendChild(o.progressBarSlide), o.scrollTriggerElements = o.scrollTriggers.map((h, u)=>{
                 const g = document.createElement("div");
@@ -1638,7 +2548,7 @@ class $14d69c2d74c674dd$var$Oi {
    */ showProgressBar() {
         this.progressBar.classList.add("visible"), clearTimeout(this.hideProgressBarTimeout), this.Reveal.getConfig().scrollProgress === "auto" && !this.draggingProgressBar && (this.hideProgressBarTimeout = setTimeout(()=>{
             this.progressBar && this.progressBar.classList.remove("visible");
-        }, $14d69c2d74c674dd$var$Di));
+        }, Di));
     }
     /**
    * Scroll to the previous page.
@@ -1740,7 +2650,7 @@ class $14d69c2d74c674dd$var$Oi {
         return this.Reveal.getViewportElement();
     }
 }
-class $14d69c2d74c674dd$var$Ui {
+class Ui {
     constructor(e){
         this.Reveal = e;
     }
@@ -1748,9 +2658,9 @@ class $14d69c2d74c674dd$var$Ui {
    * Configures the presentation for printing to a static
    * PDF.
    */ activate() {
-        return $14d69c2d74c674dd$var$It(this, null, function*() {
-            const e = this.Reveal.getConfig(), i = $14d69c2d74c674dd$var$E(this.Reveal.getRevealElement(), $14d69c2d74c674dd$var$de), t = e.slideNumber && /all|print/i.test(e.showSlideNumber), s = this.Reveal.getComputedSlideSize(window.innerWidth, window.innerHeight), a = Math.floor(s.width * (1 + e.margin)), r = Math.floor(s.height * (1 + e.margin)), o = s.width, h = s.height;
-            yield new Promise(requestAnimationFrame), $14d69c2d74c674dd$var$Xe("@page{size:" + a + "px " + r + "px; margin: 0px;}"), $14d69c2d74c674dd$var$Xe(".reveal section>img, .reveal section>video, .reveal section>iframe{max-width: " + o + "px; max-height:" + h + "px}"), document.documentElement.classList.add("reveal-print", "print-pdf"), document.body.style.width = a + "px", document.body.style.height = r + "px";
+        return It(this, null, function*() {
+            const e = this.Reveal.getConfig(), i = E(this.Reveal.getRevealElement(), de), t = e.slideNumber && /all|print/i.test(e.showSlideNumber), s = this.Reveal.getComputedSlideSize(window.innerWidth, window.innerHeight), a = Math.floor(s.width * (1 + e.margin)), r = Math.floor(s.height * (1 + e.margin)), o = s.width, h = s.height;
+            yield new Promise(requestAnimationFrame), Xe("@page{size:" + a + "px " + r + "px; margin: 0px;}"), Xe(".reveal section>img, .reveal section>video, .reveal section>iframe{max-width: " + o + "px; max-height:" + h + "px}"), document.documentElement.classList.add("reveal-print", "print-pdf"), document.body.style.width = a + "px", document.body.style.height = r + "px";
             const u = this.Reveal.getViewportElement();
             let g;
             if (u) {
@@ -1798,7 +2708,7 @@ class $14d69c2d74c674dd$var$Ui {
                                 L.classList.remove("visible", "current-fragment");
                             });
                         });
-                    } else $14d69c2d74c674dd$var$E(R, ".fragment:not(.fade-out)").forEach(function(B) {
+                    } else E(R, ".fragment:not(.fade-out)").forEach(function(B) {
                         B.classList.add("visible");
                     });
                 }
@@ -1813,7 +2723,7 @@ class $14d69c2d74c674dd$var$Ui {
         return this.Reveal.getConfig().view === "print";
     }
 }
-class $14d69c2d74c674dd$var$qi {
+class qi {
     constructor(e){
         this.Reveal = e;
     }
@@ -1826,7 +2736,7 @@ class $14d69c2d74c674dd$var$qi {
    * If fragments are disabled in the deck, they should all be
    * visible rather than stepped through.
    */ disable() {
-        $14d69c2d74c674dd$var$E(this.Reveal.getSlidesElement(), ".fragment").forEach((e)=>{
+        E(this.Reveal.getSlidesElement(), ".fragment").forEach((e)=>{
             e.classList.add("visible"), e.classList.remove("current-fragment");
         });
     }
@@ -1834,7 +2744,7 @@ class $14d69c2d74c674dd$var$qi {
    * Reverse of #disable(). Only called if fragments have
    * previously been disabled.
    */ enable() {
-        $14d69c2d74c674dd$var$E(this.Reveal.getSlidesElement(), ".fragment").forEach((e)=>{
+        E(this.Reveal.getSlidesElement(), ".fragment").forEach((e)=>{
             e.classList.remove("visible"), e.classList.remove("current-fragment");
         });
     }
@@ -1897,7 +2807,7 @@ class $14d69c2d74c674dd$var$qi {
    * presentation.
    */ sortAll() {
         this.Reveal.getHorizontalSlides().forEach((e)=>{
-            let i = $14d69c2d74c674dd$var$E(e, "section");
+            let i = E(e, "section");
             i.forEach((t, s)=>{
                 this.sort(t.querySelectorAll(".fragment"));
             }, this), i.length === 0 && this.sort(e.querySelectorAll(".fragment"));
@@ -2008,7 +2918,7 @@ class $14d69c2d74c674dd$var$qi {
         return this.goto(null, -1);
     }
 }
-class $14d69c2d74c674dd$var$Wi {
+class Wi {
     constructor(e){
         this.Reveal = e, this.active = !1, this.onSlideClicked = this.onSlideClicked.bind(this);
     }
@@ -2017,7 +2927,7 @@ class $14d69c2d74c674dd$var$Wi {
    * down and arranging all slide elements.
    */ activate() {
         if (this.Reveal.getConfig().overview && !this.Reveal.isScrollView() && !this.isActive()) {
-            this.active = !0, this.Reveal.getRevealElement().classList.add("overview"), this.Reveal.cancelAutoSlide(), this.Reveal.getSlidesElement().appendChild(this.Reveal.getBackgroundsElement()), $14d69c2d74c674dd$var$E(this.Reveal.getRevealElement(), $14d69c2d74c674dd$var$de).forEach((s)=>{
+            this.active = !0, this.Reveal.getRevealElement().classList.add("overview"), this.Reveal.cancelAutoSlide(), this.Reveal.getSlidesElement().appendChild(this.Reveal.getBackgroundsElement()), E(this.Reveal.getRevealElement(), de).forEach((s)=>{
                 s.classList.contains("stack") || s.addEventListener("click", this.onSlideClicked, !0);
             });
             const e = 70, i = this.Reveal.getComputedSlideSize();
@@ -2038,12 +2948,12 @@ class $14d69c2d74c674dd$var$Wi {
    * display inside of the overview mode.
    */ layout() {
         this.Reveal.getHorizontalSlides().forEach((e, i)=>{
-            e.setAttribute("data-index-h", i), $14d69c2d74c674dd$var$ae(e, "translate3d(" + i * this.overviewSlideWidth + "px, 0, 0)"), e.classList.contains("stack") && $14d69c2d74c674dd$var$E(e, "section").forEach((t, s)=>{
-                t.setAttribute("data-index-h", i), t.setAttribute("data-index-v", s), $14d69c2d74c674dd$var$ae(t, "translate3d(0, " + s * this.overviewSlideHeight + "px, 0)");
+            e.setAttribute("data-index-h", i), ae(e, "translate3d(" + i * this.overviewSlideWidth + "px, 0, 0)"), e.classList.contains("stack") && E(e, "section").forEach((t, s)=>{
+                t.setAttribute("data-index-h", i), t.setAttribute("data-index-v", s), ae(t, "translate3d(0, " + s * this.overviewSlideHeight + "px, 0)");
             });
         }), Array.from(this.Reveal.getBackgroundsElement().childNodes).forEach((e, i)=>{
-            $14d69c2d74c674dd$var$ae(e, "translate3d(" + i * this.overviewSlideWidth + "px, 0, 0)"), $14d69c2d74c674dd$var$E(e, ".slide-background").forEach((t, s)=>{
-                $14d69c2d74c674dd$var$ae(t, "translate3d(0, " + s * this.overviewSlideHeight + "px, 0)");
+            ae(e, "translate3d(" + i * this.overviewSlideWidth + "px, 0, 0)"), E(e, ".slide-background").forEach((t, s)=>{
+                ae(t, "translate3d(0, " + s * this.overviewSlideHeight + "px, 0)");
             });
         });
     }
@@ -2067,10 +2977,10 @@ class $14d69c2d74c674dd$var$Wi {
         if (this.Reveal.getConfig().overview) {
             this.active = !1, this.Reveal.getRevealElement().classList.remove("overview"), this.Reveal.getRevealElement().classList.add("overview-deactivating"), setTimeout(()=>{
                 this.Reveal.getRevealElement().classList.remove("overview-deactivating");
-            }, 1), this.Reveal.getRevealElement().appendChild(this.Reveal.getBackgroundsElement()), $14d69c2d74c674dd$var$E(this.Reveal.getRevealElement(), $14d69c2d74c674dd$var$de).forEach((i)=>{
-                $14d69c2d74c674dd$var$ae(i, ""), i.removeEventListener("click", this.onSlideClicked, !0);
-            }), $14d69c2d74c674dd$var$E(this.Reveal.getBackgroundsElement(), ".slide-background").forEach((i)=>{
-                $14d69c2d74c674dd$var$ae(i, "");
+            }, 1), this.Reveal.getRevealElement().appendChild(this.Reveal.getBackgroundsElement()), E(this.Reveal.getRevealElement(), de).forEach((i)=>{
+                ae(i, ""), i.removeEventListener("click", this.onSlideClicked, !0);
+            }), E(this.Reveal.getBackgroundsElement(), ".slide-background").forEach((i)=>{
+                ae(i, "");
             }), this.Reveal.transformSlides({
                 overview: ""
             });
@@ -2118,7 +3028,7 @@ class $14d69c2d74c674dd$var$Wi {
         }
     }
 }
-class $14d69c2d74c674dd$var$ji {
+class ji {
     constructor(e){
         this.Reveal = e, this.shortcuts = {}, this.bindings = {}, this.onDocumentKeyDown = this.onDocumentKeyDown.bind(this);
     }
@@ -2266,14 +3176,14 @@ class $14d69c2d74c674dd$var$ji {
             66,
             86,
             190
-        ].includes(t) || t === 191 && !e.shiftKey ? this.Reveal.togglePause() : t === 70 ? $14d69c2d74c674dd$var$Dt(i.embedded ? this.Reveal.getViewportElement() : document.documentElement) : t === 65 ? i.autoSlideStoppable && this.Reveal.toggleAutoSlide(s) : t === 71 ? i.jumpToSlide && this.Reveal.toggleJumpToSlide() : t === 67 && this.Reveal.isOverlayOpen() ? this.Reveal.closeOverlay() : (t === 63 || t === 191) && e.shiftKey ? this.Reveal.toggleHelp() : t === 112 ? this.Reveal.toggleHelp() : b = !1), b ? e.preventDefault && e.preventDefault() : t === 27 || t === 79 ? (this.Reveal.closeOverlay() === !1 && this.Reveal.overview.toggle(), e.preventDefault && e.preventDefault()) : t === 13 && this.Reveal.overview.isActive() && (this.Reveal.overview.deactivate(), e.preventDefault && e.preventDefault()), this.Reveal.cueAutoSlide();
+        ].includes(t) || t === 191 && !e.shiftKey ? this.Reveal.togglePause() : t === 70 ? Dt(i.embedded ? this.Reveal.getViewportElement() : document.documentElement) : t === 65 ? i.autoSlideStoppable && this.Reveal.toggleAutoSlide(s) : t === 71 ? i.jumpToSlide && this.Reveal.toggleJumpToSlide() : t === 67 && this.Reveal.isOverlayOpen() ? this.Reveal.closeOverlay() : (t === 63 || t === 191) && e.shiftKey ? this.Reveal.toggleHelp() : t === 112 ? this.Reveal.toggleHelp() : b = !1), b ? e.preventDefault && e.preventDefault() : t === 27 || t === 79 ? (this.Reveal.closeOverlay() === !1 && this.Reveal.overview.toggle(), e.preventDefault && e.preventDefault()) : t === 13 && this.Reveal.overview.isActive() && (this.Reveal.overview.deactivate(), e.preventDefault && e.preventDefault()), this.Reveal.cueAutoSlide();
     }
 }
-class $14d69c2d74c674dd$var$Ki {
+class Ki {
     constructor(e){
         // The minimum number of milliseconds that must pass between
         // calls to history.replaceState
-        $14d69c2d74c674dd$var$je(this, "MAX_REPLACE_STATE_FREQUENCY", 1e3);
+        je(this, "MAX_REPLACE_STATE_FREQUENCY", 1e3);
         this.Reveal = e, this.writeURLTimeout = 0, this.replaceStateTimestamp = 0, this.onWindowHashChange = this.onWindowHashChange.bind(this);
     }
     bind() {
@@ -2298,7 +3208,7 @@ class $14d69c2d74c674dd$var$Ki {
                 const o = decodeURIComponent(t);
                 a = (document.getElementById(o) || document.querySelector(`[data-id="${o}"]`)).closest(".slides section");
             } catch (o) {}
-            if (a) return $14d69c2d74c674dd$var$We($14d69c2d74c674dd$var$Q({}, this.Reveal.getIndices(a)), {
+            if (a) return We(Q({}, this.Reveal.getIndices(a)), {
                 f: r
             });
         } else {
@@ -2361,7 +3271,7 @@ class $14d69c2d74c674dd$var$Ki {
         this.readURL();
     }
 }
-class $14d69c2d74c674dd$var$_i {
+class _i {
     constructor(e){
         this.Reveal = e, this.onNavigateLeftClicked = this.onNavigateLeftClicked.bind(this), this.onNavigateRightClicked = this.onNavigateRightClicked.bind(this), this.onNavigateUpClicked = this.onNavigateUpClicked.bind(this), this.onNavigateDownClicked = this.onNavigateDownClicked.bind(this), this.onNavigatePrevClicked = this.onNavigatePrevClicked.bind(this), this.onNavigateNextClicked = this.onNavigateNextClicked.bind(this), this.onEnterFullscreen = this.onEnterFullscreen.bind(this);
     }
@@ -2370,7 +3280,7 @@ class $14d69c2d74c674dd$var$_i {
         this.element = document.createElement("aside"), this.element.className = "controls", this.element.innerHTML = `<button class="navigate-left" aria-label="${e ? "next slide" : "previous slide"}"><div class="controls-arrow"></div></button>
 			<button class="navigate-right" aria-label="${e ? "previous slide" : "next slide"}"><div class="controls-arrow"></div></button>
 			<button class="navigate-up" aria-label="above slide"><div class="controls-arrow"></div></button>
-			<button class="navigate-down" aria-label="below slide"><div class="controls-arrow"></div></button>`, this.Reveal.getRevealElement().appendChild(this.element), this.controlsLeft = $14d69c2d74c674dd$var$E(i, ".navigate-left"), this.controlsRight = $14d69c2d74c674dd$var$E(i, ".navigate-right"), this.controlsUp = $14d69c2d74c674dd$var$E(i, ".navigate-up"), this.controlsDown = $14d69c2d74c674dd$var$E(i, ".navigate-down"), this.controlsPrev = $14d69c2d74c674dd$var$E(i, ".navigate-prev"), this.controlsNext = $14d69c2d74c674dd$var$E(i, ".navigate-next"), this.controlsFullscreen = $14d69c2d74c674dd$var$E(i, ".enter-fullscreen"), this.controlsRightArrow = this.element.querySelector(".navigate-right"), this.controlsLeftArrow = this.element.querySelector(".navigate-left"), this.controlsDownArrow = this.element.querySelector(".navigate-down");
+			<button class="navigate-down" aria-label="below slide"><div class="controls-arrow"></div></button>`, this.Reveal.getRevealElement().appendChild(this.element), this.controlsLeft = E(i, ".navigate-left"), this.controlsRight = E(i, ".navigate-right"), this.controlsUp = E(i, ".navigate-up"), this.controlsDown = E(i, ".navigate-down"), this.controlsPrev = E(i, ".navigate-prev"), this.controlsNext = E(i, ".navigate-next"), this.controlsFullscreen = E(i, ".enter-fullscreen"), this.controlsRightArrow = this.element.querySelector(".navigate-right"), this.controlsLeftArrow = this.element.querySelector(".navigate-left"), this.controlsDownArrow = this.element.querySelector(".navigate-down");
     }
     /**
    * Called when the reveal.js config is updated.
@@ -2383,7 +3293,7 @@ class $14d69c2d74c674dd$var$_i {
             "touchstart",
             "click"
         ];
-        $14d69c2d74c674dd$var$Ft && (e = [
+        Ft && (e = [
             "touchend"
         ]), e.forEach((i)=>{
             this.controlsLeft.forEach((t)=>t.addEventListener(i, this.onNavigateLeftClicked, !1)), this.controlsRight.forEach((t)=>t.addEventListener(i, this.onNavigateRightClicked, !1)), this.controlsUp.forEach((t)=>t.addEventListener(i, this.onNavigateUpClicked, !1)), this.controlsDown.forEach((t)=>t.addEventListener(i, this.onNavigateDownClicked, !1)), this.controlsPrev.forEach((t)=>t.addEventListener(i, this.onNavigatePrevClicked, !1)), this.controlsNext.forEach((t)=>t.addEventListener(i, this.onNavigateNextClicked, !1)), this.controlsFullscreen.forEach((t)=>t.addEventListener(i, this.onEnterFullscreen, !1));
@@ -2473,10 +3383,10 @@ class $14d69c2d74c674dd$var$_i {
     }
     onEnterFullscreen(e) {
         const i = this.Reveal.getConfig(), t = this.Reveal.getViewportElement();
-        $14d69c2d74c674dd$var$Dt(i.embedded ? t : t.parentElement);
+        Dt(i.embedded ? t : t.parentElement);
     }
 }
-class $14d69c2d74c674dd$var$$i {
+class $i {
     constructor(e){
         this.Reveal = e, this.onProgressClicked = this.onProgressClicked.bind(this);
     }
@@ -2523,7 +3433,7 @@ class $14d69c2d74c674dd$var$$i {
         this.element.remove();
     }
 }
-class $14d69c2d74c674dd$var$Xi {
+class Xi {
     constructor(e){
         this.Reveal = e, this.lastMouseWheelStep = 0, this.cursorHidden = !1, this.cursorInactiveTimeout = 0, this.onDocumentCursorActive = this.onDocumentCursorActive.bind(this), this.onDocumentMouseScroll = this.onDocumentMouseScroll.bind(this);
     }
@@ -2568,7 +3478,7 @@ class $14d69c2d74c674dd$var$Xi {
         }
     }
 }
-const $14d69c2d74c674dd$var$Bt = (c, e)=>{
+const Bt = (c, e)=>{
     const i = document.createElement("script");
     i.type = "text/javascript", i.async = !1, i.defer = !1, i.src = c, typeof e == "function" && (i.onload = (s)=>{
         s.type === "load" && (i.onload = i.onerror = null, e());
@@ -2579,7 +3489,7 @@ const $14d69c2d74c674dd$var$Bt = (c, e)=>{
     const t = document.querySelector("head");
     t && t.insertBefore(i, t.lastChild);
 };
-class $14d69c2d74c674dd$var$Yi {
+class Yi {
     constructor(e){
         this.Reveal = e, this.state = "idle", this.registeredPlugins = {}, this.asyncDependencies = [];
     }
@@ -2606,7 +3516,7 @@ class $14d69c2d74c674dd$var$Yi {
                     o && typeof o.callback == "function" && o.callback(), --a === 0 && this.initPlugins().then(t);
                 };
                 s.forEach((o)=>{
-                    typeof o.id == "string" ? (this.registerPlugin(o), r(o)) : typeof o.src == "string" ? $14d69c2d74c674dd$var$Bt(o.src, ()=>r(o)) : (console.warn("Unrecognized plugin format", o), r());
+                    typeof o.id == "string" ? (this.registerPlugin(o), r(o)) : typeof o.src == "string" ? Bt(o.src, ()=>r(o)) : (console.warn("Unrecognized plugin format", o), r());
                 });
             } else this.initPlugins().then(t);
         });
@@ -2636,7 +3546,7 @@ class $14d69c2d74c674dd$var$Yi {
    * Loads all async reveal.js dependencies.
    */ loadAsync() {
         return this.state = "loaded", this.asyncDependencies.length && this.asyncDependencies.forEach((e)=>{
-            $14d69c2d74c674dd$var$Bt(e.src, e.callback);
+            Bt(e.src, e.callback);
         }), Promise.resolve();
     }
     /**
@@ -2674,7 +3584,7 @@ class $14d69c2d74c674dd$var$Yi {
         }), this.registeredPlugins = {}, this.asyncDependencies = [];
     }
 }
-class $14d69c2d74c674dd$var$Gi {
+class Gi {
     constructor(e){
         this.Reveal = e, this.onSlidesClicked = this.onSlidesClicked.bind(this), this.iframeTriggerSelector = null, this.mediaTriggerSelector = "[data-preview-image], [data-preview-video]", this.stateProps = [
             "previewIframe",
@@ -2857,8 +3767,8 @@ class $14d69c2d74c674dd$var$Gi {
         this.close();
     }
 }
-const $14d69c2d74c674dd$var$Te = 40;
-class $14d69c2d74c674dd$var$Ji {
+const Te = 40;
+class Ji {
     constructor(e){
         this.Reveal = e, this.touchStartX = 0, this.touchStartY = 0, this.touchStartCount = 0, this.touchCaptured = !1, this.onPointerDown = this.onPointerDown.bind(this), this.onPointerMove = this.onPointerMove.bind(this), this.onPointerUp = this.onPointerUp.bind(this), this.onTouchStart = this.onTouchStart.bind(this), this.onTouchMove = this.onTouchMove.bind(this), this.onTouchEnd = this.onTouchEnd.bind(this);
     }
@@ -2878,7 +3788,7 @@ class $14d69c2d74c674dd$var$Ji {
    * Checks if the target element prevents the triggering of
    * swipe navigation.
    */ isSwipePrevented(e) {
-        if ($14d69c2d74c674dd$var$xe(e, "video[controls], audio[controls]")) return !0;
+        if (xe(e, "video[controls], audio[controls]")) return !0;
         for(; e && typeof e.hasAttribute == "function";){
             if (e.hasAttribute("data-prevent-swipe")) return !0;
             e = e.parentNode;
@@ -2901,7 +3811,7 @@ class $14d69c2d74c674dd$var$Ji {
    */ onTouchMove(e) {
         if (this.isSwipePrevented(e.target)) return !0;
         let i = this.Reveal.getConfig();
-        if (this.touchCaptured) $14d69c2d74c674dd$var$Ft && e.preventDefault();
+        if (this.touchCaptured) Ft && e.preventDefault();
         else {
             this.Reveal.onUserInput(e);
             let t = e.touches[0].clientX, s = e.touches[0].clientY;
@@ -2909,7 +3819,7 @@ class $14d69c2d74c674dd$var$Ji {
                 let a = this.Reveal.availableRoutes({
                     includeFragments: !0
                 }), r = t - this.touchStartX, o = s - this.touchStartY;
-                r > $14d69c2d74c674dd$var$Te && Math.abs(r) > Math.abs(o) ? (this.touchCaptured = !0, i.navigationMode === "linear" ? i.rtl ? this.Reveal.next() : this.Reveal.prev() : this.Reveal.left()) : r < -$14d69c2d74c674dd$var$Te && Math.abs(r) > Math.abs(o) ? (this.touchCaptured = !0, i.navigationMode === "linear" ? i.rtl ? this.Reveal.prev() : this.Reveal.next() : this.Reveal.right()) : o > $14d69c2d74c674dd$var$Te && a.up ? (this.touchCaptured = !0, i.navigationMode === "linear" ? this.Reveal.prev() : this.Reveal.up()) : o < -$14d69c2d74c674dd$var$Te && a.down && (this.touchCaptured = !0, i.navigationMode === "linear" ? this.Reveal.next() : this.Reveal.down()), i.embedded ? (this.touchCaptured || this.Reveal.isVerticalSlide()) && e.preventDefault() : e.preventDefault();
+                r > Te && Math.abs(r) > Math.abs(o) ? (this.touchCaptured = !0, i.navigationMode === "linear" ? i.rtl ? this.Reveal.next() : this.Reveal.prev() : this.Reveal.left()) : r < -Te && Math.abs(r) > Math.abs(o) ? (this.touchCaptured = !0, i.navigationMode === "linear" ? i.rtl ? this.Reveal.prev() : this.Reveal.next() : this.Reveal.right()) : o > Te && a.up ? (this.touchCaptured = !0, i.navigationMode === "linear" ? this.Reveal.prev() : this.Reveal.up()) : o < -Te && a.down && (this.touchCaptured = !0, i.navigationMode === "linear" ? this.Reveal.next() : this.Reveal.down()), i.embedded ? (this.touchCaptured || this.Reveal.isVerticalSlide()) && e.preventDefault() : e.preventDefault();
             }
         }
     }
@@ -2957,8 +3867,8 @@ class $14d69c2d74c674dd$var$Ji {
         ], this.onTouchEnd(e));
     }
 }
-const $14d69c2d74c674dd$var$$e = "focus", $14d69c2d74c674dd$var$Ht = "blur";
-class $14d69c2d74c674dd$var$Qi {
+const $e = "focus", Ht = "blur";
+class Qi {
     constructor(e){
         this.Reveal = e, this.onRevealPointerDown = this.onRevealPointerDown.bind(this), this.onDocumentPointerDown = this.onDocumentPointerDown.bind(this);
     }
@@ -2974,13 +3884,13 @@ class $14d69c2d74c674dd$var$Qi {
         this.Reveal.getRevealElement().removeEventListener("pointerdown", this.onRevealPointerDown, !1), document.removeEventListener("pointerdown", this.onDocumentPointerDown, !1);
     }
     focus() {
-        this.state !== $14d69c2d74c674dd$var$$e && (this.Reveal.getRevealElement().classList.add("focused"), document.addEventListener("pointerdown", this.onDocumentPointerDown, !1)), this.state = $14d69c2d74c674dd$var$$e;
+        this.state !== $e && (this.Reveal.getRevealElement().classList.add("focused"), document.addEventListener("pointerdown", this.onDocumentPointerDown, !1)), this.state = $e;
     }
     blur() {
-        this.state !== $14d69c2d74c674dd$var$Ht && (this.Reveal.getRevealElement().classList.remove("focused"), document.removeEventListener("pointerdown", this.onDocumentPointerDown, !1)), this.state = $14d69c2d74c674dd$var$Ht;
+        this.state !== Ht && (this.Reveal.getRevealElement().classList.remove("focused"), document.removeEventListener("pointerdown", this.onDocumentPointerDown, !1)), this.state = Ht;
     }
     isFocused() {
-        return this.state === $14d69c2d74c674dd$var$$e;
+        return this.state === $e;
     }
     destroy() {
         this.Reveal.getRevealElement().classList.remove("focused");
@@ -2989,11 +3899,11 @@ class $14d69c2d74c674dd$var$Qi {
         this.focus();
     }
     onDocumentPointerDown(e) {
-        let i = $14d69c2d74c674dd$var$V(e.target, ".reveal");
+        let i = V(e.target, ".reveal");
         (!i || i !== this.Reveal.getRevealElement()) && this.blur();
     }
 }
-class $14d69c2d74c674dd$var$Zi {
+class Zi {
     constructor(e){
         this.Reveal = e;
     }
@@ -3053,7 +3963,7 @@ class $14d69c2d74c674dd$var$Zi {
         this.element.remove();
     }
 }
-class $14d69c2d74c674dd$var$es {
+class es {
     /**
    * @param {HTMLElement} container The component will append
    * itself to this
@@ -3089,7 +3999,7 @@ class $14d69c2d74c674dd$var$es {
         this.playing = !1, this.canvas.parentNode && this.container.removeChild(this.canvas);
     }
 }
-const $14d69c2d74c674dd$var$ts = {
+const ts = {
     width: 960,
     height: 700,
     margin: 0.04,
@@ -3179,8 +4089,8 @@ const $14d69c2d74c674dd$var$ts = {
     pdfPageHeightOffset: -1,
     dependencies: [],
     plugins: []
-}, $14d69c2d74c674dd$var$Ot = "6.0.0";
-function $14d69c2d74c674dd$var$Ut(c, e) {
+}, Ot = "6.0.0";
+function Ut(c, e) {
     arguments.length < 2 && (e = arguments[0], c = document.querySelector(".reveal"));
     const i = {};
     let t = {}, s = !1, a = !1, r, o, h, u, g = {
@@ -3189,15 +4099,15 @@ function $14d69c2d74c674dd$var$Ut(c, e) {
     }, y = [], p = 1, b = {
         layout: "",
         overview: ""
-    }, l = {}, A = "idle", M = 0, O, U = 0, re = -1, z = !1, R = new $14d69c2d74c674dd$var$Ci(i), B = new $14d69c2d74c674dd$var$Ii(i), q = new $14d69c2d74c674dd$var$Mi(i), W = new $14d69c2d74c674dd$var$Hi(i), L = new $14d69c2d74c674dd$var$Bi(i), k = new $14d69c2d74c674dd$var$Oi(i), F = new $14d69c2d74c674dd$var$Ui(i), C = new $14d69c2d74c674dd$var$qi(i), f = new $14d69c2d74c674dd$var$Wi(i), S = new $14d69c2d74c674dd$var$ji(i), T = new $14d69c2d74c674dd$var$Ki(i), X = new $14d69c2d74c674dd$var$_i(i), K = new $14d69c2d74c674dd$var$$i(i), ie = new $14d69c2d74c674dd$var$Xi(i), D = new $14d69c2d74c674dd$var$Yi(i), H = new $14d69c2d74c674dd$var$Gi(i), ne = new $14d69c2d74c674dd$var$Qi(i), Ie = new $14d69c2d74c674dd$var$Ji(i), _ = new $14d69c2d74c674dd$var$Zi(i);
+    }, l = {}, A = "idle", M = 0, O, U = 0, re = -1, z = !1, R = new Ci(i), B = new Ii(i), q = new Mi(i), W = new Hi(i), L = new Bi(i), k = new Oi(i), F = new Ui(i), C = new qi(i), f = new Wi(i), S = new ji(i), T = new Ki(i), X = new _i(i), K = new $i(i), ie = new Xi(i), D = new Yi(i), H = new Gi(i), ne = new Qi(i), Ie = new Ji(i), _ = new Zi(i);
     function Wt(n) {
         if (!c) throw 'Unable to find presentation root (<div class="reveal">).';
         if (s) throw "Reveal.js has already been initialized.";
         if (s = !0, l.wrapper = c, l.slides = c.querySelector(".slides"), !l.slides) throw 'Unable to find slides container (<div class="slides">).';
-        return t = $14d69c2d74c674dd$var$Q($14d69c2d74c674dd$var$Q($14d69c2d74c674dd$var$Q($14d69c2d74c674dd$var$Q($14d69c2d74c674dd$var$Q({}, $14d69c2d74c674dd$var$ts), t), e), n), $14d69c2d74c674dd$var$Mt()), /print-pdf/gi.test(window.location.search) && (t.view = "print"), jt(), window.addEventListener("load", he, !1), D.load(t.plugins, t.dependencies).then(Kt), new Promise((d)=>i.on("ready", d));
+        return t = Q(Q(Q(Q(Q({}, ts), t), e), n), Mt()), /print-pdf/gi.test(window.location.search) && (t.view = "print"), jt(), window.addEventListener("load", he, !1), D.load(t.plugins, t.dependencies).then(Kt), new Promise((d)=>i.on("ready", d));
     }
     function jt() {
-        t.embedded === !0 ? l.viewport = $14d69c2d74c674dd$var$V(c, ".reveal-viewport") || c : (l.viewport = document.body, document.documentElement.classList.add("reveal-full-page")), l.viewport.classList.add("reveal-viewport");
+        t.embedded === !0 ? l.viewport = V(c, ".reveal-viewport") || c : (l.viewport = document.body, document.documentElement.classList.add("reveal-full-page")), l.viewport.classList.add("reveal-viewport");
     }
     function Kt() {
         s !== !1 && (a = !0, Je(), $t(), Jt(), Yt(), Gt(), ni(), Ze(), L.update(!0), _t(), T.readURL(), setTimeout(()=>{
@@ -3216,13 +4126,13 @@ function $14d69c2d74c674dd$var$Ut(c, e) {
         (n || d) && (n ? be() : Ie.unbind(), l.viewport.classList.add("loading-scroll-mode"), n ? document.readyState === "complete" ? F.activate() : window.addEventListener("load", ()=>F.activate()) : k.activate());
     }
     function Je() {
-        t.showHiddenSlides || $14d69c2d74c674dd$var$E(l.wrapper, 'section[data-visibility="hidden"]').forEach((n)=>{
+        t.showHiddenSlides || E(l.wrapper, 'section[data-visibility="hidden"]').forEach((n)=>{
             const d = n.parentNode;
             d.childElementCount === 1 && /section/i.test(d.nodeName) ? d.remove() : n.remove();
         });
     }
     function $t() {
-        l.slides.classList.add("no-transition"), $14d69c2d74c674dd$var$le ? l.wrapper.classList.add("no-hover") : l.wrapper.classList.remove("no-hover"), L.render(), B.render(), q.render(), X.render(), K.render(), _.render(), l.pauseOverlay = $14d69c2d74c674dd$var$wi(l.wrapper, "div", "pause-overlay", t.controls ? '<button class="resume-button">Resume presentation</button>' : null), l.statusElement = Xt(), l.wrapper.setAttribute("role", "application");
+        l.slides.classList.add("no-transition"), le ? l.wrapper.classList.add("no-hover") : l.wrapper.classList.remove("no-hover"), L.render(), B.render(), q.render(), X.render(), K.render(), _.render(), l.pauseOverlay = wi(l.wrapper, "div", "pause-overlay", t.controls ? '<button class="resume-button">Resume presentation</button>' : null), l.statusElement = Xt(), l.wrapper.setAttribute("role", "application");
     }
     function Xt() {
         let n = l.wrapper.querySelector(".aria-status");
@@ -3277,10 +4187,10 @@ function $14d69c2d74c674dd$var$Ut(c, e) {
         t.postMessage && window.addEventListener("message", Rt, !1);
     }
     function Ze(n) {
-        const d = $14d69c2d74c674dd$var$Q({}, t);
-        if (typeof n == "object" && $14d69c2d74c674dd$var$ge(t, n), i.isReady() === !1) return;
-        const v = l.wrapper.querySelectorAll($14d69c2d74c674dd$var$de).length;
-        l.wrapper.classList.remove(d.transition), l.wrapper.classList.add(t.transition), l.wrapper.setAttribute("data-transition-speed", t.transitionSpeed), l.wrapper.setAttribute("data-background-transition", t.backgroundTransition), l.viewport.style.setProperty("--slide-width", typeof t.width == "string" ? t.width : t.width + "px"), l.viewport.style.setProperty("--slide-height", typeof t.height == "string" ? t.height : t.height + "px"), t.shuffle && De(), $14d69c2d74c674dd$var$Ke(l.wrapper, "embedded", t.embedded), $14d69c2d74c674dd$var$Ke(l.wrapper, "rtl", t.rtl), $14d69c2d74c674dd$var$Ke(l.wrapper, "center", t.center), t.pause === !1 && ve(), W.reset(), O && (O.destroy(), O = null), v > 1 && t.autoSlide && t.autoSlideStoppable && (O = new $14d69c2d74c674dd$var$es(l.wrapper, ()=>Math.min(Math.max((Date.now() - re) / M, 0), 1)), O.on("click", fi), z = !1), t.navigationMode !== "default" ? l.wrapper.setAttribute("data-navigation-mode", t.navigationMode) : l.wrapper.removeAttribute("data-navigation-mode"), _.configure(t, d), ne.configure(t, d), ie.configure(t, d), X.configure(t, d), K.configure(t, d), S.configure(t, d), C.configure(t, d), B.configure(t, d), ut();
+        const d = Q({}, t);
+        if (typeof n == "object" && ge(t, n), i.isReady() === !1) return;
+        const v = l.wrapper.querySelectorAll(de).length;
+        l.wrapper.classList.remove(d.transition), l.wrapper.classList.add(t.transition), l.wrapper.setAttribute("data-transition-speed", t.transitionSpeed), l.wrapper.setAttribute("data-background-transition", t.backgroundTransition), l.viewport.style.setProperty("--slide-width", typeof t.width == "string" ? t.width : t.width + "px"), l.viewport.style.setProperty("--slide-height", typeof t.height == "string" ? t.height : t.height + "px"), t.shuffle && De(), Ke(l.wrapper, "embedded", t.embedded), Ke(l.wrapper, "rtl", t.rtl), Ke(l.wrapper, "center", t.center), t.pause === !1 && ve(), W.reset(), O && (O.destroy(), O = null), v > 1 && t.autoSlide && t.autoSlideStoppable && (O = new es(l.wrapper, ()=>Math.min(Math.max((Date.now() - re) / M, 0), 1)), O.on("click", fi), z = !1), t.navigationMode !== "default" ? l.wrapper.setAttribute("data-navigation-mode", t.navigationMode) : l.wrapper.removeAttribute("data-navigation-mode"), _.configure(t, d), ne.configure(t, d), ie.configure(t, d), X.configure(t, d), K.configure(t, d), S.configure(t, d), C.configure(t, d), B.configure(t, d), ut();
     }
     function et() {
         window.addEventListener("resize", Pt, !1), t.touch && Ie.bind(), t.keyboard && S.bind(), t.progress && K.bind(), t.respondToHashChanges && T.bind(), X.bind(), ne.bind(), l.slides.addEventListener("click", Ct, !1), l.slides.addEventListener("transitionend", kt, !1), l.pauseOverlay.addEventListener("click", ve, !1), t.focusBodyOnPageVisibilityChange && document.addEventListener("visibilitychange", Lt, !1);
@@ -3289,7 +4199,7 @@ function $14d69c2d74c674dd$var$Ut(c, e) {
         Ie.unbind(), ne.unbind(), S.unbind(), X.unbind(), K.unbind(), T.unbind(), window.removeEventListener("resize", Pt, !1), l.slides.removeEventListener("click", Ct, !1), l.slides.removeEventListener("transitionend", kt, !1), l.pauseOverlay.removeEventListener("click", ve, !1);
     }
     function Qt() {
-        s = !1, a !== !1 && (be(), Se(), _.destroy(), ne.destroy(), H.destroy(), D.destroy(), ie.destroy(), X.destroy(), K.destroy(), L.destroy(), B.destroy(), q.destroy(), document.removeEventListener("fullscreenchange", Pe), document.removeEventListener("webkitfullscreenchange", Pe), document.removeEventListener("visibilitychange", Lt, !1), window.removeEventListener("message", Rt, !1), window.removeEventListener("load", he, !1), l.pauseOverlay && l.pauseOverlay.remove(), l.statusElement && l.statusElement.remove(), document.documentElement.classList.remove("reveal-full-page"), l.wrapper.classList.remove("ready", "center", "has-horizontal-slides", "has-vertical-slides"), l.wrapper.removeAttribute("data-transition-speed"), l.wrapper.removeAttribute("data-background-transition"), l.viewport.classList.remove("reveal-viewport"), l.viewport.style.removeProperty("--slide-width"), l.viewport.style.removeProperty("--slide-height"), l.slides.style.removeProperty("width"), l.slides.style.removeProperty("height"), l.slides.style.removeProperty("zoom"), l.slides.style.removeProperty("left"), l.slides.style.removeProperty("top"), l.slides.style.removeProperty("bottom"), l.slides.style.removeProperty("right"), l.slides.style.removeProperty("transform"), Array.from(l.wrapper.querySelectorAll($14d69c2d74c674dd$var$de)).forEach((n)=>{
+        s = !1, a !== !1 && (be(), Se(), _.destroy(), ne.destroy(), H.destroy(), D.destroy(), ie.destroy(), X.destroy(), K.destroy(), L.destroy(), B.destroy(), q.destroy(), document.removeEventListener("fullscreenchange", Pe), document.removeEventListener("webkitfullscreenchange", Pe), document.removeEventListener("visibilitychange", Lt, !1), window.removeEventListener("message", Rt, !1), window.removeEventListener("load", he, !1), l.pauseOverlay && l.pauseOverlay.remove(), l.statusElement && l.statusElement.remove(), document.documentElement.classList.remove("reveal-full-page"), l.wrapper.classList.remove("ready", "center", "has-horizontal-slides", "has-vertical-slides"), l.wrapper.removeAttribute("data-transition-speed"), l.wrapper.removeAttribute("data-background-transition"), l.viewport.classList.remove("reveal-viewport"), l.viewport.style.removeProperty("--slide-width"), l.viewport.style.removeProperty("--slide-height"), l.slides.style.removeProperty("width"), l.slides.style.removeProperty("height"), l.slides.style.removeProperty("zoom"), l.slides.style.removeProperty("left"), l.slides.style.removeProperty("top"), l.slides.style.removeProperty("bottom"), l.slides.style.removeProperty("right"), l.slides.style.removeProperty("transform"), Array.from(l.wrapper.querySelectorAll(de)).forEach((n)=>{
             n.style.removeProperty("display"), n.style.removeProperty("top"), n.removeAttribute("hidden"), n.removeAttribute("aria-hidden");
         }));
     }
@@ -3300,11 +4210,11 @@ function $14d69c2d74c674dd$var$Ut(c, e) {
         c.removeEventListener(n, d, v);
     }
     function Ne(n) {
-        typeof n.layout == "string" && (b.layout = n.layout), typeof n.overview == "string" && (b.overview = n.overview), b.layout ? $14d69c2d74c674dd$var$ae(l.slides, b.layout + " " + b.overview) : $14d69c2d74c674dd$var$ae(l.slides, b.overview);
+        typeof n.layout == "string" && (b.layout = n.layout), typeof n.overview == "string" && (b.overview = n.overview), b.layout ? ae(l.slides, b.layout + " " + b.overview) : ae(l.slides, b.overview);
     }
     function j({ target: n = l.wrapper, type: d, data: v, bubbles: m = !0 }) {
         let w = document.createEvent("HTMLEvents", 1, 2);
-        return w.initEvent(d, m, !0), $14d69c2d74c674dd$var$ge(w, v), n.dispatchEvent(w), n === l.wrapper && at(d), w;
+        return w.initEvent(d, m, !0), ge(w, v), n.dispatchEvent(w), n === l.wrapper && at(d), w;
     }
     function st(n) {
         j({
@@ -3325,21 +4235,21 @@ function $14d69c2d74c674dd$var$Ut(c, e) {
                 eventName: n,
                 state: St()
             };
-            $14d69c2d74c674dd$var$ge(v, d), window.parent.postMessage(JSON.stringify(v), "*");
+            ge(v, d), window.parent.postMessage(JSON.stringify(v), "*");
         }
     }
     function he() {
         if (l.wrapper && !F.isActive()) {
             const n = l.viewport.offsetWidth, d = l.viewport.offsetHeight;
             if (!t.disableLayout) {
-                $14d69c2d74c674dd$var$le && !t.embedded && document.documentElement.style.setProperty("--vh", window.innerHeight * 0.01 + "px");
+                le && !t.embedded && document.documentElement.style.setProperty("--vh", window.innerHeight * 0.01 + "px");
                 const v = k.isActive() ? we(n, d) : we(), m = p;
                 rt(t.width, t.height), l.slides.style.width = v.width + "px", l.slides.style.height = v.height + "px", p = Math.min(v.presentationWidth / v.width, v.presentationHeight / v.height), p = Math.max(p, t.minScale), p = Math.min(p, t.maxScale), p === 1 || k.isActive() ? (l.slides.style.zoom = "", l.slides.style.left = "", l.slides.style.top = "", l.slides.style.bottom = "", l.slides.style.right = "", Ne({
                     layout: ""
                 })) : (l.slides.style.zoom = "", l.slides.style.left = "50%", l.slides.style.top = "50%", l.slides.style.bottom = "auto", l.slides.style.right = "auto", Ne({
                     layout: "translate(-50%, -50%) scale(" + p + ")"
                 }));
-                const w = Array.from(l.wrapper.querySelectorAll($14d69c2d74c674dd$var$de));
+                const w = Array.from(l.wrapper.querySelectorAll(de));
                 for(let P = 0, x = w.length; P < x; P++){
                     const N = w[P];
                     N.style.display !== "none" && (t.center || N.classList.contains("center") ? N.classList.contains("stack") ? N.style.top = 0 : N.style.top = Math.max((v.height - N.scrollHeight) / 2, 0) + "px" : N.style.top = "");
@@ -3357,8 +4267,8 @@ function $14d69c2d74c674dd$var$Ut(c, e) {
         }
     }
     function rt(n, d) {
-        $14d69c2d74c674dd$var$E(l.slides, "section > .stretch, section > .r-stretch").forEach((v)=>{
-            let m = $14d69c2d74c674dd$var$Ei(v, d);
+        E(l.slides, "section > .stretch, section > .r-stretch").forEach((v)=>{
+            let m = Ei(v, d);
             if (/(img|video)/gi.test(v.nodeName)) {
                 const w = v.naturalWidth || v.videoWidth, P = v.naturalHeight || v.videoHeight, x = Math.min(n / w, m / P);
                 v.style.width = w * x + "px", v.style.height = P * x + "px";
@@ -3448,7 +4358,7 @@ function $14d69c2d74c674dd$var$Ut(c, e) {
             }
         }).defaultPrevented) return;
         h = u;
-        const P = l.wrapper.querySelectorAll($14d69c2d74c674dd$var$te);
+        const P = l.wrapper.querySelectorAll(te);
         if (k.isActive()) {
             const J = k.getSlideByIndices(n, d);
             J && k.scrollToSlide(J);
@@ -3459,7 +4369,7 @@ function $14d69c2d74c674dd$var$Ut(c, e) {
         const x = y.concat();
         y.length = 0;
         let N = r || 0, oe = o || 0;
-        r = Ee($14d69c2d74c674dd$var$te, n === void 0 ? r : n), o = Ee($14d69c2d74c674dd$var$_e, d === void 0 ? o : d);
+        r = Ee(te, n === void 0 ? r : n), o = Ee(_e, d === void 0 ? o : d);
         let G = r !== N || o !== oe;
         G || (h = null);
         let $ = P[r], I = $.querySelectorAll("section");
@@ -3498,7 +4408,7 @@ function $14d69c2d74c674dd$var$Ut(c, e) {
         }), st();
     }
     function ut() {
-        be(), et(), he(), M = t.autoSlide, ue(), L.create(), T.writeURL(), t.sortFragmentsOnSync === !0 && C.sortAll(), typeof r != "undefined" && (r = Ee($14d69c2d74c674dd$var$te, r), o = Ee($14d69c2d74c674dd$var$_e, o)), X.update(), K.update(), Ve(), _.update(), _.updateVisibility(), H.update(), L.update(!0), B.update(), R.formatEmbeddedContent(), t.autoPlayMedia === !1 ? R.stopEmbeddedContent(u, {
+        be(), et(), he(), M = t.autoSlide, ue(), L.create(), T.writeURL(), t.sortFragmentsOnSync === !0 && C.sortAll(), typeof r != "undefined" && (r = Ee(te, r), o = Ee(_e, o)), X.update(), K.update(), Ve(), _.update(), _.updateVisibility(), H.update(), L.update(!0), B.update(), R.formatEmbeddedContent(), t.autoPlayMedia === !1 ? R.stopEmbeddedContent(u, {
             unloadIframes: !1
         }) : R.startEmbeddedContent(u), f.isActive() && f.layout(), j({
             type: "sync"
@@ -3514,7 +4424,7 @@ function $14d69c2d74c674dd$var$Ut(c, e) {
     }
     function ni() {
         se().forEach((n)=>{
-            $14d69c2d74c674dd$var$E(n, "section").forEach((d, v)=>{
+            E(n, "section").forEach((d, v)=>{
                 v > 0 && (d.classList.remove("present"), d.classList.remove("past"), d.classList.add("future"), d.setAttribute("aria-hidden", "true"));
             });
         });
@@ -3528,7 +4438,7 @@ function $14d69c2d74c674dd$var$Ut(c, e) {
         });
     }
     function Ee(n, d) {
-        let v = $14d69c2d74c674dd$var$E(l.wrapper, n), m = v.length, w = k.isActive() || F.isActive(), P = !1, x = !1;
+        let v = E(l.wrapper, n), m = v.length, w = k.isActive() || F.isActive(), P = !1, x = !1;
         if (m) {
             t.loop && (d >= m && (P = !0), d %= m, d < 0 && (d = m + d, x = !0)), d = Math.max(Math.min(d, m - 1), 0);
             for(let $ = 0; $ < m; $++){
@@ -3551,12 +4461,12 @@ function $14d69c2d74c674dd$var$Ut(c, e) {
         return d;
     }
     function ft(n) {
-        $14d69c2d74c674dd$var$E(n, ".fragment").forEach((d)=>{
+        E(n, ".fragment").forEach((d)=>{
             d.classList.add("visible"), d.classList.remove("current-fragment");
         });
     }
     function gt(n) {
-        $14d69c2d74c674dd$var$E(n, ".fragment.visible").forEach((d)=>{
+        E(n, ".fragment.visible").forEach((d)=>{
             d.classList.remove("visible", "current-fragment");
         });
     }
@@ -3565,9 +4475,9 @@ function $14d69c2d74c674dd$var$Ut(c, e) {
         if (d && typeof r != "undefined") {
             const w = f.isActive();
             let P = w ? 10 : t.viewDistance;
-            $14d69c2d74c674dd$var$le && (P = w ? 6 : t.mobileViewDistance), F.isActive() && (P = Number.MAX_VALUE);
+            le && (P = w ? 6 : t.mobileViewDistance), F.isActive() && (P = Number.MAX_VALUE);
             for(let x = 0; x < d; x++){
-                let N = n[x], oe = $14d69c2d74c674dd$var$E(N, "section"), G = oe.length;
+                let N = n[x], oe = E(N, "section"), G = oe.length;
                 if (v = Math.abs((r || 0) - x) || 0, t.loop && (v = Math.abs(((r || 0) - x) % (d - P)) || 0), v < P ? R.load(N) : R.unload(N), G) {
                     let $ = w ? 0 : ot(N);
                     for(let I = 0; I < G; I++){
@@ -3580,7 +4490,7 @@ function $14d69c2d74c674dd$var$Ut(c, e) {
         }
     }
     function Z({ includeFragments: n = !1 } = {}) {
-        let d = l.wrapper.querySelectorAll($14d69c2d74c674dd$var$te), v = l.wrapper.querySelectorAll($14d69c2d74c674dd$var$_e), m = {
+        let d = l.wrapper.querySelectorAll(te), v = l.wrapper.querySelectorAll(_e), m = {
             left: r > 0,
             right: r < d.length - 1,
             up: o > 0,
@@ -3626,7 +4536,7 @@ function $14d69c2d74c674dd$var$Ut(c, e) {
             if (k.isActive()) d = parseInt(n.getAttribute("data-index-h"), 10), n.getAttribute("data-index-v") && (v = parseInt(n.getAttribute("data-index-v"), 10));
             else {
                 let w = pe(n), P = w ? n.parentNode : n, x = se();
-                d = Math.max(x.indexOf(P), 0), v = void 0, w && (v = Math.max($14d69c2d74c674dd$var$E(n.parentNode, "section").indexOf(n), 0));
+                d = Math.max(x.indexOf(P), 0), v = void 0, w && (v = Math.max(E(n.parentNode, "section").indexOf(n), 0));
             }
         }
         if (!n && u && u.querySelectorAll(".fragment").length > 0) {
@@ -3635,21 +4545,21 @@ function $14d69c2d74c674dd$var$Ut(c, e) {
         }
         return {
             h: d,
-            v: v,
+            v,
             f: m
         };
     }
     function Fe() {
-        return $14d69c2d74c674dd$var$E(l.wrapper, $14d69c2d74c674dd$var$de + ':not(.stack):not([data-visibility="uncounted"])');
+        return E(l.wrapper, de + ':not(.stack):not([data-visibility="uncounted"])');
     }
     function se() {
-        return $14d69c2d74c674dd$var$E(l.wrapper, $14d69c2d74c674dd$var$te);
+        return E(l.wrapper, te);
     }
     function mt() {
-        return $14d69c2d74c674dd$var$E(l.wrapper, ".slides>section>section");
+        return E(l.wrapper, ".slides>section>section");
     }
     function li() {
-        return $14d69c2d74c674dd$var$E(l.wrapper, $14d69c2d74c674dd$var$te + ".stack");
+        return E(l.wrapper, te + ".stack");
     }
     function yt() {
         return se().length > 1;
@@ -3680,7 +4590,7 @@ function $14d69c2d74c674dd$var$Ut(c, e) {
     }
     function St() {
         let n = vt();
-        return $14d69c2d74c674dd$var$Q({
+        return Q({
             indexh: n.h,
             indexv: n.v,
             indexf: n.f,
@@ -3690,15 +4600,15 @@ function $14d69c2d74c674dd$var$Ut(c, e) {
     }
     function hi(n) {
         if (typeof n == "object") {
-            Y($14d69c2d74c674dd$var$fe(n.indexh), $14d69c2d74c674dd$var$fe(n.indexv), $14d69c2d74c674dd$var$fe(n.indexf));
-            let d = $14d69c2d74c674dd$var$fe(n.paused), v = $14d69c2d74c674dd$var$fe(n.overview);
+            Y(fe(n.indexh), fe(n.indexv), fe(n.indexf));
+            let d = fe(n.paused), v = fe(n.overview);
             typeof d == "boolean" && d !== me() && ht(d), typeof v == "boolean" && v !== f.isActive() && f.toggle(v), H.setState(n);
         }
     }
     function ue() {
         if (Se(), u && t.autoSlide !== !1) {
             let n = u.querySelector(".current-fragment[data-autoslide]"), d = n ? n.getAttribute("data-autoslide") : null, v = u.parentNode ? u.parentNode.getAttribute("data-autoslide") : null, m = u.getAttribute("data-autoslide");
-            d ? M = parseInt(d, 10) : m ? M = parseInt(m, 10) : v ? M = parseInt(v, 10) : (M = t.autoSlide, u.querySelectorAll(".fragment").length === 0 && $14d69c2d74c674dd$var$E(u, "video, audio").forEach((w)=>{
+            d ? M = parseInt(d, 10) : m ? M = parseInt(m, 10) : v ? M = parseInt(v, 10) : (M = t.autoSlide, u.querySelectorAll(".fragment").length === 0 && E(u, "video, audio").forEach((w)=>{
                 w.hasAttribute("data-autoplay") && M && w.duration * 1e3 / w.playbackRate > M && (M = w.duration * 1e3 / w.playbackRate + 1e3);
             })), M && !z && !me() && !f.isActive() && (!Be() || C.availableRoutes().next || t.loop === !0) && (U = setTimeout(()=>{
                 typeof t.autoSlideMethod == "function" ? t.autoSlideMethod() : Ue(), ue();
@@ -3742,7 +4652,7 @@ function $14d69c2d74c674dd$var$Ut(c, e) {
             });
             else {
                 let d;
-                if (t.rtl ? d = $14d69c2d74c674dd$var$E(l.wrapper, $14d69c2d74c674dd$var$te + ".future").pop() : d = $14d69c2d74c674dd$var$E(l.wrapper, $14d69c2d74c674dd$var$te + ".past").pop(), d && d.classList.contains("stack")) {
+                if (t.rtl ? d = E(l.wrapper, te + ".future").pop() : d = E(l.wrapper, te + ".past").pop(), d && d.classList.contains("stack")) {
                     let v = d.querySelectorAll("section").length - 1 || void 0, m = r - 1;
                     Y(m, v);
                 } else t.rtl ? Ce({
@@ -3772,7 +4682,7 @@ function $14d69c2d74c674dd$var$Ut(c, e) {
     function Rt(n) {
         let d = n.data;
         if (typeof d == "string" && d.charAt(0) === "{" && d.charAt(d.length - 1) === "}" && (d = JSON.parse(d), d.method && typeof i[d.method] == "function")) {
-            if ($14d69c2d74c674dd$var$Li.test(d.method) === !1) {
+            if (Li.test(d.method) === !1) {
                 const v = i[d.method].apply(i, d.args);
                 at("callback", {
                     method: d.method,
@@ -3793,7 +4703,7 @@ function $14d69c2d74c674dd$var$Ut(c, e) {
         }));
     }
     function Ct(n) {
-        const d = $14d69c2d74c674dd$var$V(n.target, 'a[href^="#"]');
+        const d = V(n.target, 'a[href^="#"]');
         if (d) {
             const v = d.getAttribute("href"), m = T.getIndicesFromHash(v);
             m && (i.slide(m.h, m.v, m.f), n.preventDefault());
@@ -3814,7 +4724,7 @@ function $14d69c2d74c674dd$var$Ut(c, e) {
         Be() && t.loop === !1 ? (Y(0, 0), Re()) : z ? Re() : Ae();
     }
     const Tt = {
-        VERSION: $14d69c2d74c674dd$var$Ot,
+        VERSION: Ot,
         initialize: Wt,
         configure: Ze,
         destroy: Qt,
@@ -3955,7 +4865,7 @@ function $14d69c2d74c674dd$var$Ut(c, e) {
         // Returns the current configuration object
         getConfig: ()=>t,
         // Helper method, retrieves query string as a key:value map
-        getQueryHash: $14d69c2d74c674dd$var$Mt,
+        getQueryHash: Mt,
         // Returns the path to the current slide as represented in the URL
         getSlidePath: T.getHash.bind(T),
         // Returns reveal.js DOM elements
@@ -3969,7 +4879,7 @@ function $14d69c2d74c674dd$var$Ut(c, e) {
         getPlugin: D.getPlugin.bind(D),
         getPlugins: D.getRegisteredPlugins.bind(D)
     };
-    return $14d69c2d74c674dd$var$ge(i, $14d69c2d74c674dd$var$We($14d69c2d74c674dd$var$Q({}, Tt), {
+    return ge(i, We(Q({}, Tt), {
         // Methods for announcing content to screen readers
         announceStatus: Me,
         getStatusText: ye,
@@ -3994,11 +4904,11 @@ function $14d69c2d74c674dd$var$Ut(c, e) {
         cancelAutoSlide: Se
     })), Tt;
 }
-const $14d69c2d74c674dd$export$2e2bcd8739ae039 = $14d69c2d74c674dd$var$Ut, $14d69c2d74c674dd$var$qt = [];
-$14d69c2d74c674dd$export$2e2bcd8739ae039.initialize = (c)=>{
+const ce = Ut, qt = [];
+ce.initialize = (c)=>{
     const e = document.querySelector(".reveal");
     if (!(e instanceof HTMLElement)) throw new Error('Unable to find presentation root (<div class="reveal">).');
-    return Object.assign($14d69c2d74c674dd$export$2e2bcd8739ae039, new $14d69c2d74c674dd$var$Ut(e, c)), $14d69c2d74c674dd$var$qt.map((i)=>i($14d69c2d74c674dd$export$2e2bcd8739ae039)), $14d69c2d74c674dd$export$2e2bcd8739ae039.initialize();
+    return Object.assign(ce, new Ut(e, c)), qt.map((i)=>i(ce)), ce.initialize();
 };
 [
     "configure",
@@ -4008,18 +4918,47 @@ $14d69c2d74c674dd$export$2e2bcd8739ae039.initialize = (c)=>{
     "removeEventListener",
     "registerPlugin"
 ].forEach((c)=>{
-    $14d69c2d74c674dd$export$2e2bcd8739ae039[c] = (...e)=>{
-        $14d69c2d74c674dd$var$qt.push((i)=>i[c].call(null, ...e));
+    ce[c] = (...e)=>{
+        qt.push((i)=>i[c].call(null, ...e));
     };
 });
-$14d69c2d74c674dd$export$2e2bcd8739ae039.isReady = ()=>!1;
-$14d69c2d74c674dd$export$2e2bcd8739ae039.VERSION = $14d69c2d74c674dd$var$Ot;
+ce.isReady = ()=>!1;
+ce.VERSION = Ot;
 
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"1egVF"}],"1egVF":[function(require,module,exports,__globalThis) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, '__esModule', {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === 'default' || key === '__esModule' || Object.prototype.hasOwnProperty.call(dest, key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
 
-var $e1fc2ef36a356843$exports = {};
+},{}],"6e8rN":[function(require,module,exports,__globalThis) {
 (function(ze, ke) {
-    $e1fc2ef36a356843$exports = ke();
-})($e1fc2ef36a356843$exports, function() {
+    module.exports = ke();
+})(this, function() {
     "use strict";
     function ze(t) {
         return t && t.__esModule && Object.prototype.hasOwnProperty.call(t, "default") ? t.default : t;
@@ -53169,11 +54108,10 @@ https://github.com/highlightjs/highlight.js/issues/2277`), ce = A, X = k), q ===
     return ()=>ie;
 });
 
-
-var $ca2344b273606212$exports = {};
+},{}],"5NbHA":[function(require,module,exports,__globalThis) {
 (function(L, E) {
-    $ca2344b273606212$exports = E();
-})($ca2344b273606212$exports, function() {
+    module.exports = E();
+})(this, function() {
     "use strict";
     function L() {
         return {
@@ -54941,11 +55879,10 @@ Please report this to https://github.com/markedjs/marked.`, t) {
     };
 });
 
-
-var $69115910d9991bf4$exports = {};
+},{}],"8UXxo":[function(require,module,exports,__globalThis) {
 (function(f, m) {
-    $69115910d9991bf4$exports = m();
-})($69115910d9991bf4$exports, function() {
+    module.exports = m();
+})(this, function() {
     "use strict";
     const f = {
         id: "zoom",
@@ -55025,11 +55962,10 @@ var $69115910d9991bf4$exports = {};
     return m;
 });
 
-
-var $53e71e43b04784c9$exports = {};
+},{}],"kSqKj":[function(require,module,exports,__globalThis) {
 (function($, v) {
-    $53e71e43b04784c9$exports = v();
-})($53e71e43b04784c9$exports, function() {
+    module.exports = v();
+})(this, function() {
     "use strict";
     const $ = `<!--
 	NOTE: You need to build the notes plugin after making changes to this file.
@@ -57557,7 +58493,20 @@ Please report this to https://github.com/markedjs/marked.`, r) {
     };
 });
 
+},{}],"2J4bG":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Header", ()=>(0, _headerDefault.default));
+parcelHelpers.export(exports, "Menu", ()=>(0, _menuDefault.default));
+parcelHelpers.export(exports, "Toolbar", ()=>(0, _toolbarDefault.default));
+var _header = require("./_header");
+var _headerDefault = parcelHelpers.interopDefault(_header);
+var _menu = require("./_menu");
+var _menuDefault = parcelHelpers.interopDefault(_menu);
+var _toolbar = require("./_toolbar");
+var _toolbarDefault = parcelHelpers.interopDefault(_toolbar);
 
+},{"./_header":"5Zzf5","./_menu":"lJifY","./_toolbar":"eVjm1","@parcel/transformer-js/src/esmodule-helpers.js":"1egVF"}],"5Zzf5":[function(require,module,exports,__globalThis) {
 /**
  * Reveal.js Header plugin
  *
@@ -57588,7 +58537,9 @@ Please report this to https://github.com/markedjs/marked.`, r) {
  * Copyright (c) 2025 Emiliano "pixu1980" Pisu
 
 * @returns {{ id: string, init: function, update: function }} A Reveal plugin definition.
- */ const $f1a7eda04286c8af$var$HeaderPlugin = ()=>{
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+const HeaderPlugin = ()=>{
     let deck;
     const headerPlugin = {
         id: "header",
@@ -57637,9 +58588,9 @@ Please report this to https://github.com/markedjs/marked.`, r) {
     };
     return headerPlugin;
 };
-var $f1a7eda04286c8af$export$2e2bcd8739ae039 = $f1a7eda04286c8af$var$HeaderPlugin;
+exports.default = HeaderPlugin;
 
-
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"1egVF"}],"lJifY":[function(require,module,exports,__globalThis) {
 /**
  * Reveal.js Menu Plugin
  *
@@ -57662,7 +58613,9 @@ var $f1a7eda04286c8af$export$2e2bcd8739ae039 = $f1a7eda04286c8af$var$HeaderPlugi
  * - For very long slide decks, consider debouncing UI updates.
 
  * Copyright (c) 2025 Emiliano "pixu1980" Pisu
-*/ const $7701f38bc5a852f6$var$defaults = {
+*/ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+const defaults = {
     side: 'right',
     numbers: false,
     titleSelector: 'h1, h2, h3, h4, h5',
@@ -57685,7 +58638,7 @@ var $f1a7eda04286c8af$export$2e2bcd8739ae039 = $f1a7eda04286c8af$var$HeaderPlugi
     delayInit: false,
     openOnInit: false
 };
-class $7701f38bc5a852f6$var$Menu {
+class Menu {
     deck;
     dom = {
         reveal: null,
@@ -58366,27 +59319,27 @@ class $7701f38bc5a852f6$var$Menu {
     constructor(deck){
         this.deck = deck;
         this.settings = {
-            ...$7701f38bc5a852f6$var$defaults,
+            ...defaults,
             ...deck.getConfig()?.menu
         };
         this.init();
     }
 }
-const $7701f38bc5a852f6$var$Plugin = ()=>{
+const Plugin = ()=>{
     let instance;
     return {
         id: 'menu',
         init: (deck)=>{
-            instance = new $7701f38bc5a852f6$var$Menu(deck);
+            instance = new Menu(deck);
         },
         toggleMenu: ()=>{
             instance.toggle();
         }
     };
 };
-var $7701f38bc5a852f6$export$2e2bcd8739ae039 = $7701f38bc5a852f6$var$Plugin;
+exports.default = Plugin;
 
-
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"1egVF"}],"eVjm1":[function(require,module,exports,__globalThis) {
 /**
  * Reveal.js toolbar plugin
  * Toolbar plugin defaults.
@@ -58406,7 +59359,9 @@ var $7701f38bc5a852f6$export$2e2bcd8739ae039 = $7701f38bc5a852f6$var$Plugin;
  * - Notes ?
  * - PDF export ?
  * - tooltips
- */ const $affd1976bee17ca2$var$defaults = {
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+const defaults = {
     position: "top",
     fullscreen: true,
     colorScheme: true,
@@ -58416,7 +59371,7 @@ var $7701f38bc5a852f6$export$2e2bcd8739ae039 = $7701f38bc5a852f6$var$Plugin;
     help: true,
     menu: true
 };
-class $affd1976bee17ca2$var$Toolbar {
+class Toolbar {
     deck;
     dom = {
         reveal: null,
@@ -58447,7 +59402,7 @@ class $affd1976bee17ca2$var$Toolbar {
 	 */ addAction(name, caption, options, handler) {
         const defaults = {
             class: `reveal-toolbar-button-${name}`,
-            caption: caption,
+            caption,
             content: undefined
         };
         const settings = {
@@ -58543,7 +59498,7 @@ class $affd1976bee17ca2$var$Toolbar {
 	 */ constructor(deck){
         this.deck = deck;
         this.settings = {
-            ...$affd1976bee17ca2$var$defaults,
+            ...defaults,
             ...deck.getConfig()?.toolbar
         };
         this.init();
@@ -58553,19 +59508,22 @@ class $affd1976bee17ca2$var$Toolbar {
 /**
  * Toolbar plugin factory for Reveal.js.
  * @returns {{ id: string, init: (deck:any)=>void }} Plugin definition
- */ const $affd1976bee17ca2$var$Plugin = ()=>{
+ */ const Plugin = ()=>{
     return {
         id: "toolbar",
         init: (deck)=>{
-            new $affd1976bee17ca2$var$Toolbar(deck);
+            new Toolbar(deck);
         }
     };
 };
-var $affd1976bee17ca2$export$2e2bcd8739ae039 = $affd1976bee17ca2$var$Plugin;
+exports.default = Plugin;
 
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"1egVF"}],"bUnuW":[function(require,module,exports,__globalThis) {
+var _diveIn = require("./_dive-in");
+var _stagger = require("./_stagger");
+var _tabs = require("./_tabs");
 
-
-
+},{"./_dive-in":"8NxU3","./_stagger":"4NTDm","./_tabs":"5D0bv"}],"8NxU3":[function(require,module,exports,__globalThis) {
 /**
  * DiveIn stacked container component
  *
@@ -58588,7 +59546,7 @@ var $affd1976bee17ca2$export$2e2bcd8739ae039 = $affd1976bee17ca2$var$Plugin;
  * Performance notes:
  * - The `mousemove` handler writes CSS variables on every event. For complex
  *   scenes consider throttling with requestAnimationFrame.
- */ class $e4356d7c6fbfa914$var$DiveInElement extends HTMLElement {
+ */ class DiveInElement extends HTMLElement {
     constructor(){
         super();
         this.handleMouseMove = this.handleMouseMove.bind(this);
@@ -58619,29 +59577,29 @@ var $affd1976bee17ca2$export$2e2bcd8739ae039 = $affd1976bee17ca2$var$Plugin;
         stackContainer.style.setProperty('--mouse-y', `${offsetY}px`);
     }
 }
-if (!customElements.get('pix-dive-in')) customElements.define('pix-dive-in', $e4356d7c6fbfa914$var$DiveInElement);
+if (!customElements.get('dive-in')) customElements.define('dive-in', DiveInElement);
 
-
+},{}],"4NTDm":[function(require,module,exports,__globalThis) {
 /**
  * Stagger animation components
  *
- * Enhances `<stagger>` containers by assigning a per-child CSS variable
+ * Enhances `<stagger-container>` containers by assigning a per-child CSS variable
  * `--stagger--index` to allow staggered effects in CSS.
  *
  * Usage:
  * ```html
- * <stagger>
+ * <stagger-container>
  *   <div>Item A</div>
  *   <div>Item B</div>
  *   <div>Item C</div>
- * </stagger>
+ * </stagger-container>
  * ```
  * Then in CSS you can refer to `--stagger--index` to offset animations/timings.
  *
  * Lifecycle:
  * - Registered as the `stagger` custom element.
  * - Recomputes child indexes when the element is connected.
- */ class $2dd6d1de1baa9f28$var$StaggerElement extends HTMLElement {
+ */ class StaggerElement extends HTMLElement {
     connectedCallback() {
         this.refreshItems();
     }
@@ -58654,16 +59612,16 @@ if (!customElements.get('pix-dive-in')) customElements.define('pix-dive-in', $e4
         });
     }
 }
-if (!customElements.get('pix-stagger')) customElements.define('pix-stagger', $2dd6d1de1baa9f28$var$StaggerElement);
+if (!customElements.get('stagger-container')) customElements.define('stagger-container', StaggerElement);
 
-
+},{}],"5D0bv":[function(require,module,exports,__globalThis) {
 /**
  * Tabs component
  *
  * Enhances a semantic HTML structure:
  *
  * ```html
- * <tabs>
+ * <tabs-container>
  *   <tabs-list>
  *     <a href="#panel-1" role="tab">Tab 1</a>
  *     <a href="#panel-2" role="tab">Tab 2</a>
@@ -58672,7 +59630,7 @@ if (!customElements.get('pix-stagger')) customElements.define('pix-stagger', $2d
  *     <tab-panel id="panel-1" role="tabpanel">...</tab-panel>
  *     <tab-panel id="panel-2" role="tabpanel">...</tab-panel>
  *   </tabs-panels>
- * </tabs>
+ * </tabs-container>
  * ```
  *
  * Behavior:
@@ -58691,7 +59649,7 @@ if (!customElements.get('pix-stagger')) customElements.define('pix-stagger', $2d
 
  * Notes:
  * - This component assumes a mostly static DOM structure after initialization.
- */ class $51910a3cce986e3d$var$TabsElement extends HTMLElement {
+ */ class TabsElement extends HTMLElement {
     constructor(){
         super();
         this.currentTabIndex = 0;
@@ -58760,11 +59718,9 @@ if (!customElements.get('pix-stagger')) customElements.define('pix-stagger', $2d
         event.stopPropagation();
     }
 }
-if (!customElements.get('pix-tabs')) customElements.define('pix-tabs', $51910a3cce986e3d$var$TabsElement);
+if (!customElements.get('tabs-container')) customElements.define('tabs-container', TabsElement);
 
-
-
-
+},{}],"4Bc7d":[function(require,module,exports,__globalThis) {
 window.pixuTalks = {
     /**
    * Pass in an element and its CSS Custom Property that you want the value of.
@@ -58874,452 +59830,20 @@ window.pixuTalks = {
     }
 };
 
-
-addEventListener("DOMContentLoaded", ()=>{
-    let deck = new (0, $14d69c2d74c674dd$export$2e2bcd8739ae039)(document.querySelector(".reveal"), {
-        ...window.location.href.includes("?print-pdf") && {
-            pdfSeparateFragments: false
-        },
-        hash: true,
-        // plugins: [Markdown, Highlight, Zoom, Notes, Menu, Toolbar, Header],
-        // plugins: [Markdown, Highlight, Zoom, Notes, Toolbar, Menu],
-        plugins: [
-            (0, (/*@__PURE__*/$parcel$interopDefault($ca2344b273606212$exports))),
-            (0, (/*@__PURE__*/$parcel$interopDefault($e1fc2ef36a356843$exports))),
-            (0, (/*@__PURE__*/$parcel$interopDefault($69115910d9991bf4$exports))),
-            (0, (/*@__PURE__*/$parcel$interopDefault($53e71e43b04784c9$exports))),
-            (0, $affd1976bee17ca2$export$2e2bcd8739ae039)
-        ],
-        navigationMode: "linear",
-        menu: {
-            // Specifies which side of the presentation the menu will
-            // be shown. Use 'left' or 'right'.
-            side: "left",
-            // Specifies the width of the menu.
-            // Can be one of the following:
-            // 'normal', 'wide', 'third', 'half', 'full', or
-            // any valid css length value
-            width: "normal",
-            // Add slide numbers to the titles in the slide list.
-            // Use 'true' or format string (same as reveal.js slide numbers)
-            numbers: true,
-            // Specifies which slide elements will be used for generating
-            // the slide titles in the menu. The default selects the first
-            // heading element found in the slide, but you can specify any
-            // valid css selector and the text from the first matching
-            // element will be used.
-            // Note: that a section data-menu-title attribute or an element
-            // with a menu-title class will take precedence over this option
-            titleSelector: "h1, h2, h3, h4, h5, h6",
-            // If slides do not have a matching title, attempt to use the
-            // start of the text content as the title instead
-            useTextContentForMissingTitles: false,
-            // Hide slides from the menu that do not have a title.
-            // Set to 'true' to only list slides with titles.
-            hideMissingTitles: true,
-            // Adds markers to the slide titles to indicate the
-            // progress through the presentation. Set to 'false'
-            // to hide the markers.
-            markers: true,
-            // Specify custom panels to be included in the menu, by
-            // providing an array of objects with 'title', 'icon'
-            // properties, and either a 'src' or 'content' property.
-            custom: false,
-            // // Specifies the themes that will be available in the themes
-            // // menu panel. Set to 'true' to show the themes menu panel
-            // // with the default themes list. Alternatively, provide an
-            // // array to specify the themes to make available in the
-            // // themes menu panel, for example...
-            // //
-            // // [
-            // //     { name: 'Black', theme: 'dist/theme/black.css' },
-            // //     { name: 'White', theme: 'dist/theme/white.css' },
-            // //     { name: 'League', theme: 'dist/theme/league.css' },
-            // //     {
-            // //       name: 'Dark',
-            // //       theme: 'lib/reveal.js/dist/theme/black.css',
-            // //       highlightTheme: 'lib/reveal.js/plugin/highlight/monokai.css'
-            // //     },
-            // //     {
-            // //       name: 'Code: Zenburn',
-            // //       highlightTheme: 'lib/reveal.js/plugin/highlight/zenburn.css'
-            // //     }
-            // // ]
-            // //
-            // // Note: specifying highlightTheme without a theme will
-            // // change the code highlight theme while leaving the
-            // // presentation theme unchanged.
-            // themes: false,
-            // // Specifies the path to the default theme files. If your
-            // // presentation uses a different path to the standard reveal
-            // // layout then you need to provide this option, but only
-            // // when 'themes' is set to 'true'. If you provide your own
-            // // list of themes or 'themes' is set to 'false' the
-            // // 'themesPath' option is ignored.
-            // themesPath: 'dist/theme/',
-            // Specifies if the transitions menu panel will be shown.
-            // Set to 'true' to show the transitions menu panel with
-            // the default transitions list. Alternatively, provide an
-            // array to specify the transitions to make available in
-            // the transitions panel, for example...
-            // ['None', 'Fade', 'Slide']
-            transitions: false,
-            // Adds a menu button to the slides to open the menu panel.
-            // Set to 'false' to hide the button.
-            openButton: false,
-            // If 'true' allows the slide number in the presentation to
-            // open the menu panel. The reveal.js slideNumber option must
-            // be displayed for this to take effect
-            openSlideNumber: false,
-            // If true allows the user to open and navigate the menu using
-            // the keyboard. Standard keyboard interaction with reveal
-            // will be disabled while the menu is open.
-            keyboard: true,
-            // Normally the menu will close on user actions such as
-            // selecting a menu item, or clicking the presentation area.
-            // If 'true', the sticky option will leave the menu open
-            // until it is explicitly closed, that is, using the close
-            // button or pressing the ESC or m key (when the keyboard
-            // interaction option is enabled).
-            sticky: false,
-            // If 'true' standard menu items will be automatically opened
-            // when navigating using the keyboard. Note: this only takes
-            // effect when both the 'keyboard' and 'sticky' options are enabled.
-            autoOpen: true,
-            // If 'true' the menu will not be created until it is explicitly
-            // requested by calling RevealMenu.init(). Note this will delay
-            // the creation of all menu panels, including custom panels, and
-            // the menu button.
-            delayInit: false,
-            // If 'true' the menu will be shown when the menu is initialised.
-            openOnInit: false
-        },
-        toolbar: {
-            // Specifies where the toolbar will be shown: 'top' or 'bottom'
-            position: "top",
-            // // If true, the reveal.js-menu will be moved into the toolbar.
-            // // Set to false to leave the menu on its own.
-            // menu: {
-            //   content: '<icon class="draft-ui-icon-hamburger"></icon>',
-            // },
-            menu: false,
-            // Add button to show the help overlay
-            help: {
-                content: '<icon class="draft-ui-icon-circle-info"></icon>'
-            },
-            // Add button to toggle the overview mode on and off
-            colorScheme: {
-                content: '<icon class="draft-ui-icon-computer"></icon>'
-            },
-            // Add button to toggle the overview mode on and off
-            overview: {
-                content: '<icon class="draft-ui-icon-apps"></icon>'
-            },
-            // Add button to toggle fullscreen mode for the presentation
-            fullscreen: {
-                content: '<icon class="draft-ui-icon-zoom-in"></icon>'
-            },
-            // Add button to pause (hide) the presentation display
-            pause: false,
-            // Add button to show the speaker notes
-            notes: false
-        }
-    });
-    // keyboard nav configuration
-    deck.configure({
-        keyboard: {
-            8: "prev",
-            // 27: null,
-            78: null
-        }
-    });
-    deck.initialize();
-    // Make the Reveal object globally available on the /demo page
-    window.Reveal = deck;
-});
-
-
+},{}],"1sNcI":[function(require,module,exports,__globalThis) {
 // Baseline Status Web Component (vanilla JS)
 // - Autonomous custom element (no Shadow DOM, no <template>)
 // - Fetches Baseline info from https://api.webstatus.dev
 // - Assets (CSS, SVG, HTML) imported as text via Parcel bundle-text: pipeline
-var $42550a20f74bb02b$exports = {};
-$42550a20f74bb02b$exports = "baseline-status {\n  --baseline-status-color-limited: var(--lightningcss-light, #ea8600) var(--lightningcss-dark, #f09418);\n  --baseline-status-color-newly: var(--lightningcss-light, #1a73e8) var(--lightningcss-dark, #4185ff);\n  --baseline-status-color-widely: var(--lightningcss-light, #1e8e3e) var(--lightningcss-dark, #24a446);\n  --baseline-status-color-no_data: var(--lightningcss-light, #707070) var(--lightningcss-dark, #868686);\n  --baseline-status-color-outline: var(--lightningcss-light, #d9d9d9) var(--lightningcss-dark, #d9d9d9);\n  --baseline-status-color-link: var(--lightningcss-light, #1a73e8) var(--lightningcss-dark, #5aa1ff);\n  border: 1px solid var(--baseline-status-color-outline);\n  width: 50rem;\n  color: inherit;\n  border-radius: .8rem;\n  margin: 2rem auto;\n  font: 2rem / 1.5 system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif;\n  display: block;\n}\n\nbaseline-status details > summary {\n  cursor: pointer;\n  flex-flow: column;\n  place-content: space-between;\n  place-items: center;\n  gap: 1.6rem;\n  padding: 1.2rem 2.4rem;\n  display: flex;\n}\n\nbaseline-status details > summary .name {\n  font-weight: 600;\n}\n\nbaseline-status details > summary .summary-top {\n  flex-flow: column;\n  place-content: center;\n  place-items: center;\n  gap: 0;\n  display: flex;\n}\n\nbaseline-status details > summary .summary-top p {\n  margin: 0 !important;\n}\n\nbaseline-status details > summary .summary-bottom {\n  align-items: center;\n  gap: 12px;\n  display: flex;\n}\n\nbaseline-status details > summary::-webkit-details-marker {\n  display: none;\n}\n\nbaseline-status details .open-icon {\n  width: 10px;\n  height: 20px;\n  color: inherit;\n  place-content: center;\n  place-items: center;\n  display: flex;\n}\n\nbaseline-status details .open-icon svg {\n  transition: transform .3s;\n}\n\nbaseline-status details[open] {\n  padding-bottom: 1.6rem;\n}\n\nbaseline-status details[open] .open-icon svg {\n  transform: rotate(180deg);\n}\n\nbaseline-status a {\n  color: var(--baseline-status-color-link);\n}\n\nbaseline-status .baseline-status-title {\n  flex: 1;\n  place-content: space-between;\n  place-items: center;\n  gap: 2.5rem;\n  display: flex;\n}\n\nbaseline-status .baseline-status-title div:first-child {\n  align-items: center;\n  gap: .5rem;\n  display: flex;\n}\n\nbaseline-status .baseline-badge {\n  color: #fff;\n  text-transform: uppercase;\n  white-space: nowrap;\n  background: #3367d6;\n  border-radius: 2px;\n  margin-left: .5rem;\n  margin-right: .5rem;\n  padding: 0 4px;\n  font-size: 11px;\n  line-height: 20px;\n}\n\nbaseline-status .baseline-status-browsers {\n  align-items: center;\n  gap: 12px;\n  max-width: 240px;\n  font-size: 0;\n  display: flex;\n}\n\nbaseline-status .baseline-status-browsers .browser-icon {\n  vertical-align: top;\n  width: 21px;\n  height: 21px;\n  margin-bottom: -1px;\n  margin-right: -2px;\n  display: inline-block;\n}\n\nbaseline-status .support-no_data {\n  color: var(--baseline-status-color-no_data);\n}\n\nbaseline-status .support-unavailable {\n  color: var(--baseline-status-color-limited);\n}\n\nbaseline-status .support-newly {\n  color: var(--baseline-status-color-newly);\n}\n\nbaseline-status .support-widely, baseline-status .support-available {\n  color: var(--baseline-status-color-widely);\n}\n";
-
-
-// Centralized constants and asset imports for the Baseline Status component
-// Assets are imported as text using Parcel's bundle-text: pipeline
-// Support state icons
-var $af5db4894f7150e1$exports = {};
-$af5db4894f7150e1$exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"17\" height=\"21\" fill=\"none\"><path fill=\"currentColor\" d=\"M1.253 3.31a8.843 8.843 0 0 1 5.47-1.882c4.882 0 8.838 3.927 8.838 8.772 0 4.845-3.956 8.772-8.837 8.772a8.842 8.842 0 0 1-5.47-1.882c-.237.335-.49.657-.758.966a10.074 10.074 0 0 0 6.228 2.14c5.562 0 10.07-4.475 10.07-9.996 0-5.52-4.508-9.996-10.07-9.996-2.352 0-4.514.8-6.228 2.14.268.309.521.631.757.966Z\"/><path fill=\"currentColor\" d=\"M11.348 8.125 6.34 13.056l-3.006-2.954 1.002-.985 1.999 1.965 4.012-3.942 1.002.985Z\"/></svg>";
-
-
-var $610208fbcf03ba10$exports = {};
-$610208fbcf03ba10$exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"17\" height=\"21\" fill=\"none\"><path fill=\"currentColor\" d=\"M1.254 3.31a8.843 8.843 0 0 1 5.47-1.882c4.881 0 8.838 3.927 8.838 8.772 0 4.845-3.957 8.772-8.838 8.772a8.842 8.842 0 0 1-5.47-1.882c-.236.335-.49.657-.757.966a10.074 10.074 0 0 0 6.227 2.14c5.562 0 10.071-4.475 10.071-9.996 0-5.52-4.509-9.996-10.07-9.996-2.352 0-4.515.8-6.228 2.14.268.309.52.631.757.966Z\"/><path fill=\"currentColor\" d=\"m10.321 8.126-1.987 1.972 1.987 1.972-.993.986-1.987-1.972-1.987 1.972-.993-.986 1.986-1.972-1.986-1.972.993-.986 1.987 1.972L9.328 7.14l.993.986Z\"/></svg>";
-
-
-var $f3df254ae99c899e$exports = {};
-$f3df254ae99c899e$exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"17\" height=\"21\" viewBox=\"0 0 17 21\" fill=\"none\"><path d=\"M7.18169 12.2783H5.98706C5.99134 11.8703 6.02774 11.5367 6.09625 11.2775C6.16904 11.014 6.28679 10.7738 6.4495 10.5571C6.61221 10.3404 6.82844 10.0939 7.0982 9.8176C7.29516 9.61785 7.475 9.43085 7.63771 9.2566C7.8047 9.0781 7.93958 8.88685 8.04235 8.68285C8.14511 8.4746 8.19649 8.22598 8.19649 7.93698C8.19649 7.64373 8.14297 7.39085 8.03592 7.17835C7.93316 6.96585 7.77901 6.80223 7.57348 6.68748C7.37224 6.57273 7.12175 6.51535 6.82202 6.51535C6.57367 6.51535 6.33817 6.55998 6.11552 6.64923C5.89286 6.73848 5.71302 6.8766 5.576 7.0636C5.43898 7.24635 5.36833 7.48648 5.36405 7.78398H4.17584C4.18441 7.30373 4.3043 6.89148 4.53552 6.54723C4.77102 6.20298 5.08787 5.93948 5.48609 5.75673C5.8843 5.57398 6.32961 5.4826 6.82202 5.4826C7.36581 5.4826 7.82825 5.58035 8.20934 5.77585C8.5947 5.97135 8.88801 6.25185 9.08926 6.61735C9.2905 6.9786 9.39113 7.40785 9.39113 7.9051C9.39113 8.2876 9.31191 8.64035 9.15348 8.96335C8.99934 9.2821 8.80023 9.58173 8.55617 9.86222C8.3121 10.1427 8.05305 10.4105 7.77901 10.6655C7.54351 10.8822 7.38508 11.1266 7.30373 11.3986C7.22237 11.6706 7.18169 11.9639 7.18169 12.2783ZM5.93568 14.2992C5.93568 14.108 5.99562 13.9465 6.11552 13.8147C6.23541 13.683 6.40882 13.6171 6.63576 13.6171C6.86698 13.6171 7.04253 13.683 7.16243 13.8147C7.28232 13.9465 7.34226 14.108 7.34226 14.2992C7.34226 14.482 7.28232 14.6392 7.16243 14.771C7.04253 14.9027 6.86698 14.9686 6.63576 14.9686C6.40882 14.9686 6.23541 14.9027 6.11552 14.771C5.99562 14.6392 5.93568 14.482 5.93568 14.2992Z\" fill=\"currentColor\"/><path d=\"M1.25317 3.31021C2.75786 2.13162 4.65827 1.4281 6.72373 1.4281C11.6047 1.4281 15.5615 5.35546 15.5615 10.2001C15.5615 15.0447 11.6047 18.9721 6.72373 18.9721C4.65827 18.9721 2.75786 18.2686 1.25317 17.09C1.01715 17.425 0.764387 17.7475 0.496094 18.0563C2.20987 19.3966 4.37247 20.1961 6.72373 20.1961C12.2857 20.1961 16.7946 15.7207 16.7946 10.2001C16.7946 4.67946 12.2857 0.204102 6.72373 0.204102C4.37247 0.204102 2.20987 1.00363 0.496094 2.34391C0.764386 2.65272 1.01715 2.97522 1.25317 3.31021Z\" fill=\"currentColor\"/></svg>";
-
-
-var $5c41cb256e956c2e$exports = {};
-$5c41cb256e956c2e$exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"21\" height=\"21\" viewBox=\"0 0 260 260\"><linearGradient id=\"a\" x1=\"145\" x2=\"34\" y1=\"253\" y2=\"61\" gradientUnits=\"userSpaceOnUse\"><stop offset=\"0\" stop-color=\"#1e8e3e\"/><stop offset=\"1\" stop-color=\"#34a853\"/></linearGradient><linearGradient id=\"b\" x1=\"111\" x2=\"222\" y1=\"254\" y2=\"62\" gradientUnits=\"userSpaceOnUse\"><stop offset=\"0\" stop-color=\"#fcc934\"/><stop offset=\"1\" stop-color=\"#fbbc04\"/></linearGradient><linearGradient id=\"c\" x1=\"17\" x2=\"239\" y1=\"80\" y2=\"80\" gradientUnits=\"userSpaceOnUse\"><stop offset=\"0\" stop-color=\"#d93025\"/><stop offset=\"1\" stop-color=\"#ea4335\"/></linearGradient><circle cx=\"128\" cy=\"128\" r=\"64\" fill=\"#fff\"/><path fill=\"url(#a)\" d=\"M96 183.4A63.7 63.7 0 0 1 72.6 160L17.2 64A128 128 0 0 0 128 256l55.4-96A64 64 0 0 1 96 183.4Z\"/><path fill=\"url(#b)\" d=\"M192 128a63.7 63.7 0 0 1-8.6 32L128 256A128 128 0 0 0 238.9 64h-111a64 64 0 0 1 64 64Z\"/><circle cx=\"128\" cy=\"128\" r=\"52\" fill=\"#1a73e8\"/><path fill=\"url(#c)\" d=\"M96 72.6a63.7 63.7 0 0 1 32-8.6h110.8a128 128 0 0 0-221.7 0l55.5 96A64 64 0 0 1 96 72.6Z\"/></svg>";
-
-
-var $f8789536b1ef08bc$exports = {};
-$f8789536b1ef08bc$exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"21\" height=\"21\" fill=\"none\"><defs><radialGradient id=\"e\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"rotate(-81.384 12.03 4.657) scale(11.4261 9.23112)\" gradientUnits=\"userSpaceOnUse\"><stop offset=\".8\" stop-opacity=\"0\"/><stop offset=\".9\" stop-opacity=\".5\"/><stop offset=\"1\"/></radialGradient><radialGradient id=\"f\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"rotate(92.291 -.78 2.876) scale(16.1416 34.3784)\" gradientUnits=\"userSpaceOnUse\"><stop stop-color=\"#35C1F1\"/><stop offset=\".1\" stop-color=\"#34C1ED\"/><stop offset=\".2\" stop-color=\"#2FC2DF\"/><stop offset=\".3\" stop-color=\"#2BC3D2\"/><stop offset=\".7\" stop-color=\"#36C752\"/></radialGradient><radialGradient id=\"g\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"matrix(2.171 7.44345 -6.05301 1.76546 19.13 6.16)\" gradientUnits=\"userSpaceOnUse\"><stop stop-color=\"#66EB6E\"/><stop offset=\"1\" stop-color=\"#66EB6E\" stop-opacity=\"0\"/></radialGradient><linearGradient id=\"q\" x1=\"4.678\" x2=\"18.894\" y1=\"14.105\" y2=\"14.105\" gradientUnits=\"userSpaceOnUse\"><stop offset=\"0\" stop-color=\"#0C59A4\"/><stop offset=\"1\" stop-color=\"#114A8B\"/></linearGradient><linearGradient id=\"d\" x1=\"12.168\" x2=\"3.299\" y1=\"7.937\" y2=\"17.603\" gradientUnits=\"userSpaceOnUse\"><stop stop-color=\"#1B9DE2\"/><stop offset=\".2\" stop-color=\"#1595DF\"/><stop offset=\".7\" stop-color=\"#0680D7\"/><stop offset=\"1\" stop-color=\"#0078D4\"/></linearGradient><clipPath id=\"a\"><path fill=\"#fff\" d=\"M0 0h20.4v20.4H0z\"/></clipPath></defs><g clip-path=\"url(#a)\"><path fill=\"url(#q)\" d=\"M18.416 15.18a7.485 7.485 0 0 1-.845.375 8.121 8.121 0 0 1-2.86.51c-3.77 0-7.053-2.59-7.053-5.92a2.51 2.51 0 0 1 1.307-2.176c-3.41.143-4.287 3.697-4.287 5.777 0 5.897 5.427 6.487 6.598 6.487.63 0 1.578-.184 2.152-.367l.103-.032a10.224 10.224 0 0 0 5.307-4.207.319.319 0 0 0-.422-.447Z\"/><path fill=\"url(#d)\" d=\"M8.423 19.229a6.31 6.31 0 0 1-1.809-1.698A6.43 6.43 0 0 1 8.965 7.97c.255-.12.677-.327 1.243-.319a2.582 2.582 0 0 1 2.048 1.036c.32.431.497.953.502 1.49 0-.016 1.953-6.343-6.375-6.343-3.498 0-6.375 3.315-6.375 6.232-.014 1.54.316 3.065.964 4.462a10.2 10.2 0 0 0 12.464 5.34 6.015 6.015 0 0 1-5.005-.638h-.008Z\"/><path fill=\"url(#e)\" d=\"M8.423 19.229a6.31 6.31 0 0 1-1.809-1.698A6.43 6.43 0 0 1 8.965 7.97c.255-.12.677-.327 1.243-.319a2.582 2.582 0 0 1 2.048 1.036c.32.431.497.953.502 1.49 0-.016 1.953-6.343-6.375-6.343-3.498 0-6.375 3.315-6.375 6.232-.014 1.54.316 3.065.964 4.462a10.2 10.2 0 0 0 12.464 5.34 6.015 6.015 0 0 1-5.005-.638h-.008Z\" opacity=\".41\"/><path fill=\"url(#f)\" d=\"M12.145 11.857c-.072.08-.271.2-.271.447 0 .207.135.414.382.582 1.14.796 3.3.685 3.307.685a4.75 4.75 0 0 0 2.415-.662A4.893 4.893 0 0 0 20.4 8.694c.024-1.785-.637-2.972-.9-3.498C17.802 1.896 14.16 0 10.2 0A10.2 10.2 0 0 0 0 10.057c.04-2.909 2.933-5.26 6.375-5.26.28 0 1.873.024 3.347.797a5.786 5.786 0 0 1 2.463 2.335c.486.845.573 1.92.573 2.35 0 .431-.215 1.06-.621 1.587l.008-.008Z\"/><path fill=\"url(#g)\" d=\"M12.145 11.857c-.072.08-.271.2-.271.447 0 .207.135.414.382.582 1.14.796 3.3.685 3.307.685a4.75 4.75 0 0 0 2.415-.662A4.893 4.893 0 0 0 20.4 8.694c.024-1.785-.637-2.972-.9-3.498C17.802 1.896 14.16 0 10.2 0A10.2 10.2 0 0 0 0 10.057c.04-2.909 2.933-5.26 6.375-5.26.28 0 1.873.024 3.347.797a5.786 5.786 0 0 1 2.463 2.335c.486.845.573 1.92.573 2.35 0 .431-.215 1.06-.621 1.587l.008-.008Z\"/></g></svg>";
-
-
-var $189dad310a745fa5$exports = {};
-$189dad310a745fa5$exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"21\" height=\"21\" fill=\"none\"><g clip-path=\"url(#M)\"><path d=\"M19.661 6.85c-.444-1.034-1.344-2.15-2.049-2.503.503.942.851 1.955 1.034 3l.002.017c-1.155-2.786-3.112-3.911-4.711-6.358l-.241-.379-.113-.204a1.76 1.76 0 0 1-.152-.392c-.011-.022-.017-.025-.023-.026-.021 0-.023.002-.024.003l-.003-.003C10.816 1.46 9.945 4.152 9.866 5.499c-1.025.068-2.004.434-2.811 1.049a3.05 3.05 0 0 0-.263-.193c-.233-.789-.243-1.623-.029-2.417-.942.442-1.779 1.068-2.458 1.84H4.3c-.405-.497-.376-2.135-.353-2.477-.12.047-.234.105-.341.175-.357.247-.691.524-.998.828-.35.343-.669.714-.955 1.109v.002-.002a8.22 8.22 0 0 0-1.37 2.995l-.014.065c-.019.087-.089.523-.1.617 0 .007-.002.014-.002.022A9.14 9.14 0 0 0 0 10.475v.051c.005 2.474.967 4.857 2.697 6.678s4.103 2.948 6.649 3.158a10.45 10.45 0 0 0 7.105-2.023c2.023-1.511 3.388-3.702 3.825-6.14l.046-.383c.21-1.683-.017-3.391-.662-4.967l.001.002zm-11.77 7.741l.141.067.007.004-.149-.072zm10.758-7.224v-.009l.002.01-.002-.001z\" fill=\"url(#A)\"/><use href=\"#N\" fill=\"url(#B)\"/><use href=\"#N\" fill=\"url(#C)\"/><path d=\"M14.697 8.011l.064.045c-.257-.44-.576-.844-.949-1.198C10.637 3.784 12.98.194 13.375.01l.004-.006c-2.565 1.454-3.436 4.146-3.515 5.493l.359-.018c.91.002 1.803.237 2.589.681a5.07 5.07 0 0 1 1.885 1.849v.001z\" fill=\"url(#D)\"/><use href=\"#O\" fill=\"url(#E)\"/><use href=\"#O\" fill=\"url(#F)\"/><path d=\"M6.576 6.22l.211.135c-.233-.789-.243-1.623-.029-2.417-.942.442-1.779 1.068-2.458 1.84.05-.001 1.531-.027 2.276.442z\" fill=\"url(#G)\"/><path d=\"M.093 10.761c.788 4.508 5.009 7.952 9.799 8.083 4.434.121 7.267-2.371 8.437-4.802.991-2.102 1.105-4.493.318-6.674v-.009l.002.007c.362 2.29-.841 4.508-2.722 6.011l-.006.013c-3.665 2.891-7.172 1.744-7.881 1.276l-.149-.072c-2.137-.989-3.02-2.873-2.83-4.49-.507.007-1.006-.128-1.435-.39s-.771-.638-.984-1.084c.561-.333 1.2-.521 1.858-.546a3.96 3.96 0 0 1 1.897.4 5.24 5.24 0 0 0 3.834.146c-.004-.08-1.781-.765-2.474-1.426-.37-.353-.546-.524-.702-.651-.084-.069-.172-.134-.263-.193l-.211-.135c-.745-.469-2.226-.443-2.275-.442h-.005c-.405-.497-.376-2.135-.353-2.477-.12.047-.234.105-.341.175-.357.247-.691.524-.998.828-.351.342-.672.712-.959 1.107A8.22 8.22 0 0 0 .28 8.409c-.005.02-.368 1.556-.189 2.353h.002z\" fill=\"url(#H)\"/><path d=\"M13.812 6.858c.373.355.692.758.948 1.199l.153.121c2.315 2.067 1.102 4.988 1.012 5.195 1.881-1.5 3.083-3.72 2.722-6.011-1.155-2.789-3.114-3.914-4.711-6.361l-.241-.379-.113-.204a1.76 1.76 0 0 1-.152-.392c-.011-.022-.017-.025-.023-.026-.021 0-.023.002-.024.003-.402.185-2.745 3.777.43 6.849l-.001.004z\" fill=\"url(#I)\"/><path d=\"M14.913 8.179c-.045-.04-.097-.08-.153-.121l-.063-.045c-.718-.482-1.596-.688-2.462-.579 3.673 1.778 2.688 7.902-2.403 7.672-.453-.018-.901-.102-1.329-.248l-.3-.119-.172-.08.007.004c.71.469 4.216 1.616 7.881-1.276l.006-.013c.091-.207 1.305-3.128-1.012-5.195l.001-.001z\" fill=\"url(#J)\"/><path d=\"M5.625 11.419S6.096 9.718 9 9.718c.314 0 1.212-.848 1.228-1.094a5.24 5.24 0 0 1-3.834-.146 3.96 3.96 0 0 0-1.897-.4c-.657.026-1.297.214-1.858.546.213.446.555.822.984 1.084s.928.397 1.435.39c-.189 1.617.694 3.5 2.83 4.49l.141.067c-1.247-.624-2.277-1.804-2.405-3.235v-.001z\" fill=\"url(#K)\"/><path d=\"M19.661 6.845c-.444-1.034-1.344-2.15-2.049-2.503a10.05 10.05 0 0 1 1.034 3l.002.017c-1.155-2.786-3.112-3.911-4.711-6.358l-.241-.379-.112-.204c-.066-.124-.117-.256-.152-.392-.011-.022-.017-.025-.023-.026-.02 0-.023.002-.024.003l-.003-.003c-2.565 1.454-3.436 4.146-3.515 5.493l.359-.018c.91.002 1.803.237 2.589.681a5.07 5.07 0 0 1 1.885 1.849c-.718-.482-1.596-.688-2.462-.579 3.673 1.778 2.688 7.902-2.403 7.672-.453-.018-.901-.102-1.329-.248l-.3-.119-.172-.08.007.004-.149-.072.141.067c-1.247-.624-2.277-1.804-2.405-3.235 0 0 .471-1.701 3.375-1.701.314 0 1.212-.848 1.228-1.094-.004-.08-1.781-.765-2.474-1.426l-.702-.651a3.05 3.05 0 0 0-.263-.193c-.233-.789-.243-1.623-.029-2.417-.942.442-1.779 1.068-2.458 1.84H4.3c-.405-.497-.376-2.135-.353-2.477-.12.047-.234.105-.341.175-.357.247-.691.524-.998.828-.35.343-.669.714-.955 1.109a8.22 8.22 0 0 0-1.37 2.995l-.014.065-.118.624A11.15 11.15 0 0 0 0 10.473v.051c.005 2.474.967 4.857 2.697 6.678S6.8 20.15 9.347 20.36a10.45 10.45 0 0 0 7.105-2.023c2.023-1.511 3.388-3.702 3.825-6.14l.046-.383c.21-1.683-.017-3.391-.662-4.967l-.001-.001z\" fill=\"url(#L)\"/></g><defs><linearGradient id=\"A\" x1=\"18.309\" y1=\"3.165\" x2=\"1.883\" y2=\"19.533\"><stop offset=\".048\" stop-color=\"#fff44f\"/><stop offset=\".111\" stop-color=\"#ffe847\"/><stop offset=\".225\" stop-color=\"#ffc830\"/><stop offset=\".368\" stop-color=\"#ff980e\"/><stop offset=\".401\" stop-color=\"#ff8b16\"/><stop offset=\".462\" stop-color=\"#ff672a\"/><stop offset=\".534\" stop-color=\"#ff3647\"/><stop offset=\".705\" stop-color=\"#e31587\"/></linearGradient><radialGradient id=\"B\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"translate(17.6533 2.30078) scale(21.2899 20.6149)\"><stop offset=\".129\" stop-color=\"#ffbd4f\"/><stop offset=\".186\" stop-color=\"#ffac31\"/><stop offset=\".247\" stop-color=\"#ff9d17\"/><stop offset=\".283\" stop-color=\"#ff980e\"/><stop offset=\".403\" stop-color=\"#ff563b\"/><stop offset=\".467\" stop-color=\"#ff3750\"/><stop offset=\".71\" stop-color=\"#f5156c\"/><stop offset=\".782\" stop-color=\"#eb0878\"/><stop offset=\".86\" stop-color=\"#e50080\"/></radialGradient><radialGradient id=\"C\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"matrix(21.2899,0,0,20.6149,9.74862,10.7203)\"><stop offset=\".3\" stop-color=\"#960e18\"/><stop offset=\".351\" stop-color=\"#b11927\" stop-opacity=\".74\"/><stop offset=\".435\" stop-color=\"#db293d\" stop-opacity=\".343\"/><stop offset=\".497\" stop-color=\"#f5334b\" stop-opacity=\".094\"/><stop offset=\".53\" stop-color=\"#ff3750\" stop-opacity=\"0\"/></radialGradient><radialGradient id=\"D\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"translate(12.3835 -2.29164) scale(15.422 14.9331)\"><stop offset=\".132\" stop-color=\"#fff44f\"/><stop offset=\".252\" stop-color=\"#ffdc3e\"/><stop offset=\".506\" stop-color=\"#ff9d12\"/><stop offset=\".526\" stop-color=\"#ff980e\"/></radialGradient><radialGradient id=\"E\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"translate(7.37722 16.0781) scale(10.1364 9.81506)\"><stop offset=\".353\" stop-color=\"#3a8ee6\"/><stop offset=\".472\" stop-color=\"#5c79f0\"/><stop offset=\".669\" stop-color=\"#9059ff\"/><stop offset=\"1\" stop-color=\"#c139e6\"/></radialGradient><radialGradient id=\"F\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"matrix(5.22,-1.22,1.39,5.94,10.78,8.95)\"><stop offset=\".206\" stop-color=\"#9059ff\" stop-opacity=\"0\"/><stop offset=\".278\" stop-color=\"#8c4ff3\" stop-opacity=\".064\"/><stop offset=\".747\" stop-color=\"#7716a8\" stop-opacity=\".45\"/><stop offset=\".975\" stop-color=\"#6e008b\" stop-opacity=\".6\"/></radialGradient><radialGradient id=\"G\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"translate(9.485 1.535) scale(7.293 7.062)\"><stop stop-color=\"#ffe226\"/><stop offset=\".121\" stop-color=\"#ffdb27\"/><stop offset=\".295\" stop-color=\"#ffc82a\"/><stop offset=\".502\" stop-color=\"#ffa930\"/><stop offset=\".732\" stop-color=\"#ff7e37\"/><stop offset=\".792\" stop-color=\"#ff7139\"/></radialGradient><radialGradient id=\"H\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"translate(15.282 -3.057) scale(31.118 30.132)\"><stop offset=\".113\" stop-color=\"#fff44f\"/><stop offset=\".456\" stop-color=\"#ff980e\"/><stop offset=\".622\" stop-color=\"#ff5634\"/><stop offset=\".716\" stop-color=\"#ff3647\"/><stop offset=\".904\" stop-color=\"#e31587\"/></radialGradient><radialGradient id=\"I\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"translate(12.695 -1.386) rotate(83.78) scale(22.089 14.96)\"><stop stop-color=\"#fff44f\"/><stop offset=\".06\" stop-color=\"#ffe847\"/><stop offset=\".168\" stop-color=\"#ffc830\"/><stop offset=\".304\" stop-color=\"#ff980e\"/><stop offset=\".356\" stop-color=\"#ff8b16\"/><stop offset=\".455\" stop-color=\"#ff672a\"/><stop offset=\".57\" stop-color=\"#ff3647\"/><stop offset=\".737\" stop-color=\"#e31587\"/></radialGradient><radialGradient id=\"J\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"translate(9.485 4.087) scale(19.424 18.809)\"><stop offset=\".137\" stop-color=\"#fff44f\"/><stop offset=\".48\" stop-color=\"#ff980e\"/><stop offset=\".592\" stop-color=\"#ff5634\"/><stop offset=\".655\" stop-color=\"#ff3647\"/><stop offset=\".904\" stop-color=\"#e31587\"/></radialGradient><radialGradient id=\"K\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"translate(14.491 5.107) scale(21.261 20.587)\"><stop offset=\".094\" stop-color=\"#fff44f\"/><stop offset=\".231\" stop-color=\"#ffe141\"/><stop offset=\".509\" stop-color=\"#ffaf1e\"/><stop offset=\".626\" stop-color=\"#ff980e\"/></radialGradient><linearGradient id=\"L\" x1=\"18.103\" y1=\"3.076\" x2=\"4.144\" y2=\"17.494\"><stop offset=\".167\" stop-color=\"#fff44f\" stop-opacity=\".8\"/><stop offset=\".266\" stop-color=\"#fff44f\" stop-opacity=\".634\"/><stop offset=\".489\" stop-color=\"#fff44f\" stop-opacity=\".217\"/><stop offset=\".6\" stop-color=\"#fff44f\" stop-opacity=\"0\"/></linearGradient><clipPath id=\"M\"><path fill=\"#fff\" d=\"M0 0h20.4v20.4H0z\"/></clipPath><path id=\"N\" d=\"M19.661 6.85c-.444-1.034-1.344-2.15-2.049-2.503.503.942.851 1.955 1.034 3v.009l.002.01c.787 2.181.673 4.573-.318 6.674-1.17 2.432-4.002 4.924-8.437 4.802-4.79-.131-9.011-3.574-9.799-8.083-.144-.711 0-1.072.072-1.649-.098.449-.153.906-.164 1.364v.051c.005 2.474.967 4.857 2.697 6.678s4.103 2.948 6.649 3.158a10.45 10.45 0 0 0 7.105-2.023c2.023-1.511 3.388-3.702 3.825-6.14l.046-.383c.21-1.684-.017-3.391-.663-4.968l-.001.001z\"/><path id=\"O\" d=\"M10.228 8.626C10.211 8.872 9.314 9.72 9 9.72c-2.904 0-3.375 1.701-3.375 1.701.129 1.432 1.159 2.613 2.405 3.235l.172.08.3.119c.428.146.876.23 1.329.248 5.091.231 6.076-5.894 2.403-7.672.867-.109 1.744.097 2.462.579-.449-.767-1.099-1.405-1.885-1.849s-1.679-.679-2.589-.681l-.359.018c-1.025.068-2.004.434-2.811 1.049.156.128.331.298.702.651.693.661 2.47 1.346 2.474 1.426v.002z\"/></defs></svg>";
-
-
-var $70b36b72a47c94c9$exports = {};
-$70b36b72a47c94c9$exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"21\" height=\"21\" viewBox=\"0 0 21 21\" fill=\"none\"><g clip-path=\"url(#clip0)\"><path opacity=\".53\" d=\"M19.505 10.524a9.3 9.3 0 0 1-2.725 6.37 9.21 9.21 0 0 1-6.579 2.639 9.21 9.21 0 0 1-6.579-2.639 9.3 9.3 0 0 1-2.725-6.37c0-5.39 4.383-9.76 9.304-9.76 5.02 0 9.304 4.37 9.304 9.76Z\" fill=\"#000\"/><path d=\"M19.859 9.729c0 1.275-.25 2.538-.736 3.716a9.576 9.576 0 0 1-2.093 3.151 9.317 9.317 0 0 1-6.83 2.745c-2.562 0-5.018-1.023-6.829-2.844C1.56 14.675.542 12.205.542 9.63S1.56 4.585 3.371 2.764C5.182.943 7.639-.08 10.2-.08c1.269 0 2.524.25 3.696.738 1.171.487 2.236 1.203 3.132 2.104.897.902 1.608 1.973 2.093 3.151.486 1.178.736 2.441.736 3.716Z\" fill=\"url(#paint0)\" stroke=\"#CDCDCD\" stroke-width=\".352\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M19.102 9.729c0 2.374-.938 4.65-2.607 6.329-1.67 1.678-3.934 2.621-6.295 2.621-2.36 0-4.624-.943-6.293-2.621C2.238 14.38 1.3 12.103 1.3 9.73c0-2.374.938-4.651 2.607-6.33 1.669-1.678 3.933-2.62 6.294-2.62 2.361 0 4.625.942 6.294 2.62 1.67 1.679 2.607 3.956 2.607 6.33Z\" fill=\"url(#paint1)\"/><g opacity=\".409\" filter=\"url(#f0)\"><path d=\"m16.283 4.509-7.1 4.148-4.489 7.106 6.568-4.891 5.022-6.363Z\" fill=\"#000\"/></g><path d=\"M11.218 10.8 9.183 8.657 16.402 3.774 11.218 10.8Z\" fill=\"#FF5150\"/><path d=\"m11.218 10.8-2.035-2.143-5.184 7.026 7.219-4.883Z\" fill=\"#F1F1F1\"/><path opacity=\".243\" d=\"M4 15.684 11.218 10.8l5.184-7.026L4 15.684Z\" fill=\"#000\"/></g><defs><filter id=\"f0\" x=\"2.149\" y=\"1.964\" width=\"16.679\" height=\"16.344\" filterUnits=\"userSpaceOnUse\" color-interpolation-filters=\"sRGB\"><feFlood flood-opacity=\"0\"/><feBlend in=\"SourceGraphic\"/><feGaussianBlur stdDeviation=\"1.272\"/></filter><linearGradient id=\"paint0\" x1=\"10.2\" y1=\"19.44\" x2=\"10.2\" y2=\".018\" gradientUnits=\"userSpaceOnUse\"><stop stop-color=\"#BDBDBD\"/><stop offset=\"1\" stop-color=\"#fff\"/></linearGradient><radialGradient id=\"paint1\" cx=\"0\" cy=\"0\" r=\"1\" gradientUnits=\"userSpaceOnUse\" gradientTransform=\"translate(10.241 8.424) scale(9.658 9.711)\"><stop stop-color=\"#06C2E7\"/><stop offset=\".25\" stop-color=\"#0DB8EC\"/><stop offset=\".5\" stop-color=\"#12AEF1\"/><stop offset=\".75\" stop-color=\"#1F86F9\"/><stop offset=\"1\" stop-color=\"#107DDD\"/></radialGradient><clipPath id=\"clip0\"><rect width=\"20.4\" height=\"20.4\" fill=\"#fff\"/></clipPath></defs></svg>";
-
-
-var $a72b14208ede2b08$exports = {};
-$a72b14208ede2b08$exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"36\" height=\"20\" viewBox=\"0 0 540 300\" aria-hidden=\"true\">\n  <path d=\"M150 0L240 90L210 120L120 30L150 0Z\" fill=\"var(--baseline-icon-limited-front, #F09409)\"/>\n  <path d=\"M420 30L540 150L420 270L390 240L480 150L390 60L420 30Z\" fill=\"var(--baseline-icon-limited-back, #C6C6C6)\"/>\n  <path d=\"M330 180L300 210L390 300L420 270L330 180Z\" fill=\"var(--baseline-icon-limited-front, #F09409)\"/>\n  <path d=\"M120 30L150 60L60 150L150 240L120 270L0 150L120 30Z\" fill=\"var(--baseline-icon-limited-back, #C6C6C6)\"/>\n  <path d=\"M390 0L420 30L150 300L120 270L390 0Z\" fill=\"var(--baseline-icon-limited-front, #F09409)\"/>\n</svg>";
-
-
-var $b55023305910935b$exports = {};
-$b55023305910935b$exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"36\" height=\"20\" viewBox=\"0 0 540 300\" aria-hidden=\"true\">\n  <path d=\"M150 0L180 30L150 60L120 30L150 0Z\" fill=\"var(--baseline-icon-newly-back, #A8C7FA)\"/>\n  <path d=\"M210 60L240 90L210 120L180 90L210 60Z\" fill=\"var(--baseline-icon-newly-back, #A8C7FA)\"/>\n  <path d=\"M450 60L480 90L450 120L420 90L450 60Z\" fill=\"var(--baseline-icon-newly-back, #A8C7FA)\"/>\n  <path d=\"M510 120L540 150L510 180L480 150L510 120Z\" fill=\"var(--baseline-icon-newly-back, #A8C7FA)\"/>\n  <path d=\"M450 180L480 210L450 240L420 210L450 180Z\" fill=\"var(--baseline-icon-newly-back, #A8C7FA)\"/>\n  <path d=\"M390 240L420 270L390 300L360 270L390 240Z\" fill=\"var(--baseline-icon-newly-back, #A8C7FA)\"/>\n  <path d=\"M330 180L360 210L330 240L300 210L330 180Z\" fill=\"var(--baseline-icon-newly-back, #A8C7FA)\"/>\n  <path d=\"M90 60L120 90L90 120L60 90L90 60Z\" fill=\"var(--baseline-icon-newly-back, #A8C7FA)\"/>\n  <path d=\"M390 0L420 30L150 300L0 150L30 120L150 240L390 0Z\" fill=\"var(--baseline-icon-newly-front, #1B6EF3)\"/>\n</svg>";
-
-
-var $a6f9ea9fb807a8bd$exports = {};
-$a6f9ea9fb807a8bd$exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"36\" height=\"20\" viewBox=\"0 0 540 300\" aria-hidden=\"true\">\n  <path d=\"M420 30L390 60L480 150L390 240L330 180L300 210L390 300L540 150L420 30Z\" fill=\"var(--baseline-icon-widely-back, #C4EED0)\"/>\n  <path d=\"M150 0L30 120L60 150L150 60L210 120L240 90L150 0Z\" fill=\"var(--baseline-icon-widely-back, #C4EED0)\"/>\n  <path d=\"M390 0L420 30L150 300L0 150L30 120L150 240L390 0Z\" fill=\"var(--baseline-icon-widely-front, #1EA446)\"/>\n</svg>";
-
-
-var $45b9c36d578c2dbf$exports = {};
-$45b9c36d578c2dbf$exports = "<svg viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" aria-hidden=\"true\">\n  <rect x=\"3\" y=\"3\" width=\"14\" height=\"14\" transform=\"rotate(45 10 10)\" fill=\"var(--baseline-icon-no_data, #909090)\"/>\n</svg>";
-
-
-var $f73e0fe28919578c$exports = {};
-$f73e0fe28919578c$exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"11\" height=\"7\" viewBox=\"0 0 11 7\" fill=\"none\"><path d=\"M5.5 6.454 0.25 1.204 1.191.263 5.5 4.594 9.809.285 10.75 1.225 5.5 6.454Z\" fill=\"currentColor\"/></svg>";
-
-
-var $da75677e44dcabff$exports = {};
-$da75677e44dcabff$exports = "<html><head></head><body><details open=\"\" data-baseline=\"loading\">\n  <summary aria-label=\"Baseline: Loading\">\n    <div class=\"summary-top\">\n      <span class=\"name\">{{featureName}}</span>\n    </div>\n    <div class=\"summary-bottom\">\n      {{baselineGlyph}}\n      <div class=\"baseline-status-title\" aria-hidden=\"true\">\n        <div><strong>Baseline</strong> Loading</div>\n        <div class=\"baseline-status-browsers\">\n          <span>{{chromeIcon}} {{noDataIcon}}</span>\n          <span>{{edgeIcon}} {{noDataIcon}}</span>\n          <span>{{firefoxIcon}} {{noDataIcon}}</span>\n          <span>{{safariIcon}} {{noDataIcon}}</span>\n        </div>\n      </div>\n      <span class=\"open-icon\" aria-hidden=\"true\"> {{chevronIcon}} </span>\n    </div>\n  </summary>\n  <p>Loading Baseline data...</p>\n</details>\n</body></html>";
-
-
-var $7abd602fd8456a34$exports = {};
-$7abd602fd8456a34$exports = "<html><head></head><body><details data-baseline=\"{{baseline}}\">\n  <summary aria-label=\"{{aria}}\">\n    <div class=\"summary-top\">\n      <p class=\"name\">{{name}}</p>\n      <p class=\"since\">{{since}}</p>\n    </div>\n    <div class=\"summary-bottom\">\n      <div class=\"baseline-status-title\" aria-hidden=\"true\">\n        <div>{{baselineGlyph}} {{title}}</div>\n        <div class=\"baseline-status-browsers\">\n          <span>{{chromeIcon}} {{chromeSupport}}</span>\n          <span>{{edgeIcon}} {{edgeSupport}}</span>\n          <span>{{firefoxIcon}} {{firefoxSupport}}</span>\n          <span>{{safariIcon}} {{safariSupport}}</span>\n        </div>\n        <span class=\"open-icon\" aria-hidden=\"true\">{{chevronIcon}}</span>\n      </div>\n    </div>\n  </summary>\n  <p>{{description}} {{learnMore}}</p>\n</details>\n</body></html>";
-
-
-// API endpoints and providers
-const $76f995269b4a6e61$export$dc587512b86f5854 = "auto"; // auto: try webstatus then mdn (if configured)
-const $76f995269b4a6e61$export$f7ad78096900f254 = "https://api.webstatus.dev/v1/features/";
-// MDN Browser Compat Data via CDN: expects a file path like "data/javascript/classes.json"
-const $76f995269b4a6e61$export$bf135c1d93039a27 = "https://cdn.jsdelivr.net/npm/mdn-browser-compat-data@latest/";
-// Baseline text definitions
-const $76f995269b4a6e61$export$ed21503f5862529d = {
-    limited: {
-        title: "Limited availability",
-        defaultDescription: "This feature is not Baseline because it does not work in some of the most widely used browsers."
-    },
-    newly: {
-        title: "Newly available",
-        defaultDescription: "This feature works across the latest devices and browser versions. This feature might not work in older devices or browsers."
-    },
-    widely: {
-        title: "Widely available",
-        defaultDescription: "This feature is well established and works across many devices and browser versions."
-    },
-    loading: {
-        title: "Loading",
-        defaultDescription: ""
-    },
-    no_data: {
-        title: "Unknown availability",
-        defaultDescription: "We currently do not have browser support information about this feature."
-    }
-};
-// Mappings used by the component
-const $76f995269b4a6e61$export$d5554999f5e3f464 = {
-    available: (0, (/*@__PURE__*/$parcel$interopDefault($af5db4894f7150e1$exports))),
-    unavailable: (0, (/*@__PURE__*/$parcel$interopDefault($610208fbcf03ba10$exports))),
-    no_data: (0, (/*@__PURE__*/$parcel$interopDefault($f3df254ae99c899e$exports)))
-};
-const $76f995269b4a6e61$export$267b91ff97e1f3d5 = {
-    chrome: (0, (/*@__PURE__*/$parcel$interopDefault($5c41cb256e956c2e$exports))),
-    edge: (0, (/*@__PURE__*/$parcel$interopDefault($f8789536b1ef08bc$exports))),
-    firefox: (0, (/*@__PURE__*/$parcel$interopDefault($189dad310a745fa5$exports))),
-    safari: (0, (/*@__PURE__*/$parcel$interopDefault($70b36b72a47c94c9$exports)))
-};
-
-
-
-function $ff64a7fee6f978dd$export$c02167e0cada2101(feature) {
-    const d = feature?.baseline?.low_date;
-    if (!d) return "";
-    try {
-        return new Intl.DateTimeFormat("en-US", {
-            year: "numeric",
-            month: "long"
-        }).format(new Date(d));
-    } catch  {
-        return "";
-    }
-}
-function $ff64a7fee6f978dd$export$1372a3bc9ee77f03(baseline, date) {
-    if (baseline === "newly" && date) return `Since ${date} this feature works across the latest devices and browser versions. This feature might not work in older devices or browsers.`;
-    if (baseline === "widely" && date) return `This feature is well established and works across many devices and browser versions. It has been available across browsers since ${date}.`;
-    return (0, $76f995269b4a6e61$export$ed21503f5862529d)[baseline]?.defaultDescription || (0, $76f995269b4a6e61$export$ed21503f5862529d).no_data.defaultDescription;
-}
-function $ff64a7fee6f978dd$export$7114fc426f7ae1f4(baseline, browserImplementation) {
-    const support = baseline === "limited" ? browserImplementation?.status || "unavailable" : baseline;
-    const iconKey = support === "newly" || support === "widely" ? "available" : support;
-    const cls = `support-${support}`;
-    const svg = (0, $76f995269b4a6e61$export$d5554999f5e3f464)[iconKey] || (0, $76f995269b4a6e61$export$d5554999f5e3f464).no_data;
-    return `<span class="${cls}" aria-hidden="true">${svg}</span>`;
-}
-function $ff64a7fee6f978dd$export$5a7282a6210fbf36(support) {
-    if (support === "limited") return 0, (/*@__PURE__*/$parcel$interopDefault($a72b14208ede2b08$exports));
-    if (support === "newly") return 0, (/*@__PURE__*/$parcel$interopDefault($b55023305910935b$exports));
-    if (support === "widely") return 0, (/*@__PURE__*/$parcel$interopDefault($a6f9ea9fb807a8bd$exports));
-    return 0, (/*@__PURE__*/$parcel$interopDefault($45b9c36d578c2dbf$exports));
-}
-function $ff64a7fee6f978dd$export$b5c363744c17aeab(tpl, map) {
-    return tpl.replace(/\{\{(.*?)\}\}/g, (_, k)=>map[k.trim()] ?? "");
-}
-function $ff64a7fee6f978dd$export$8d8ca2b50254803f(cssText) {
-    const STYLE_ID = "baseline-status-component-styles";
-    if (document.getElementById(STYLE_ID)) return;
-    const style = document.createElement("style");
-    style.id = STYLE_ID;
-    style.textContent = cssText;
-    document.head.appendChild(style);
-}
-// Return a robust pair { label: 'Month Year', year: 'YYYY' } from feature.baseline.low_date
-function $ff64a7fee6f978dd$export$7f6ef799fcf80ad8(feature) {
-    const raw = feature?.baseline?.low_date;
-    if (!raw) return {
-        label: "",
-        year: ""
-    };
-    let dateObj = null;
-    // string like '2024-08-21' or '2024'
-    if (typeof raw === "string") {
-        const parsed = Date.parse(raw);
-        if (!Number.isNaN(parsed)) dateObj = new Date(parsed);
-        else if (/^\d{4}$/.test(raw)) dateObj = new Date(Number(raw), 0, 1);
-    }
-    // number epoch (seconds or ms)
-    if (typeof raw === "number") dateObj = new Date(raw < 1e12 ? raw * 1000 : raw);
-    // object with fields {year, month}
-    if (!dateObj && typeof raw === "object") {
-        const y = Number(raw.year);
-        const m = raw.month != null ? Number(raw.month) - 1 : 0; // 1-based to 0-based
-        if (!Number.isNaN(y)) dateObj = new Date(y, !Number.isNaN(m) ? m : 0, 1);
-    }
-    if (!dateObj || Number.isNaN(dateObj.getTime())) return {
-        label: "",
-        year: ""
-    };
-    try {
-        const label = new Intl.DateTimeFormat("en-US", {
-            month: "long",
-            year: "numeric"
-        }).format(dateObj);
-        const year = String(dateObj.getFullYear());
-        return {
-            label: label,
-            year: year
-        };
-    } catch  {
-        return {
-            label: "",
-            year: ""
-        };
-    }
-}
-// Return the most recent date across all browser implementations: { label, year }
-function $ff64a7fee6f978dd$export$5cea789dcbc3fed1(feature) {
-    const impl = feature?.browser_implementations;
-    if (!impl || typeof impl !== "object") return {
-        label: "",
-        year: ""
-    };
-    const parseDate = (raw)=>{
-        if (!raw) return null;
-        let d = null;
-        if (typeof raw === "string") {
-            const parsed = Date.parse(raw);
-            if (!Number.isNaN(parsed)) d = new Date(parsed);
-            else if (/^\d{4}$/.test(raw)) d = new Date(Number(raw), 0, 1);
-        } else if (typeof raw === "number") d = new Date(raw < 1e12 ? raw * 1000 : raw);
-        else if (typeof raw === "object") {
-            const y = Number(raw.year);
-            const m = raw.month != null ? Number(raw.month) - 1 : 0;
-            if (!Number.isNaN(y)) d = new Date(y, !Number.isNaN(m) ? m : 0, 1);
-        }
-        return d && !Number.isNaN(d.getTime()) ? d : null;
-    };
-    let latest = null;
-    for (const key of Object.keys(impl)){
-        const date = parseDate(impl[key]?.date);
-        if (date && (!latest || date > latest)) latest = date;
-    }
-    if (!latest) return {
-        label: "",
-        year: ""
-    };
-    try {
-        const label = new Intl.DateTimeFormat("en-US", {
-            month: "long",
-            year: "numeric"
-        }).format(latest);
-        const year = String(latest.getFullYear());
-        return {
-            label: label,
-            year: year
-        };
-    } catch  {
-        return {
-            label: "",
-            year: ""
-        };
-    }
-}
-// Escape utilities to protect HTML/attribute contexts when injecting dynamic text
-function $ff64a7fee6f978dd$export$5dd27816c66fb702(value) {
-    return String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
-}
-function $ff64a7fee6f978dd$export$a9838b2e53d1d807(value) {
-    // For simplicity use same escaping as HTML text since we place values inside double quotes
-    return $ff64a7fee6f978dd$export$5dd27816c66fb702(value);
-}
-// Convert an inline SVG markup string into a data URI string.
-// This isolates <defs> ids and avoids cross-instance collisions in the DOM.
-function $ff64a7fee6f978dd$export$a091f7483650fe17(svg) {
-    if (!svg) return "";
-    // Ensure XML is compact for URI length and avoid stray whitespace
-    const cleaned = String(svg).replace(/\n+/g, "").replace(/>\s+</g, "><").trim();
-    const encoded = encodeURIComponent(cleaned)// EncodeURIComponent already encodes most characters; keep SVG friendly
-    .replace(/%20/g, " ");
-    return `data:image/svg+xml;utf8,${encoded}`;
-}
-// Build an <img> tag string for a given inline SVG string.
-// width/height are optional; if missing, try to infer from the svg tag or default to 21.
-function $ff64a7fee6f978dd$export$5b079801cdadb41f(svg, { width: width, height: height, className: className = "browser-icon" } = {}) {
-    if (!svg) return "";
-    let w = width;
-    let h = height;
-    if (w == null || h == null) {
-        const m = String(svg).match(/<svg[^>]*\bwidth=["']?(\d+)["']?[^>]*\bheight=["']?(\d+)["']?[^>]*>/i);
-        if (m) {
-            w = w ?? Number(m[1]);
-            h = h ?? Number(m[2]);
-        }
-    }
-    w = w ?? 21;
-    h = h ?? 21;
-    const src = $ff64a7fee6f978dd$export$a091f7483650fe17(svg);
-    return `<img class="${$ff64a7fee6f978dd$export$a9838b2e53d1d807(className)}" alt="" aria-hidden="true" role="presentation" src="${$ff64a7fee6f978dd$export$a9838b2e53d1d807(src)}" width="${$ff64a7fee6f978dd$export$a9838b2e53d1d807(String(w))}" height="${$ff64a7fee6f978dd$export$a9838b2e53d1d807(String(h))}" />`;
-}
-
-
-class $7a4e9a947a998bf3$export$26cf4b949b341e59 extends HTMLElement {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+// inject component styles once
+parcelHelpers.export(exports, "BaselineStatus", ()=>BaselineStatus);
+var _baselineStatusCss = require("bundle-text:./baseline-status.css");
+var _baselineStatusCssDefault = parcelHelpers.interopDefault(_baselineStatusCss);
+var _baselineStatusConstantsJs = require("./baseline-status.constants.js");
+var _baselineStatusUtilsJs = require("./baseline-status.utils.js");
+class BaselineStatus extends HTMLElement {
     static get observedAttributes() {
         return [
             "feature-id",
@@ -59333,7 +59857,7 @@ class $7a4e9a947a998bf3$export$26cf4b949b341e59 extends HTMLElement {
         this._ctrl = null;
         this._data = null;
         this._loading = false;
-        (0, $ff64a7fee6f978dd$export$8d8ca2b50254803f)((0, (/*@__PURE__*/$parcel$interopDefault($42550a20f74bb02b$exports))));
+        (0, _baselineStatusUtilsJs.ensureStyles)((0, _baselineStatusCssDefault.default));
     }
     connectedCallback() {
         this._renderLoading();
@@ -59353,7 +59877,7 @@ class $7a4e9a947a998bf3$export$26cf4b949b341e59 extends HTMLElement {
         return this.getAttribute("feature-id") || this.getAttribute("featureId") || "";
     }
     get provider() {
-        return this.getAttribute("provider") || (0, $76f995269b4a6e61$export$dc587512b86f5854);
+        return this.getAttribute("provider") || (0, _baselineStatusConstantsJs.API_PROVIDER_DEFAULT);
     }
     set provider(v) {
         if (v == null) this.removeAttribute("provider");
@@ -59371,48 +59895,48 @@ class $7a4e9a947a998bf3$export$26cf4b949b341e59 extends HTMLElement {
         else this.setAttribute("feature-id", String(v));
     }
     _renderLoading() {
-        const html = (0, $ff64a7fee6f978dd$export$b5c363744c17aeab)((0, (/*@__PURE__*/$parcel$interopDefault($da75677e44dcabff$exports))), {
-            featureName: (0, $ff64a7fee6f978dd$export$5dd27816c66fb702)(this.featureId || "Loading feature..."),
-            baselineGlyph: (0, $ff64a7fee6f978dd$export$5a7282a6210fbf36)("no_data"),
+        const html = (0, _baselineStatusUtilsJs.renderTemplate)((0, _baselineStatusConstantsJs.TPL_LOADING), {
+            featureName: (0, _baselineStatusUtilsJs.escapeHTML)(this.featureId || "Loading feature..."),
+            baselineGlyph: (0, _baselineStatusUtilsJs.renderBaselineGlyph)("no_data"),
             chromeIcon: this._browserImg("chrome"),
             edgeIcon: this._browserImg("edge"),
             firefoxIcon: this._browserImg("firefox"),
             safariIcon: this._browserImg("safari"),
-            noDataIcon: (0, $76f995269b4a6e61$export$d5554999f5e3f464).no_data,
-            chevronIcon: (0, (/*@__PURE__*/$parcel$interopDefault($f73e0fe28919578c$exports)))
+            noDataIcon: (0, _baselineStatusConstantsJs.SUPPORT_ICONS).no_data,
+            chevronIcon: (0, _baselineStatusConstantsJs.ICON_CHEVRON)
         });
         this.innerHTML = html;
     }
     _render(feature) {
         const baseline = feature?.baseline?.status || "no_data";
-        const title = (0, $76f995269b4a6e61$export$ed21503f5862529d)[baseline]?.title || (0, $76f995269b4a6e61$export$ed21503f5862529d).no_data.title;
-        const { label: baselineDateLabel, year: year } = (0, $ff64a7fee6f978dd$export$7f6ef799fcf80ad8)(feature);
-        const { label: latestImplLabel } = (0, $ff64a7fee6f978dd$export$5cea789dcbc3fed1)(feature);
+        const title = (0, _baselineStatusConstantsJs.BASELINE_DEFS)[baseline]?.title || (0, _baselineStatusConstantsJs.BASELINE_DEFS).no_data.title;
+        const { label: baselineDateLabel, year } = (0, _baselineStatusUtilsJs.getBaselineDateParts)(feature);
+        const { label: latestImplLabel } = (0, _baselineStatusUtilsJs.getLatestImplementationDateParts)(feature);
         const badge = baseline === "newly" ? '<span class="baseline-badge">newly available</span>' : "";
-        const description = (0, $ff64a7fee6f978dd$export$1372a3bc9ee77f03)(baseline, baselineDateLabel);
+        const description = (0, _baselineStatusUtilsJs.descriptionFor)(baseline, baselineDateLabel);
         const impl = feature?.browser_implementations || {};
         const aria = this._buildAriaLabel(title, year, !!badge, impl);
         const since = latestImplLabel ? `(since ${latestImplLabel})` : "";
-        const html = (0, $ff64a7fee6f978dd$export$b5c363744c17aeab)((0, (/*@__PURE__*/$parcel$interopDefault($7abd602fd8456a34$exports))), {
-            name: (0, $ff64a7fee6f978dd$export$5dd27816c66fb702)(feature?.name || this.featureId || "Unknown feature"),
-            aria: (0, $ff64a7fee6f978dd$export$a9838b2e53d1d807)(aria),
-            baseline: baseline,
-            since: since,
-            baselineGlyph: (0, $ff64a7fee6f978dd$export$5a7282a6210fbf36)(baseline),
+        const html = (0, _baselineStatusUtilsJs.renderTemplate)((0, _baselineStatusConstantsJs.TPL_MAIN), {
+            name: (0, _baselineStatusUtilsJs.escapeHTML)(feature?.name || this.featureId || "Unknown feature"),
+            aria: (0, _baselineStatusUtilsJs.escapeAttr)(aria),
+            baseline,
+            since,
+            baselineGlyph: (0, _baselineStatusUtilsJs.renderBaselineGlyph)(baseline),
             baselineLabel: "<strong>Baseline</strong>",
-            title: title,
-            year: year,
-            badge: badge,
+            title,
+            year,
+            badge,
             chromeIcon: this._browserImg("chrome"),
             edgeIcon: this._browserImg("edge"),
             firefoxIcon: this._browserImg("firefox"),
             safariIcon: this._browserImg("safari"),
-            chromeSupport: (0, $ff64a7fee6f978dd$export$7114fc426f7ae1f4)(baseline, impl.chrome),
-            edgeSupport: (0, $ff64a7fee6f978dd$export$7114fc426f7ae1f4)(baseline, impl.edge),
-            firefoxSupport: (0, $ff64a7fee6f978dd$export$7114fc426f7ae1f4)(baseline, impl.firefox),
-            safariSupport: (0, $ff64a7fee6f978dd$export$7114fc426f7ae1f4)(baseline, impl.safari),
-            chevronIcon: (0, (/*@__PURE__*/$parcel$interopDefault($f73e0fe28919578c$exports))),
-            description: description,
+            chromeSupport: (0, _baselineStatusUtilsJs.renderSupportIcon)(baseline, impl.chrome),
+            edgeSupport: (0, _baselineStatusUtilsJs.renderSupportIcon)(baseline, impl.edge),
+            firefoxSupport: (0, _baselineStatusUtilsJs.renderSupportIcon)(baseline, impl.firefox),
+            safariSupport: (0, _baselineStatusUtilsJs.renderSupportIcon)(baseline, impl.safari),
+            chevronIcon: (0, _baselineStatusConstantsJs.ICON_CHEVRON),
+            description,
             learnMore: baseline === "no_data" ? "" : this._buildLearnMoreLink(feature)
         });
         this.innerHTML = html;
@@ -59420,14 +59944,14 @@ class $7a4e9a947a998bf3$export$26cf4b949b341e59 extends HTMLElement {
     _buildLearnMoreLink(feature) {
         // Prefer MDN url if present from BCD normalization
         const mdn = feature?.learn_more_url;
-        if (mdn) return `<a href="${(0, $ff64a7fee6f978dd$export$a9838b2e53d1d807)(mdn)}" target="_blank" rel="noopener noreferrer">Learn more on MDN</a>`;
+        if (mdn) return `<a href="${(0, _baselineStatusUtilsJs.escapeAttr)(mdn)}" target="_blank" rel="noopener noreferrer">Learn more on MDN</a>`;
         const id = feature?.feature_id || this.featureId;
-        return `<a href="https://webstatus.dev/features/${(0, $ff64a7fee6f978dd$export$a9838b2e53d1d807)(id)}" target="_blank" rel="noopener noreferrer">Learn more</a>`;
+        return `<a href="https://webstatus.dev/features/${(0, _baselineStatusUtilsJs.escapeAttr)(id)}" target="_blank" rel="noopener noreferrer">Learn more</a>`;
     }
     _browserImg(name) {
         // Use data URI <img> to avoid inline SVG <defs> id collisions and paint issues
-        const svg = (0, $76f995269b4a6e61$export$267b91ff97e1f3d5)[name];
-        return (0, $ff64a7fee6f978dd$export$5b079801cdadb41f)(svg, {
+        const svg = (0, _baselineStatusConstantsJs.BROWSER_ICONS)[name];
+        return (0, _baselineStatusUtilsJs.svgToImgTag)(svg, {
             className: `browser-icon browser-icon-${name}`
         });
     }
@@ -59492,7 +60016,7 @@ class $7a4e9a947a998bf3$export$26cf4b949b341e59 extends HTMLElement {
         }
     }
     async _fetchWebstatus(featureId) {
-        const resp = await fetch((0, $76f995269b4a6e61$export$f7ad78096900f254) + encodeURIComponent(featureId), {
+        const resp = await fetch((0, _baselineStatusConstantsJs.API_ENDPOINT_WEBSTATUS) + encodeURIComponent(featureId), {
             signal: this._ctrl.signal,
             cache: "force-cache"
         });
@@ -59505,8 +60029,8 @@ class $7a4e9a947a998bf3$export$26cf4b949b341e59 extends HTMLElement {
         // Accept dotted path like "javascript.classes.static_initialization_blocks"
         // or a raw BCD JSON path like "data/javascript/classes.json#static_initialization_blocks"
         try {
-            const { filePath: filePath, keyPath: keyPath } = this._resolveMdnPath(pathOrId);
-            const url = (0, $76f995269b4a6e61$export$bf135c1d93039a27) + filePath;
+            const { filePath, keyPath } = this._resolveMdnPath(pathOrId);
+            const url = (0, _baselineStatusConstantsJs.API_ENDPOINT_MDN_CDN) + filePath;
             const resp = await fetch(url, {
                 signal: this._ctrl.signal,
                 cache: "force-cache"
@@ -59543,7 +60067,7 @@ class $7a4e9a947a998bf3$export$26cf4b949b341e59 extends HTMLElement {
             ];
             return {
                 filePath: file,
-                keyPath: keyPath
+                keyPath
             };
         }
         if (input.startsWith("data/")) {
@@ -59566,7 +60090,7 @@ class $7a4e9a947a998bf3$export$26cf4b949b341e59 extends HTMLElement {
         ];
         return {
             filePath: file,
-            keyPath: keyPath
+            keyPath
         };
     }
     _getByKeyPath(obj, pathArr) {
@@ -59613,13 +60137,338 @@ class $7a4e9a947a998bf3$export$26cf4b949b341e59 extends HTMLElement {
         const flags = s.flags || s.partial_implementation;
         const status = added && !flags ? "available" : "unavailable";
         return {
-            status: status
+            status
         };
     }
 }
-customElements.define("baseline-status", $7a4e9a947a998bf3$export$26cf4b949b341e59);
+customElements.define("baseline-status", BaselineStatus);
 
+},{"bundle-text:./baseline-status.css":"iJmuf","./baseline-status.constants.js":"cxNiv","./baseline-status.utils.js":"61ORP","@parcel/transformer-js/src/esmodule-helpers.js":"1egVF"}],"iJmuf":[function(require,module,exports,__globalThis) {
+module.exports = "baseline-status {\n  --baseline-status-color-limited: light-dark(#ea8600, #f09418);\n  --baseline-status-color-newly: light-dark(#1a73e8, #4185ff);\n  --baseline-status-color-widely: light-dark(#1e8e3e, #24a446);\n  --baseline-status-color-no_data: light-dark(#707070, #868686);\n  --baseline-status-color-outline: light-dark(#d9d9d9, #d9d9d9);\n  --baseline-status-color-link: light-dark(#1a73e8, #5aa1ff);\n  border: 1px solid var(--baseline-status-color-outline);\n  inline-size: 50rem;\n  color: inherit;\n  border-radius: .8rem;\n  margin: 2rem auto;\n  font: 2rem / 1.5 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;\n  display: block;\n\n  & details {\n    & > summary {\n      cursor: pointer;\n      flex-flow: column;\n      place-content: space-between;\n      place-items: center;\n      gap: 1.6rem;\n      padding: 1.2rem 2.4rem;\n      display: flex;\n\n      & .name {\n        font-weight: 600;\n      }\n\n      & .summary-top {\n        flex-flow: column;\n        place-content: center;\n        place-items: center;\n        gap: 0;\n        display: flex;\n\n        & p {\n          margin: 0 !important;\n        }\n      }\n\n      & .summary-bottom {\n        align-items: center;\n        gap: 12px;\n        display: flex;\n      }\n\n      &::-webkit-details-marker {\n        display: none;\n      }\n    }\n\n    & .open-icon {\n      width: 10px;\n      height: 20px;\n      color: inherit;\n      place-content: center;\n      place-items: center;\n      display: flex;\n\n      & svg {\n        transition: transform .3s;\n      }\n    }\n\n    &[open] {\n      padding-block-end: 1.6rem;\n\n      & .open-icon svg {\n        transform: rotate(180deg);\n      }\n    }\n  }\n\n  & a {\n    color: var(--baseline-status-color-link);\n  }\n\n  & .baseline-status-title {\n    flex: 1;\n    place-content: space-between;\n    place-items: center;\n    gap: 2.5rem;\n    display: flex;\n\n    & div:first-child {\n      align-items: center;\n      gap: .5rem;\n      display: flex;\n    }\n  }\n\n  & .baseline-badge {\n    color: #fff;\n    text-transform: uppercase;\n    white-space: nowrap;\n    background: #3367d6;\n    border-radius: 2px;\n    margin-inline: .5rem;\n    padding: 0 4px;\n    font-size: 11px;\n    line-height: 20px;\n  }\n\n  & .baseline-status-browsers {\n    align-items: center;\n    gap: 12px;\n    max-width: 240px;\n    font-size: 0;\n    display: flex;\n\n    & .browser-icon {\n      vertical-align: top;\n      width: 21px;\n      height: 21px;\n      margin-bottom: -1px;\n      margin-right: -2px;\n      display: inline-block;\n    }\n  }\n\n  & .support-no_data {\n    color: var(--baseline-status-color-no_data);\n  }\n\n  & .support-unavailable {\n    color: var(--baseline-status-color-limited);\n  }\n\n  & .support-newly {\n    color: var(--baseline-status-color-newly);\n  }\n\n  & .support-widely, & .support-available {\n    color: var(--baseline-status-color-widely);\n  }\n}\n";
 
+},{}],"cxNiv":[function(require,module,exports,__globalThis) {
+// Centralized constants and asset imports for the Baseline Status component
+// Assets are imported as text using Parcel's bundle-text: pipeline
+// Support state icons
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "API_PROVIDER_DEFAULT", ()=>// endpoints and copy
+    API_PROVIDER_DEFAULT);
+parcelHelpers.export(exports, "API_ENDPOINT_WEBSTATUS", ()=>API_ENDPOINT_WEBSTATUS);
+parcelHelpers.export(exports, "API_ENDPOINT_MDN_CDN", ()=>API_ENDPOINT_MDN_CDN);
+parcelHelpers.export(exports, "BASELINE_DEFS", ()=>BASELINE_DEFS);
+parcelHelpers.export(exports, "SUPPORT_ICONS", ()=>// icon maps
+    SUPPORT_ICONS);
+parcelHelpers.export(exports, "BROWSER_ICONS", ()=>BROWSER_ICONS);
+parcelHelpers.export(exports, "GLYPH_BASELINE_LIMITED", ()=>// glyphs and UI icons
+    (0, _baselineLimitedSvgDefault.default));
+parcelHelpers.export(exports, "GLYPH_BASELINE_NEWLY", ()=>(0, _baselineNewlySvgDefault.default));
+parcelHelpers.export(exports, "GLYPH_BASELINE_WIDELY", ()=>(0, _baselineWidelySvgDefault.default));
+parcelHelpers.export(exports, "GLYPH_BASELINE_NO_DATA", ()=>(0, _baselineNoDataSvgDefault.default));
+parcelHelpers.export(exports, "ICON_CHEVRON", ()=>(0, _chevronSvgDefault.default));
+parcelHelpers.export(exports, "TPL_LOADING", ()=>// templates
+    (0, _loadingHtmlDefault.default));
+parcelHelpers.export(exports, "TPL_MAIN", ()=>(0, _mainHtmlDefault.default));
+var _supportAvailableSvg = require("bundle-text:./icons/support-available.svg");
+var _supportAvailableSvgDefault = parcelHelpers.interopDefault(_supportAvailableSvg);
+var _supportUnavailableSvg = require("bundle-text:./icons/support-unavailable.svg");
+var _supportUnavailableSvgDefault = parcelHelpers.interopDefault(_supportUnavailableSvg);
+var _supportNoDataSvg = require("bundle-text:./icons/support-no_data.svg");
+var _supportNoDataSvgDefault = parcelHelpers.interopDefault(_supportNoDataSvg);
+// Browser icons
+var _browserChromeSvg = require("bundle-text:./icons/browser-chrome.svg");
+var _browserChromeSvgDefault = parcelHelpers.interopDefault(_browserChromeSvg);
+var _browserEdgeSvg = require("bundle-text:./icons/browser-edge.svg");
+var _browserEdgeSvgDefault = parcelHelpers.interopDefault(_browserEdgeSvg);
+var _browserFirefoxSvg = require("bundle-text:./icons/browser-firefox.svg");
+var _browserFirefoxSvgDefault = parcelHelpers.interopDefault(_browserFirefoxSvg);
+var _browserSafariSvg = require("bundle-text:./icons/browser-safari.svg");
+var _browserSafariSvgDefault = parcelHelpers.interopDefault(_browserSafariSvg);
+// Baseline glyphs and UI icons
+var _baselineLimitedSvg = require("bundle-text:./icons/baseline-limited.svg");
+var _baselineLimitedSvgDefault = parcelHelpers.interopDefault(_baselineLimitedSvg);
+var _baselineNewlySvg = require("bundle-text:./icons/baseline-newly.svg");
+var _baselineNewlySvgDefault = parcelHelpers.interopDefault(_baselineNewlySvg);
+var _baselineWidelySvg = require("bundle-text:./icons/baseline-widely.svg");
+var _baselineWidelySvgDefault = parcelHelpers.interopDefault(_baselineWidelySvg);
+var _baselineNoDataSvg = require("bundle-text:./icons/baseline-no_data.svg");
+var _baselineNoDataSvgDefault = parcelHelpers.interopDefault(_baselineNoDataSvg);
+var _chevronSvg = require("bundle-text:./icons/chevron.svg");
+var _chevronSvgDefault = parcelHelpers.interopDefault(_chevronSvg);
+// HTML templates
+var _loadingHtml = require("bundle-text:./templates/loading.html");
+var _loadingHtmlDefault = parcelHelpers.interopDefault(_loadingHtml);
+var _mainHtml = require("bundle-text:./templates/main.html");
+var _mainHtmlDefault = parcelHelpers.interopDefault(_mainHtml);
+// API endpoints and providers
+const API_PROVIDER_DEFAULT = "auto"; // auto: try webstatus then mdn (if configured)
+const API_ENDPOINT_WEBSTATUS = "https://api.webstatus.dev/v1/features/";
+// MDN Browser Compat Data via CDN: expects a file path like "data/javascript/classes.json"
+const API_ENDPOINT_MDN_CDN = "https://cdn.jsdelivr.net/npm/mdn-browser-compat-data@latest/";
+// Baseline text definitions
+const BASELINE_DEFS = {
+    limited: {
+        title: "Limited availability",
+        defaultDescription: "This feature is not Baseline because it does not work in some of the most widely used browsers."
+    },
+    newly: {
+        title: "Newly available",
+        defaultDescription: "This feature works across the latest devices and browser versions. This feature might not work in older devices or browsers."
+    },
+    widely: {
+        title: "Widely available",
+        defaultDescription: "This feature is well established and works across many devices and browser versions."
+    },
+    loading: {
+        title: "Loading",
+        defaultDescription: ""
+    },
+    no_data: {
+        title: "Unknown availability",
+        defaultDescription: "We currently do not have browser support information about this feature."
+    }
+};
+// Mappings used by the component
+const SUPPORT_ICONS = {
+    available: (0, _supportAvailableSvgDefault.default),
+    unavailable: (0, _supportUnavailableSvgDefault.default),
+    no_data: (0, _supportNoDataSvgDefault.default)
+};
+const BROWSER_ICONS = {
+    chrome: (0, _browserChromeSvgDefault.default),
+    edge: (0, _browserEdgeSvgDefault.default),
+    firefox: (0, _browserFirefoxSvgDefault.default),
+    safari: (0, _browserSafariSvgDefault.default)
+};
+
+},{"bundle-text:./icons/support-available.svg":"6I6fe","bundle-text:./icons/support-unavailable.svg":"975e2","bundle-text:./icons/support-no_data.svg":"g0WGO","bundle-text:./icons/browser-chrome.svg":"d3h5n","bundle-text:./icons/browser-edge.svg":"fKMOd","bundle-text:./icons/browser-firefox.svg":"kr5QP","bundle-text:./icons/browser-safari.svg":"13P4d","bundle-text:./icons/baseline-limited.svg":"hSZdO","bundle-text:./icons/baseline-newly.svg":"k7UwX","bundle-text:./icons/baseline-widely.svg":"kQ2HU","bundle-text:./icons/baseline-no_data.svg":"4D8HH","bundle-text:./icons/chevron.svg":"erKRL","bundle-text:./templates/loading.html":"eEifj","bundle-text:./templates/main.html":"g0vl3","@parcel/transformer-js/src/esmodule-helpers.js":"1egVF"}],"6I6fe":[function(require,module,exports,__globalThis) {
+module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"17\" height=\"21\" fill=\"none\"><path fill=\"currentColor\" d=\"M1.253 3.31a8.843 8.843 0 0 1 5.47-1.882c4.882 0 8.838 3.927 8.838 8.772 0 4.845-3.956 8.772-8.837 8.772a8.842 8.842 0 0 1-5.47-1.882c-.237.335-.49.657-.758.966a10.074 10.074 0 0 0 6.228 2.14c5.562 0 10.07-4.475 10.07-9.996 0-5.52-4.508-9.996-10.07-9.996-2.352 0-4.514.8-6.228 2.14.268.309.521.631.757.966Z\"/><path fill=\"currentColor\" d=\"M11.348 8.125 6.34 13.056l-3.006-2.954 1.002-.985 1.999 1.965 4.012-3.942 1.002.985Z\"/></svg>";
+
+},{}],"975e2":[function(require,module,exports,__globalThis) {
+module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"17\" height=\"21\" fill=\"none\"><path fill=\"currentColor\" d=\"M1.254 3.31a8.843 8.843 0 0 1 5.47-1.882c4.881 0 8.838 3.927 8.838 8.772 0 4.845-3.957 8.772-8.838 8.772a8.842 8.842 0 0 1-5.47-1.882c-.236.335-.49.657-.757.966a10.074 10.074 0 0 0 6.227 2.14c5.562 0 10.071-4.475 10.071-9.996 0-5.52-4.509-9.996-10.07-9.996-2.352 0-4.515.8-6.228 2.14.268.309.52.631.757.966Z\"/><path fill=\"currentColor\" d=\"m10.321 8.126-1.987 1.972 1.987 1.972-.993.986-1.987-1.972-1.987 1.972-.993-.986 1.986-1.972-1.986-1.972.993-.986 1.987 1.972L9.328 7.14l.993.986Z\"/></svg>";
+
+},{}],"g0WGO":[function(require,module,exports,__globalThis) {
+module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"17\" height=\"21\" viewBox=\"0 0 17 21\" fill=\"none\"><path d=\"M7.18169 12.2783H5.98706C5.99134 11.8703 6.02774 11.5367 6.09625 11.2775C6.16904 11.014 6.28679 10.7738 6.4495 10.5571C6.61221 10.3404 6.82844 10.0939 7.0982 9.8176C7.29516 9.61785 7.475 9.43085 7.63771 9.2566C7.8047 9.0781 7.93958 8.88685 8.04235 8.68285C8.14511 8.4746 8.19649 8.22598 8.19649 7.93698C8.19649 7.64373 8.14297 7.39085 8.03592 7.17835C7.93316 6.96585 7.77901 6.80223 7.57348 6.68748C7.37224 6.57273 7.12175 6.51535 6.82202 6.51535C6.57367 6.51535 6.33817 6.55998 6.11552 6.64923C5.89286 6.73848 5.71302 6.8766 5.576 7.0636C5.43898 7.24635 5.36833 7.48648 5.36405 7.78398H4.17584C4.18441 7.30373 4.3043 6.89148 4.53552 6.54723C4.77102 6.20298 5.08787 5.93948 5.48609 5.75673C5.8843 5.57398 6.32961 5.4826 6.82202 5.4826C7.36581 5.4826 7.82825 5.58035 8.20934 5.77585C8.5947 5.97135 8.88801 6.25185 9.08926 6.61735C9.2905 6.9786 9.39113 7.40785 9.39113 7.9051C9.39113 8.2876 9.31191 8.64035 9.15348 8.96335C8.99934 9.2821 8.80023 9.58173 8.55617 9.86222C8.3121 10.1427 8.05305 10.4105 7.77901 10.6655C7.54351 10.8822 7.38508 11.1266 7.30373 11.3986C7.22237 11.6706 7.18169 11.9639 7.18169 12.2783ZM5.93568 14.2992C5.93568 14.108 5.99562 13.9465 6.11552 13.8147C6.23541 13.683 6.40882 13.6171 6.63576 13.6171C6.86698 13.6171 7.04253 13.683 7.16243 13.8147C7.28232 13.9465 7.34226 14.108 7.34226 14.2992C7.34226 14.482 7.28232 14.6392 7.16243 14.771C7.04253 14.9027 6.86698 14.9686 6.63576 14.9686C6.40882 14.9686 6.23541 14.9027 6.11552 14.771C5.99562 14.6392 5.93568 14.482 5.93568 14.2992Z\" fill=\"currentColor\"/><path d=\"M1.25317 3.31021C2.75786 2.13162 4.65827 1.4281 6.72373 1.4281C11.6047 1.4281 15.5615 5.35546 15.5615 10.2001C15.5615 15.0447 11.6047 18.9721 6.72373 18.9721C4.65827 18.9721 2.75786 18.2686 1.25317 17.09C1.01715 17.425 0.764387 17.7475 0.496094 18.0563C2.20987 19.3966 4.37247 20.1961 6.72373 20.1961C12.2857 20.1961 16.7946 15.7207 16.7946 10.2001C16.7946 4.67946 12.2857 0.204102 6.72373 0.204102C4.37247 0.204102 2.20987 1.00363 0.496094 2.34391C0.764386 2.65272 1.01715 2.97522 1.25317 3.31021Z\" fill=\"currentColor\"/></svg>";
+
+},{}],"d3h5n":[function(require,module,exports,__globalThis) {
+module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"21\" height=\"21\" viewBox=\"0 0 260 260\"><linearGradient id=\"a\" x1=\"145\" x2=\"34\" y1=\"253\" y2=\"61\" gradientUnits=\"userSpaceOnUse\"><stop offset=\"0\" stop-color=\"#1e8e3e\"/><stop offset=\"1\" stop-color=\"#34a853\"/></linearGradient><linearGradient id=\"b\" x1=\"111\" x2=\"222\" y1=\"254\" y2=\"62\" gradientUnits=\"userSpaceOnUse\"><stop offset=\"0\" stop-color=\"#fcc934\"/><stop offset=\"1\" stop-color=\"#fbbc04\"/></linearGradient><linearGradient id=\"c\" x1=\"17\" x2=\"239\" y1=\"80\" y2=\"80\" gradientUnits=\"userSpaceOnUse\"><stop offset=\"0\" stop-color=\"#d93025\"/><stop offset=\"1\" stop-color=\"#ea4335\"/></linearGradient><circle cx=\"128\" cy=\"128\" r=\"64\" fill=\"#fff\"/><path fill=\"url(#a)\" d=\"M96 183.4A63.7 63.7 0 0 1 72.6 160L17.2 64A128 128 0 0 0 128 256l55.4-96A64 64 0 0 1 96 183.4Z\"/><path fill=\"url(#b)\" d=\"M192 128a63.7 63.7 0 0 1-8.6 32L128 256A128 128 0 0 0 238.9 64h-111a64 64 0 0 1 64 64Z\"/><circle cx=\"128\" cy=\"128\" r=\"52\" fill=\"#1a73e8\"/><path fill=\"url(#c)\" d=\"M96 72.6a63.7 63.7 0 0 1 32-8.6h110.8a128 128 0 0 0-221.7 0l55.5 96A64 64 0 0 1 96 72.6Z\"/></svg>";
+
+},{}],"fKMOd":[function(require,module,exports,__globalThis) {
+module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"21\" height=\"21\" fill=\"none\"><defs><radialGradient id=\"e\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"rotate(-81.384 12.03 4.657) scale(11.4261 9.23112)\" gradientUnits=\"userSpaceOnUse\"><stop offset=\".8\" stop-opacity=\"0\"/><stop offset=\".9\" stop-opacity=\".5\"/><stop offset=\"1\"/></radialGradient><radialGradient id=\"f\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"rotate(92.291 -.78 2.876) scale(16.1416 34.3784)\" gradientUnits=\"userSpaceOnUse\"><stop stop-color=\"#35C1F1\"/><stop offset=\".1\" stop-color=\"#34C1ED\"/><stop offset=\".2\" stop-color=\"#2FC2DF\"/><stop offset=\".3\" stop-color=\"#2BC3D2\"/><stop offset=\".7\" stop-color=\"#36C752\"/></radialGradient><radialGradient id=\"g\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"matrix(2.171 7.44345 -6.05301 1.76546 19.13 6.16)\" gradientUnits=\"userSpaceOnUse\"><stop stop-color=\"#66EB6E\"/><stop offset=\"1\" stop-color=\"#66EB6E\" stop-opacity=\"0\"/></radialGradient><linearGradient id=\"q\" x1=\"4.678\" x2=\"18.894\" y1=\"14.105\" y2=\"14.105\" gradientUnits=\"userSpaceOnUse\"><stop offset=\"0\" stop-color=\"#0C59A4\"/><stop offset=\"1\" stop-color=\"#114A8B\"/></linearGradient><linearGradient id=\"d\" x1=\"12.168\" x2=\"3.299\" y1=\"7.937\" y2=\"17.603\" gradientUnits=\"userSpaceOnUse\"><stop stop-color=\"#1B9DE2\"/><stop offset=\".2\" stop-color=\"#1595DF\"/><stop offset=\".7\" stop-color=\"#0680D7\"/><stop offset=\"1\" stop-color=\"#0078D4\"/></linearGradient><clipPath id=\"a\"><path fill=\"#fff\" d=\"M0 0h20.4v20.4H0z\"/></clipPath></defs><g clip-path=\"url(#a)\"><path fill=\"url(#q)\" d=\"M18.416 15.18a7.485 7.485 0 0 1-.845.375 8.121 8.121 0 0 1-2.86.51c-3.77 0-7.053-2.59-7.053-5.92a2.51 2.51 0 0 1 1.307-2.176c-3.41.143-4.287 3.697-4.287 5.777 0 5.897 5.427 6.487 6.598 6.487.63 0 1.578-.184 2.152-.367l.103-.032a10.224 10.224 0 0 0 5.307-4.207.319.319 0 0 0-.422-.447Z\"/><path fill=\"url(#d)\" d=\"M8.423 19.229a6.31 6.31 0 0 1-1.809-1.698A6.43 6.43 0 0 1 8.965 7.97c.255-.12.677-.327 1.243-.319a2.582 2.582 0 0 1 2.048 1.036c.32.431.497.953.502 1.49 0-.016 1.953-6.343-6.375-6.343-3.498 0-6.375 3.315-6.375 6.232-.014 1.54.316 3.065.964 4.462a10.2 10.2 0 0 0 12.464 5.34 6.015 6.015 0 0 1-5.005-.638h-.008Z\"/><path fill=\"url(#e)\" d=\"M8.423 19.229a6.31 6.31 0 0 1-1.809-1.698A6.43 6.43 0 0 1 8.965 7.97c.255-.12.677-.327 1.243-.319a2.582 2.582 0 0 1 2.048 1.036c.32.431.497.953.502 1.49 0-.016 1.953-6.343-6.375-6.343-3.498 0-6.375 3.315-6.375 6.232-.014 1.54.316 3.065.964 4.462a10.2 10.2 0 0 0 12.464 5.34 6.015 6.015 0 0 1-5.005-.638h-.008Z\" opacity=\".41\"/><path fill=\"url(#f)\" d=\"M12.145 11.857c-.072.08-.271.2-.271.447 0 .207.135.414.382.582 1.14.796 3.3.685 3.307.685a4.75 4.75 0 0 0 2.415-.662A4.893 4.893 0 0 0 20.4 8.694c.024-1.785-.637-2.972-.9-3.498C17.802 1.896 14.16 0 10.2 0A10.2 10.2 0 0 0 0 10.057c.04-2.909 2.933-5.26 6.375-5.26.28 0 1.873.024 3.347.797a5.786 5.786 0 0 1 2.463 2.335c.486.845.573 1.92.573 2.35 0 .431-.215 1.06-.621 1.587l.008-.008Z\"/><path fill=\"url(#g)\" d=\"M12.145 11.857c-.072.08-.271.2-.271.447 0 .207.135.414.382.582 1.14.796 3.3.685 3.307.685a4.75 4.75 0 0 0 2.415-.662A4.893 4.893 0 0 0 20.4 8.694c.024-1.785-.637-2.972-.9-3.498C17.802 1.896 14.16 0 10.2 0A10.2 10.2 0 0 0 0 10.057c.04-2.909 2.933-5.26 6.375-5.26.28 0 1.873.024 3.347.797a5.786 5.786 0 0 1 2.463 2.335c.486.845.573 1.92.573 2.35 0 .431-.215 1.06-.621 1.587l.008-.008Z\"/></g></svg>";
+
+},{}],"kr5QP":[function(require,module,exports,__globalThis) {
+module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"21\" height=\"21\" fill=\"none\"><g clip-path=\"url(#M)\"><path d=\"M19.661 6.85c-.444-1.034-1.344-2.15-2.049-2.503.503.942.851 1.955 1.034 3l.002.017c-1.155-2.786-3.112-3.911-4.711-6.358l-.241-.379-.113-.204a1.76 1.76 0 0 1-.152-.392c-.011-.022-.017-.025-.023-.026-.021 0-.023.002-.024.003l-.003-.003C10.816 1.46 9.945 4.152 9.866 5.499c-1.025.068-2.004.434-2.811 1.049a3.05 3.05 0 0 0-.263-.193c-.233-.789-.243-1.623-.029-2.417-.942.442-1.779 1.068-2.458 1.84H4.3c-.405-.497-.376-2.135-.353-2.477-.12.047-.234.105-.341.175-.357.247-.691.524-.998.828-.35.343-.669.714-.955 1.109v.002-.002a8.22 8.22 0 0 0-1.37 2.995l-.014.065c-.019.087-.089.523-.1.617 0 .007-.002.014-.002.022A9.14 9.14 0 0 0 0 10.475v.051c.005 2.474.967 4.857 2.697 6.678s4.103 2.948 6.649 3.158a10.45 10.45 0 0 0 7.105-2.023c2.023-1.511 3.388-3.702 3.825-6.14l.046-.383c.21-1.683-.017-3.391-.662-4.967l.001.002zm-11.77 7.741l.141.067.007.004-.149-.072zm10.758-7.224v-.009l.002.01-.002-.001z\" fill=\"url(#A)\"/><use href=\"#N\" fill=\"url(#B)\"/><use href=\"#N\" fill=\"url(#C)\"/><path d=\"M14.697 8.011l.064.045c-.257-.44-.576-.844-.949-1.198C10.637 3.784 12.98.194 13.375.01l.004-.006c-2.565 1.454-3.436 4.146-3.515 5.493l.359-.018c.91.002 1.803.237 2.589.681a5.07 5.07 0 0 1 1.885 1.849v.001z\" fill=\"url(#D)\"/><use href=\"#O\" fill=\"url(#E)\"/><use href=\"#O\" fill=\"url(#F)\"/><path d=\"M6.576 6.22l.211.135c-.233-.789-.243-1.623-.029-2.417-.942.442-1.779 1.068-2.458 1.84.05-.001 1.531-.027 2.276.442z\" fill=\"url(#G)\"/><path d=\"M.093 10.761c.788 4.508 5.009 7.952 9.799 8.083 4.434.121 7.267-2.371 8.437-4.802.991-2.102 1.105-4.493.318-6.674v-.009l.002.007c.362 2.29-.841 4.508-2.722 6.011l-.006.013c-3.665 2.891-7.172 1.744-7.881 1.276l-.149-.072c-2.137-.989-3.02-2.873-2.83-4.49-.507.007-1.006-.128-1.435-.39s-.771-.638-.984-1.084c.561-.333 1.2-.521 1.858-.546a3.96 3.96 0 0 1 1.897.4 5.24 5.24 0 0 0 3.834.146c-.004-.08-1.781-.765-2.474-1.426-.37-.353-.546-.524-.702-.651-.084-.069-.172-.134-.263-.193l-.211-.135c-.745-.469-2.226-.443-2.275-.442h-.005c-.405-.497-.376-2.135-.353-2.477-.12.047-.234.105-.341.175-.357.247-.691.524-.998.828-.351.342-.672.712-.959 1.107A8.22 8.22 0 0 0 .28 8.409c-.005.02-.368 1.556-.189 2.353h.002z\" fill=\"url(#H)\"/><path d=\"M13.812 6.858c.373.355.692.758.948 1.199l.153.121c2.315 2.067 1.102 4.988 1.012 5.195 1.881-1.5 3.083-3.72 2.722-6.011-1.155-2.789-3.114-3.914-4.711-6.361l-.241-.379-.113-.204a1.76 1.76 0 0 1-.152-.392c-.011-.022-.017-.025-.023-.026-.021 0-.023.002-.024.003-.402.185-2.745 3.777.43 6.849l-.001.004z\" fill=\"url(#I)\"/><path d=\"M14.913 8.179c-.045-.04-.097-.08-.153-.121l-.063-.045c-.718-.482-1.596-.688-2.462-.579 3.673 1.778 2.688 7.902-2.403 7.672-.453-.018-.901-.102-1.329-.248l-.3-.119-.172-.08.007.004c.71.469 4.216 1.616 7.881-1.276l.006-.013c.091-.207 1.305-3.128-1.012-5.195l.001-.001z\" fill=\"url(#J)\"/><path d=\"M5.625 11.419S6.096 9.718 9 9.718c.314 0 1.212-.848 1.228-1.094a5.24 5.24 0 0 1-3.834-.146 3.96 3.96 0 0 0-1.897-.4c-.657.026-1.297.214-1.858.546.213.446.555.822.984 1.084s.928.397 1.435.39c-.189 1.617.694 3.5 2.83 4.49l.141.067c-1.247-.624-2.277-1.804-2.405-3.235v-.001z\" fill=\"url(#K)\"/><path d=\"M19.661 6.845c-.444-1.034-1.344-2.15-2.049-2.503a10.05 10.05 0 0 1 1.034 3l.002.017c-1.155-2.786-3.112-3.911-4.711-6.358l-.241-.379-.112-.204c-.066-.124-.117-.256-.152-.392-.011-.022-.017-.025-.023-.026-.02 0-.023.002-.024.003l-.003-.003c-2.565 1.454-3.436 4.146-3.515 5.493l.359-.018c.91.002 1.803.237 2.589.681a5.07 5.07 0 0 1 1.885 1.849c-.718-.482-1.596-.688-2.462-.579 3.673 1.778 2.688 7.902-2.403 7.672-.453-.018-.901-.102-1.329-.248l-.3-.119-.172-.08.007.004-.149-.072.141.067c-1.247-.624-2.277-1.804-2.405-3.235 0 0 .471-1.701 3.375-1.701.314 0 1.212-.848 1.228-1.094-.004-.08-1.781-.765-2.474-1.426l-.702-.651a3.05 3.05 0 0 0-.263-.193c-.233-.789-.243-1.623-.029-2.417-.942.442-1.779 1.068-2.458 1.84H4.3c-.405-.497-.376-2.135-.353-2.477-.12.047-.234.105-.341.175-.357.247-.691.524-.998.828-.35.343-.669.714-.955 1.109a8.22 8.22 0 0 0-1.37 2.995l-.014.065-.118.624A11.15 11.15 0 0 0 0 10.473v.051c.005 2.474.967 4.857 2.697 6.678S6.8 20.15 9.347 20.36a10.45 10.45 0 0 0 7.105-2.023c2.023-1.511 3.388-3.702 3.825-6.14l.046-.383c.21-1.683-.017-3.391-.662-4.967l-.001-.001z\" fill=\"url(#L)\"/></g><defs><linearGradient id=\"A\" x1=\"18.309\" y1=\"3.165\" x2=\"1.883\" y2=\"19.533\"><stop offset=\".048\" stop-color=\"#fff44f\"/><stop offset=\".111\" stop-color=\"#ffe847\"/><stop offset=\".225\" stop-color=\"#ffc830\"/><stop offset=\".368\" stop-color=\"#ff980e\"/><stop offset=\".401\" stop-color=\"#ff8b16\"/><stop offset=\".462\" stop-color=\"#ff672a\"/><stop offset=\".534\" stop-color=\"#ff3647\"/><stop offset=\".705\" stop-color=\"#e31587\"/></linearGradient><radialGradient id=\"B\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"translate(17.6533 2.30078) scale(21.2899 20.6149)\"><stop offset=\".129\" stop-color=\"#ffbd4f\"/><stop offset=\".186\" stop-color=\"#ffac31\"/><stop offset=\".247\" stop-color=\"#ff9d17\"/><stop offset=\".283\" stop-color=\"#ff980e\"/><stop offset=\".403\" stop-color=\"#ff563b\"/><stop offset=\".467\" stop-color=\"#ff3750\"/><stop offset=\".71\" stop-color=\"#f5156c\"/><stop offset=\".782\" stop-color=\"#eb0878\"/><stop offset=\".86\" stop-color=\"#e50080\"/></radialGradient><radialGradient id=\"C\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"matrix(21.2899,0,0,20.6149,9.74862,10.7203)\"><stop offset=\".3\" stop-color=\"#960e18\"/><stop offset=\".351\" stop-color=\"#b11927\" stop-opacity=\".74\"/><stop offset=\".435\" stop-color=\"#db293d\" stop-opacity=\".343\"/><stop offset=\".497\" stop-color=\"#f5334b\" stop-opacity=\".094\"/><stop offset=\".53\" stop-color=\"#ff3750\" stop-opacity=\"0\"/></radialGradient><radialGradient id=\"D\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"translate(12.3835 -2.29164) scale(15.422 14.9331)\"><stop offset=\".132\" stop-color=\"#fff44f\"/><stop offset=\".252\" stop-color=\"#ffdc3e\"/><stop offset=\".506\" stop-color=\"#ff9d12\"/><stop offset=\".526\" stop-color=\"#ff980e\"/></radialGradient><radialGradient id=\"E\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"translate(7.37722 16.0781) scale(10.1364 9.81506)\"><stop offset=\".353\" stop-color=\"#3a8ee6\"/><stop offset=\".472\" stop-color=\"#5c79f0\"/><stop offset=\".669\" stop-color=\"#9059ff\"/><stop offset=\"1\" stop-color=\"#c139e6\"/></radialGradient><radialGradient id=\"F\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"matrix(5.22,-1.22,1.39,5.94,10.78,8.95)\"><stop offset=\".206\" stop-color=\"#9059ff\" stop-opacity=\"0\"/><stop offset=\".278\" stop-color=\"#8c4ff3\" stop-opacity=\".064\"/><stop offset=\".747\" stop-color=\"#7716a8\" stop-opacity=\".45\"/><stop offset=\".975\" stop-color=\"#6e008b\" stop-opacity=\".6\"/></radialGradient><radialGradient id=\"G\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"translate(9.485 1.535) scale(7.293 7.062)\"><stop stop-color=\"#ffe226\"/><stop offset=\".121\" stop-color=\"#ffdb27\"/><stop offset=\".295\" stop-color=\"#ffc82a\"/><stop offset=\".502\" stop-color=\"#ffa930\"/><stop offset=\".732\" stop-color=\"#ff7e37\"/><stop offset=\".792\" stop-color=\"#ff7139\"/></radialGradient><radialGradient id=\"H\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"translate(15.282 -3.057) scale(31.118 30.132)\"><stop offset=\".113\" stop-color=\"#fff44f\"/><stop offset=\".456\" stop-color=\"#ff980e\"/><stop offset=\".622\" stop-color=\"#ff5634\"/><stop offset=\".716\" stop-color=\"#ff3647\"/><stop offset=\".904\" stop-color=\"#e31587\"/></radialGradient><radialGradient id=\"I\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"translate(12.695 -1.386) rotate(83.78) scale(22.089 14.96)\"><stop stop-color=\"#fff44f\"/><stop offset=\".06\" stop-color=\"#ffe847\"/><stop offset=\".168\" stop-color=\"#ffc830\"/><stop offset=\".304\" stop-color=\"#ff980e\"/><stop offset=\".356\" stop-color=\"#ff8b16\"/><stop offset=\".455\" stop-color=\"#ff672a\"/><stop offset=\".57\" stop-color=\"#ff3647\"/><stop offset=\".737\" stop-color=\"#e31587\"/></radialGradient><radialGradient id=\"J\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"translate(9.485 4.087) scale(19.424 18.809)\"><stop offset=\".137\" stop-color=\"#fff44f\"/><stop offset=\".48\" stop-color=\"#ff980e\"/><stop offset=\".592\" stop-color=\"#ff5634\"/><stop offset=\".655\" stop-color=\"#ff3647\"/><stop offset=\".904\" stop-color=\"#e31587\"/></radialGradient><radialGradient id=\"K\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"translate(14.491 5.107) scale(21.261 20.587)\"><stop offset=\".094\" stop-color=\"#fff44f\"/><stop offset=\".231\" stop-color=\"#ffe141\"/><stop offset=\".509\" stop-color=\"#ffaf1e\"/><stop offset=\".626\" stop-color=\"#ff980e\"/></radialGradient><linearGradient id=\"L\" x1=\"18.103\" y1=\"3.076\" x2=\"4.144\" y2=\"17.494\"><stop offset=\".167\" stop-color=\"#fff44f\" stop-opacity=\".8\"/><stop offset=\".266\" stop-color=\"#fff44f\" stop-opacity=\".634\"/><stop offset=\".489\" stop-color=\"#fff44f\" stop-opacity=\".217\"/><stop offset=\".6\" stop-color=\"#fff44f\" stop-opacity=\"0\"/></linearGradient><clipPath id=\"M\"><path fill=\"#fff\" d=\"M0 0h20.4v20.4H0z\"/></clipPath><path id=\"N\" d=\"M19.661 6.85c-.444-1.034-1.344-2.15-2.049-2.503.503.942.851 1.955 1.034 3v.009l.002.01c.787 2.181.673 4.573-.318 6.674-1.17 2.432-4.002 4.924-8.437 4.802-4.79-.131-9.011-3.574-9.799-8.083-.144-.711 0-1.072.072-1.649-.098.449-.153.906-.164 1.364v.051c.005 2.474.967 4.857 2.697 6.678s4.103 2.948 6.649 3.158a10.45 10.45 0 0 0 7.105-2.023c2.023-1.511 3.388-3.702 3.825-6.14l.046-.383c.21-1.684-.017-3.391-.663-4.968l-.001.001z\"/><path id=\"O\" d=\"M10.228 8.626C10.211 8.872 9.314 9.72 9 9.72c-2.904 0-3.375 1.701-3.375 1.701.129 1.432 1.159 2.613 2.405 3.235l.172.08.3.119c.428.146.876.23 1.329.248 5.091.231 6.076-5.894 2.403-7.672.867-.109 1.744.097 2.462.579-.449-.767-1.099-1.405-1.885-1.849s-1.679-.679-2.589-.681l-.359.018c-1.025.068-2.004.434-2.811 1.049.156.128.331.298.702.651.693.661 2.47 1.346 2.474 1.426v.002z\"/></defs></svg>";
+
+},{}],"13P4d":[function(require,module,exports,__globalThis) {
+module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"21\" height=\"21\" viewBox=\"0 0 21 21\" fill=\"none\"><g clip-path=\"url(#clip0)\"><path opacity=\".53\" d=\"M19.505 10.524a9.3 9.3 0 0 1-2.725 6.37 9.21 9.21 0 0 1-6.579 2.639 9.21 9.21 0 0 1-6.579-2.639 9.3 9.3 0 0 1-2.725-6.37c0-5.39 4.383-9.76 9.304-9.76 5.02 0 9.304 4.37 9.304 9.76Z\" fill=\"#000\"/><path d=\"M19.859 9.729c0 1.275-.25 2.538-.736 3.716a9.576 9.576 0 0 1-2.093 3.151 9.317 9.317 0 0 1-6.83 2.745c-2.562 0-5.018-1.023-6.829-2.844C1.56 14.675.542 12.205.542 9.63S1.56 4.585 3.371 2.764C5.182.943 7.639-.08 10.2-.08c1.269 0 2.524.25 3.696.738 1.171.487 2.236 1.203 3.132 2.104.897.902 1.608 1.973 2.093 3.151.486 1.178.736 2.441.736 3.716Z\" fill=\"url(#paint0)\" stroke=\"#CDCDCD\" stroke-width=\".352\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M19.102 9.729c0 2.374-.938 4.65-2.607 6.329-1.67 1.678-3.934 2.621-6.295 2.621-2.36 0-4.624-.943-6.293-2.621C2.238 14.38 1.3 12.103 1.3 9.73c0-2.374.938-4.651 2.607-6.33 1.669-1.678 3.933-2.62 6.294-2.62 2.361 0 4.625.942 6.294 2.62 1.67 1.679 2.607 3.956 2.607 6.33Z\" fill=\"url(#paint1)\"/><g opacity=\".409\" filter=\"url(#f0)\"><path d=\"m16.283 4.509-7.1 4.148-4.489 7.106 6.568-4.891 5.022-6.363Z\" fill=\"#000\"/></g><path d=\"M11.218 10.8 9.183 8.657 16.402 3.774 11.218 10.8Z\" fill=\"#FF5150\"/><path d=\"m11.218 10.8-2.035-2.143-5.184 7.026 7.219-4.883Z\" fill=\"#F1F1F1\"/><path opacity=\".243\" d=\"M4 15.684 11.218 10.8l5.184-7.026L4 15.684Z\" fill=\"#000\"/></g><defs><filter id=\"f0\" x=\"2.149\" y=\"1.964\" width=\"16.679\" height=\"16.344\" filterUnits=\"userSpaceOnUse\" color-interpolation-filters=\"sRGB\"><feFlood flood-opacity=\"0\"/><feBlend in=\"SourceGraphic\"/><feGaussianBlur stdDeviation=\"1.272\"/></filter><linearGradient id=\"paint0\" x1=\"10.2\" y1=\"19.44\" x2=\"10.2\" y2=\".018\" gradientUnits=\"userSpaceOnUse\"><stop stop-color=\"#BDBDBD\"/><stop offset=\"1\" stop-color=\"#fff\"/></linearGradient><radialGradient id=\"paint1\" cx=\"0\" cy=\"0\" r=\"1\" gradientUnits=\"userSpaceOnUse\" gradientTransform=\"translate(10.241 8.424) scale(9.658 9.711)\"><stop stop-color=\"#06C2E7\"/><stop offset=\".25\" stop-color=\"#0DB8EC\"/><stop offset=\".5\" stop-color=\"#12AEF1\"/><stop offset=\".75\" stop-color=\"#1F86F9\"/><stop offset=\"1\" stop-color=\"#107DDD\"/></radialGradient><clipPath id=\"clip0\"><rect width=\"20.4\" height=\"20.4\" fill=\"#fff\"/></clipPath></defs></svg>";
+
+},{}],"hSZdO":[function(require,module,exports,__globalThis) {
+module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"36\" height=\"20\" viewBox=\"0 0 540 300\" aria-hidden=\"true\">\n  <path d=\"M150 0L240 90L210 120L120 30L150 0Z\" fill=\"var(--baseline-icon-limited-front, #F09409)\"/>\n  <path d=\"M420 30L540 150L420 270L390 240L480 150L390 60L420 30Z\" fill=\"var(--baseline-icon-limited-back, #C6C6C6)\"/>\n  <path d=\"M330 180L300 210L390 300L420 270L330 180Z\" fill=\"var(--baseline-icon-limited-front, #F09409)\"/>\n  <path d=\"M120 30L150 60L60 150L150 240L120 270L0 150L120 30Z\" fill=\"var(--baseline-icon-limited-back, #C6C6C6)\"/>\n  <path d=\"M390 0L420 30L150 300L120 270L390 0Z\" fill=\"var(--baseline-icon-limited-front, #F09409)\"/>\n</svg>";
+
+},{}],"k7UwX":[function(require,module,exports,__globalThis) {
+module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"36\" height=\"20\" viewBox=\"0 0 540 300\" aria-hidden=\"true\">\n  <path d=\"M150 0L180 30L150 60L120 30L150 0Z\" fill=\"var(--baseline-icon-newly-back, #A8C7FA)\"/>\n  <path d=\"M210 60L240 90L210 120L180 90L210 60Z\" fill=\"var(--baseline-icon-newly-back, #A8C7FA)\"/>\n  <path d=\"M450 60L480 90L450 120L420 90L450 60Z\" fill=\"var(--baseline-icon-newly-back, #A8C7FA)\"/>\n  <path d=\"M510 120L540 150L510 180L480 150L510 120Z\" fill=\"var(--baseline-icon-newly-back, #A8C7FA)\"/>\n  <path d=\"M450 180L480 210L450 240L420 210L450 180Z\" fill=\"var(--baseline-icon-newly-back, #A8C7FA)\"/>\n  <path d=\"M390 240L420 270L390 300L360 270L390 240Z\" fill=\"var(--baseline-icon-newly-back, #A8C7FA)\"/>\n  <path d=\"M330 180L360 210L330 240L300 210L330 180Z\" fill=\"var(--baseline-icon-newly-back, #A8C7FA)\"/>\n  <path d=\"M90 60L120 90L90 120L60 90L90 60Z\" fill=\"var(--baseline-icon-newly-back, #A8C7FA)\"/>\n  <path d=\"M390 0L420 30L150 300L0 150L30 120L150 240L390 0Z\" fill=\"var(--baseline-icon-newly-front, #1B6EF3)\"/>\n</svg>";
+
+},{}],"kQ2HU":[function(require,module,exports,__globalThis) {
+module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"36\" height=\"20\" viewBox=\"0 0 540 300\" aria-hidden=\"true\">\n  <path d=\"M420 30L390 60L480 150L390 240L330 180L300 210L390 300L540 150L420 30Z\" fill=\"var(--baseline-icon-widely-back, #C4EED0)\"/>\n  <path d=\"M150 0L30 120L60 150L150 60L210 120L240 90L150 0Z\" fill=\"var(--baseline-icon-widely-back, #C4EED0)\"/>\n  <path d=\"M390 0L420 30L150 300L0 150L30 120L150 240L390 0Z\" fill=\"var(--baseline-icon-widely-front, #1EA446)\"/>\n</svg>";
+
+},{}],"4D8HH":[function(require,module,exports,__globalThis) {
+module.exports = "<svg viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" aria-hidden=\"true\">\n  <rect x=\"3\" y=\"3\" width=\"14\" height=\"14\" transform=\"rotate(45 10 10)\" fill=\"var(--baseline-icon-no_data, #909090)\"/>\n</svg>";
+
+},{}],"erKRL":[function(require,module,exports,__globalThis) {
+module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"11\" height=\"7\" viewBox=\"0 0 11 7\" fill=\"none\"><path d=\"M5.5 6.454 0.25 1.204 1.191.263 5.5 4.594 9.809.285 10.75 1.225 5.5 6.454Z\" fill=\"currentColor\"/></svg>";
+
+},{}],"eEifj":[function(require,module,exports,__globalThis) {
+module.exports = "<html><head></head><body><details open=\"\" data-baseline=\"loading\">\n  <summary aria-label=\"Baseline: Loading\">\n    <div class=\"summary-top\">\n      <span class=\"name\">{{featureName}}</span>\n    </div>\n    <div class=\"summary-bottom\">\n      {{baselineGlyph}}\n      <div class=\"baseline-status-title\" aria-hidden=\"true\">\n        <div><strong>Baseline</strong> Loading</div>\n        <div class=\"baseline-status-browsers\">\n          <span>{{chromeIcon}} {{noDataIcon}}</span>\n          <span>{{edgeIcon}} {{noDataIcon}}</span>\n          <span>{{firefoxIcon}} {{noDataIcon}}</span>\n          <span>{{safariIcon}} {{noDataIcon}}</span>\n        </div>\n      </div>\n      <span class=\"open-icon\" aria-hidden=\"true\"> {{chevronIcon}} </span>\n    </div>\n  </summary>\n  <p>Loading Baseline data...</p>\n</details>\n<script src=\"/talk-kinetic-css.dd61bbfa.js\"></script></body></html>";
+
+},{}],"g0vl3":[function(require,module,exports,__globalThis) {
+module.exports = "<html><head></head><body><details data-baseline=\"{{baseline}}\">\n  <summary aria-label=\"{{aria}}\">\n    <div class=\"summary-top\">\n      <p class=\"name\">{{name}}</p>\n      <p class=\"since\">{{since}}</p>\n    </div>\n    <div class=\"summary-bottom\">\n      <div class=\"baseline-status-title\" aria-hidden=\"true\">\n        <div>{{baselineGlyph}} {{title}}</div>\n        <div class=\"baseline-status-browsers\">\n          <span>{{chromeIcon}} {{chromeSupport}}</span>\n          <span>{{edgeIcon}} {{edgeSupport}}</span>\n          <span>{{firefoxIcon}} {{firefoxSupport}}</span>\n          <span>{{safariIcon}} {{safariSupport}}</span>\n        </div>\n        <span class=\"open-icon\" aria-hidden=\"true\">{{chevronIcon}}</span>\n      </div>\n    </div>\n  </summary>\n  <p>{{description}} {{learnMore}}</p>\n</details>\n<script src=\"/talk-kinetic-css.df678803.js\"></script></body></html>";
+
+},{}],"61ORP":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "formatBaselineDate", ()=>formatBaselineDate);
+parcelHelpers.export(exports, "getBaselineDateParts", ()=>getBaselineDateParts);
+parcelHelpers.export(exports, "getLatestImplementationDateParts", ()=>getLatestImplementationDateParts);
+parcelHelpers.export(exports, "descriptionFor", ()=>descriptionFor);
+parcelHelpers.export(exports, "renderSupportIcon", ()=>renderSupportIcon);
+parcelHelpers.export(exports, "renderBaselineGlyph", ()=>renderBaselineGlyph);
+parcelHelpers.export(exports, "renderTemplate", ()=>renderTemplate);
+parcelHelpers.export(exports, "ensureStyles", ()=>ensureStyles);
+parcelHelpers.export(exports, "escapeHTML", ()=>escapeHTML);
+parcelHelpers.export(exports, "escapeAttr", ()=>escapeAttr);
+parcelHelpers.export(exports, "svgToDataUri", ()=>svgToDataUri);
+parcelHelpers.export(exports, "svgToImgTag", ()=>svgToImgTag);
+var _baselineStatusConstantsJs = require("./baseline-status.constants.js");
+function formatBaselineDate(feature) {
+    const d = feature?.baseline?.low_date;
+    if (!d) return "";
+    try {
+        return new Intl.DateTimeFormat("en-US", {
+            year: "numeric",
+            month: "long"
+        }).format(new Date(d));
+    } catch  {
+        return "";
+    }
+}
+function descriptionFor(baseline, date) {
+    if (baseline === "newly" && date) return `Since ${date} this feature works across the latest devices and browser versions. This feature might not work in older devices or browsers.`;
+    if (baseline === "widely" && date) return `This feature is well established and works across many devices and browser versions. It has been available across browsers since ${date}.`;
+    return (0, _baselineStatusConstantsJs.BASELINE_DEFS)[baseline]?.defaultDescription || (0, _baselineStatusConstantsJs.BASELINE_DEFS).no_data.defaultDescription;
+}
+function renderSupportIcon(baseline, browserImplementation) {
+    const support = baseline === "limited" ? browserImplementation?.status || "unavailable" : baseline;
+    const iconKey = support === "newly" || support === "widely" ? "available" : support;
+    const cls = `support-${support}`;
+    const svg = (0, _baselineStatusConstantsJs.SUPPORT_ICONS)[iconKey] || (0, _baselineStatusConstantsJs.SUPPORT_ICONS).no_data;
+    return `<span class="${cls}" aria-hidden="true">${svg}</span>`;
+}
+function renderBaselineGlyph(support) {
+    if (support === "limited") return 0, _baselineStatusConstantsJs.GLYPH_BASELINE_LIMITED;
+    if (support === "newly") return 0, _baselineStatusConstantsJs.GLYPH_BASELINE_NEWLY;
+    if (support === "widely") return 0, _baselineStatusConstantsJs.GLYPH_BASELINE_WIDELY;
+    return 0, _baselineStatusConstantsJs.GLYPH_BASELINE_NO_DATA;
+}
+function renderTemplate(tpl, map) {
+    return tpl.replace(/\{\{(.*?)\}\}/g, (_, k)=>map[k.trim()] ?? "");
+}
+function ensureStyles(cssText) {
+    const STYLE_ID = "baseline-status-component-styles";
+    if (document.getElementById(STYLE_ID)) return;
+    const style = document.createElement("style");
+    style.id = STYLE_ID;
+    style.textContent = cssText;
+    document.head.appendChild(style);
+}
+// Return a robust pair { label: 'Month Year', year: 'YYYY' } from feature.baseline.low_date
+function getBaselineDateParts(feature) {
+    const raw = feature?.baseline?.low_date;
+    if (!raw) return {
+        label: "",
+        year: ""
+    };
+    let dateObj = null;
+    // string like '2024-08-21' or '2024'
+    if (typeof raw === "string") {
+        const parsed = Date.parse(raw);
+        if (!Number.isNaN(parsed)) dateObj = new Date(parsed);
+        else if (/^\d{4}$/.test(raw)) dateObj = new Date(Number(raw), 0, 1);
+    }
+    // number epoch (seconds or ms)
+    if (typeof raw === "number") dateObj = new Date(raw < 1e12 ? raw * 1000 : raw);
+    // object with fields {year, month}
+    if (!dateObj && typeof raw === "object") {
+        const y = Number(raw.year);
+        const m = raw.month != null ? Number(raw.month) - 1 : 0; // 1-based to 0-based
+        if (!Number.isNaN(y)) dateObj = new Date(y, !Number.isNaN(m) ? m : 0, 1);
+    }
+    if (!dateObj || Number.isNaN(dateObj.getTime())) return {
+        label: "",
+        year: ""
+    };
+    try {
+        const label = new Intl.DateTimeFormat("en-US", {
+            month: "long",
+            year: "numeric"
+        }).format(dateObj);
+        const year = String(dateObj.getFullYear());
+        return {
+            label,
+            year
+        };
+    } catch  {
+        return {
+            label: "",
+            year: ""
+        };
+    }
+}
+// Return the most recent date across all browser implementations: { label, year }
+function getLatestImplementationDateParts(feature) {
+    const impl = feature?.browser_implementations;
+    if (!impl || typeof impl !== "object") return {
+        label: "",
+        year: ""
+    };
+    const parseDate = (raw)=>{
+        if (!raw) return null;
+        let d = null;
+        if (typeof raw === "string") {
+            const parsed = Date.parse(raw);
+            if (!Number.isNaN(parsed)) d = new Date(parsed);
+            else if (/^\d{4}$/.test(raw)) d = new Date(Number(raw), 0, 1);
+        } else if (typeof raw === "number") d = new Date(raw < 1e12 ? raw * 1000 : raw);
+        else if (typeof raw === "object") {
+            const y = Number(raw.year);
+            const m = raw.month != null ? Number(raw.month) - 1 : 0;
+            if (!Number.isNaN(y)) d = new Date(y, !Number.isNaN(m) ? m : 0, 1);
+        }
+        return d && !Number.isNaN(d.getTime()) ? d : null;
+    };
+    let latest = null;
+    for (const key of Object.keys(impl)){
+        const date = parseDate(impl[key]?.date);
+        if (date && (!latest || date > latest)) latest = date;
+    }
+    if (!latest) return {
+        label: "",
+        year: ""
+    };
+    try {
+        const label = new Intl.DateTimeFormat("en-US", {
+            month: "long",
+            year: "numeric"
+        }).format(latest);
+        const year = String(latest.getFullYear());
+        return {
+            label,
+            year
+        };
+    } catch  {
+        return {
+            label: "",
+            year: ""
+        };
+    }
+}
+// Escape utilities to protect HTML/attribute contexts when injecting dynamic text
+function escapeHTML(value) {
+    return String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+}
+function escapeAttr(value) {
+    // For simplicity use same escaping as HTML text since we place values inside double quotes
+    return escapeHTML(value);
+}
+// Convert an inline SVG markup string into a data URI string.
+// This isolates <defs> ids and avoids cross-instance collisions in the DOM.
+function svgToDataUri(svg) {
+    if (!svg) return "";
+    // Ensure XML is compact for URI length and avoid stray whitespace
+    const cleaned = String(svg).replace(/\n+/g, "").replace(/>\s+</g, "><").trim();
+    const encoded = encodeURIComponent(cleaned)// EncodeURIComponent already encodes most characters; keep SVG friendly
+    .replace(/%20/g, " ");
+    return `data:image/svg+xml;utf8,${encoded}`;
+}
+// Build an <img> tag string for a given inline SVG string.
+// width/height are optional; if missing, try to infer from the svg tag or default to 21.
+function svgToImgTag(svg, { width, height, className = "browser-icon" } = {}) {
+    if (!svg) return "";
+    let w = width;
+    let h = height;
+    if (w == null || h == null) {
+        const m = String(svg).match(/<svg[^>]*\bwidth=["']?(\d+)["']?[^>]*\bheight=["']?(\d+)["']?[^>]*>/i);
+        if (m) {
+            w = w ?? Number(m[1]);
+            h = h ?? Number(m[2]);
+        }
+    }
+    w = w ?? 21;
+    h = h ?? 21;
+    const src = svgToDataUri(svg);
+    return `<img class="${escapeAttr(className)}" alt="" aria-hidden="true" role="presentation" src="${escapeAttr(src)}" width="${escapeAttr(String(w))}" height="${escapeAttr(String(h))}" />`;
+}
+
+},{"./baseline-status.constants.js":"cxNiv","@parcel/transformer-js/src/esmodule-helpers.js":"1egVF"}],"8IfSn":[function(require,module,exports,__globalThis) {
 // Doodle JS - Fresh start: draggable title
 document.addEventListener("DOMContentLoaded", ()=>{
     const title = document.querySelector(".title");
@@ -59653,7 +60502,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
             const element = stage.querySelector(config.selector);
             if (!element) return null;
             const state = {
-                element: element,
+                element,
                 speed: config.speed,
                 currentX: 50,
                 currentY: 50,
@@ -59834,7 +60683,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     }
 });
 
-
+},{}],"292LN":[function(require,module,exports,__globalThis) {
 /**
  * Reveal slide hooks
  *
@@ -59845,7 +60694,10 @@ document.addEventListener("DOMContentLoaded", ()=>{
  * - When Reveal is available, on each slide change:
  *   - Find `.motion-title` inside the active slide.
  *   - Set `aria-live="polite"` so screen readers can announce it.
- */ const $55117376bb9301d5$export$5234f2d54e8e125f = ()=>{
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initSlideHooks", ()=>initSlideHooks);
+const initSlideHooks = ()=>{
     if (typeof Reveal === "undefined") return;
     Reveal.on("slidechanged", (event)=>{
         const currentSlide = event.currentSlide;
@@ -59854,7 +60706,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     });
 };
 
-
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"1egVF"}],"iJGvL":[function(require,module,exports,__globalThis) {
 /**
  * Tilt Layered Card interactions
  *
@@ -59866,16 +60718,19 @@ document.addEventListener("DOMContentLoaded", ()=>{
  * - Each container receives CSS custom properties:
  *   - --tilt-card--pos-x: number in range [-1, 1]
  *   - --tilt-card--pos-y: number in range [-1, 1]
- */ const $2bb243fb75602950$var$clamp = (value, min, max)=>Math.min(max, Math.max(min, value));
-const $2bb243fb75602950$export$8b945488eb7acd70 = ()=>{
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initTiltLayeredCard", ()=>initTiltLayeredCard);
+const clamp = (value, min, max)=>Math.min(max, Math.max(min, value));
+const initTiltLayeredCard = ()=>{
     const containers = document.querySelectorAll(".card-container");
     if (containers.length === 0) return;
     containers.forEach((container)=>{
         let isDragging = false;
         const updateFromPointer = (event)=>{
             const rect = container.getBoundingClientRect();
-            const x = $2bb243fb75602950$var$clamp((event.clientX - rect.left) / rect.width * 2 - 1, -1, 1);
-            const y = $2bb243fb75602950$var$clamp((event.clientY - rect.top) / rect.height * 2 - 1, -1, 1);
+            const x = clamp((event.clientX - rect.left) / rect.width * 2 - 1, -1, 1);
+            const y = clamp((event.clientY - rect.top) / rect.height * 2 - 1, -1, 1);
             container.style.setProperty("--tilt-card--pos-x", x.toFixed(3));
             container.style.setProperty("--tilt-card--pos-y", y.toFixed(3));
         };
@@ -59914,13 +60769,6 @@ const $2bb243fb75602950$export$8b945488eb7acd70 = ()=>{
     });
 };
 
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"1egVF"}]},["9NM20","8JWvp"], "8JWvp", "parcelRequired35b", {})
 
-/**
- * Initialize all motion JavaScript
- */ document.addEventListener("DOMContentLoaded", ()=>{
-    (0, $55117376bb9301d5$export$5234f2d54e8e125f)();
-    (0, $2bb243fb75602950$export$8b945488eb7acd70)();
-});
-
-
-//# sourceMappingURL=talk-kinetic-css.036d13ea.js.map
+//# sourceMappingURL=talk-kinetic-css.c6396971.js.map
